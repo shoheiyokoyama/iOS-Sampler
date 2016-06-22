@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CustomCollectionViewCell" customModule="CollectionView" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="323" height="519"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="323" height="519"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="article_image" translatesAutoresizingMaskIntoConstraints="NO" id="9Pu-Qs-KON">
+                        <rect key="frame" x="40" y="70" width="243" height="379"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今日はナイアガラの滝にいます" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R7k-Ur-xqG">
+                        <rect key="frame" x="12" y="12" width="224" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016/6/22" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kd9-sH-Y6s">
+                        <rect key="frame" x="12" y="37.5" width="63" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="シェア" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eRB-te-utn">
+                        <rect key="frame" x="136" y="490" width="51" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="R7k-Ur-xqG" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="5bS-0t-4H0"/>
+                <constraint firstItem="9Pu-Qs-KON" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="40" id="9Rt-Zq-hze"/>
+                <constraint firstAttribute="bottom" secondItem="9Pu-Qs-KON" secondAttribute="bottom" constant="70" id="Fnz-Gl-OOr"/>
+                <constraint firstItem="Kd9-sH-Y6s" firstAttribute="top" secondItem="R7k-Ur-xqG" secondAttribute="bottom" constant="6" id="V09-yV-D9g"/>
+                <constraint firstAttribute="trailing" secondItem="9Pu-Qs-KON" secondAttribute="trailing" constant="40" id="YFH-zz-YRK"/>
+                <constraint firstItem="9Pu-Qs-KON" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="bNa-Jh-H8z"/>
+                <constraint firstItem="R7k-Ur-xqG" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="12" id="d8e-zj-cJA"/>
+                <constraint firstItem="9Pu-Qs-KON" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="dp7-PI-sUq"/>
+                <constraint firstItem="eRB-te-utn" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="fOG-Bb-pZv"/>
+                <constraint firstAttribute="bottom" secondItem="eRB-te-utn" secondAttribute="bottom" constant="20" id="gLB-Ul-NAM"/>
+                <constraint firstItem="Kd9-sH-Y6s" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="kib-LA-1BK"/>
+                <constraint firstItem="9Pu-Qs-KON" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="70" id="n9L-Ll-jTr"/>
+                <constraint firstItem="eRB-te-utn" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="nYb-RJ-0We"/>
+            </constraints>
+            <size key="customSize" width="323" height="519"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="nYb-RJ-0We"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="264.5" y="293.5"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="article_image" width="480" height="721"/>
+    </resources>
+</document>
