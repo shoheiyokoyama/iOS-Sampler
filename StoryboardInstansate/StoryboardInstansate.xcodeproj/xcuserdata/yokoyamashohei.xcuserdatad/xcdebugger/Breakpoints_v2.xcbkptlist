@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "PageViewController/RootViewController.swift"
-            timestampString = "488971518.448251"
+            filePath = "StoryboardInstansate/SecondViewController.swift"
+            timestampString = "488993631.67648"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "pageViewController(_:spineLocationForInterfaceOrientation:)"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "tapButton(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
