@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vo8-yV-j2g">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Vo8-yV-j2g">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -64,7 +66,13 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CpM-ct-lrd">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="4hg-my-C2k">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="457" id="IUM-iO-QqP">
+                                        <variation key="widthClass=compact" constant="440"/>
+                                    </constraint>
+                                    <constraint firstAttribute="width" constant="200" id="SJS-ye-UwM"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zMY-XK-qoz">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -81,23 +89,31 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="IUM-iO-QqP"/>
+                                        <exclude reference="SJS-ye-UwM"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="IUM-iO-QqP"/>
+                                        <include reference="SJS-ye-UwM"/>
+                                    </mask>
+                                </variation>
                             </collectionView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="CpM-ct-lrd" secondAttribute="bottom" id="MsC-YO-RMZ"/>
-                            <constraint firstItem="CpM-ct-lrd" firstAttribute="leading" secondItem="0f0-mu-Qlq" secondAttribute="leading" id="N70-3P-MxD"/>
-                            <constraint firstItem="CpM-ct-lrd" firstAttribute="top" secondItem="0f0-mu-Qlq" secondAttribute="top" id="V4M-jZ-aWp"/>
-                            <constraint firstAttribute="trailing" secondItem="CpM-ct-lrd" secondAttribute="trailing" id="hAB-HQ-Uci"/>
+                            <constraint firstItem="CpM-ct-lrd" firstAttribute="top" secondItem="toL-4G-mzm" secondAttribute="bottom" constant="50" id="LeV-ht-NYd"/>
+                            <constraint firstItem="CpM-ct-lrd" firstAttribute="leading" secondItem="0f0-mu-Qlq" secondAttribute="leadingMargin" constant="50" id="Y8l-J9-H6K"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="CpM-ct-lrd"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="MsC-YO-RMZ"/>
-                                <exclude reference="N70-3P-MxD"/>
-                                <exclude reference="V4M-jZ-aWp"/>
-                                <exclude reference="hAB-HQ-Uci"/>
+                                <exclude reference="LeV-ht-NYd"/>
+                                <exclude reference="Y8l-J9-H6K"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -105,10 +121,8 @@
                                 <include reference="CpM-ct-lrd"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="MsC-YO-RMZ"/>
-                                <include reference="N70-3P-MxD"/>
-                                <include reference="V4M-jZ-aWp"/>
-                                <include reference="hAB-HQ-Uci"/>
+                                <include reference="LeV-ht-NYd"/>
+                                <include reference="Y8l-J9-H6K"/>
                             </mask>
                         </variation>
                     </view>

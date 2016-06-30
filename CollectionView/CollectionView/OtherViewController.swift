@@ -12,6 +12,9 @@ class OtherViewController: UIViewController {
     let cellIdentifier = "OtherCollectionViewCell"
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    let rect = CGRect(x: 50, y: 50, width: 200, height: 440)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,17 +29,24 @@ class OtherViewController: UIViewController {
     
 
     private func configereCollectionViewCell() {
+        collectionView.backgroundColor = UIColor.grayColor()
+        
         collectionView.dataSource = self
         collectionView.delegate = self
         
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
         collectionView.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
         
+        let margin: CGFloat = 8
+        let rowNum: CGFloat = 2
+        let columnNum: CGFloat = 3
+        
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 50, height: 50)
-        layout.minimumLineSpacing = 10
+        layout.itemSize = CGSize(width: rect.width / 2 - (margin * 3 / rowNum), height: rect.height / 3 - (margin * 4 / columnNum))
+        layout.minimumLineSpacing = margin
+        layout.minimumInteritemSpacing = margin
         layout.scrollDirection = .Vertical
-        layout.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10)
+        layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         collectionView!.collectionViewLayout = layout
     }
 
@@ -48,7 +58,7 @@ extension OtherViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 6
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
