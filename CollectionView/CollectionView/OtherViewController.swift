@@ -68,5 +68,27 @@ extension OtherViewController: UICollectionViewDataSource {
 }
 
 extension OtherViewController: UICollectionViewDelegate {
+}
+
+extension OtherViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        
+        
+        return CGSize()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }
+

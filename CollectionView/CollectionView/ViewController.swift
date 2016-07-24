@@ -61,3 +61,29 @@ extension ViewController: UICollectionViewDataSource {
 extension ViewController: UICollectionViewDelegate {
     
 }
+
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        
+        if indexPath.row == 0 {
+            return CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height - 30)
+        }
+        return CGSizeMake(100, 100)
+    } 
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
