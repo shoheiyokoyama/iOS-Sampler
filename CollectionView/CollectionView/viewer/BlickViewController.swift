@@ -30,10 +30,12 @@ private extension BlickViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical
         
-//        layout.sectionInset = UIEdgeInsetsZero
-//        layout.minimumLineSpacing = 0
-//        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 5
         collectionView.collectionViewLayout = layout
+        
+        
+        navigationController?.navigationBarHidden = false
     }
     
     private func registerCell() {
@@ -52,7 +54,7 @@ extension BlickViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return 50
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -65,12 +67,16 @@ extension BlickViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let margin: CGFloat = 5
-        let height: CGFloat = 30
+        let height: CGFloat = 150
         
         let rowCount: CGFloat = 3
         return CGSize(width: view.frame.width / rowCount - (margin * (rowCount - 1) / rowCount), height: height)
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        let margin: CGFloat = 5
+        return UIEdgeInsets(top: 0, left: 0, bottom: margin, right: 0)
+    }
     
 }
 

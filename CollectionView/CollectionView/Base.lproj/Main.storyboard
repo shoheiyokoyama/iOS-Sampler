@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="FWx-c6-X8W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Whk-nQ-5bU">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -134,10 +134,26 @@
             </objects>
             <point key="canvasLocation" x="-873" y="99"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aHZ-Zu-whm">
+            <objects>
+                <navigationController id="Whk-nQ-5bU" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HXk-UT-iPW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="FWx-c6-X8W" kind="relationship" relationship="rootViewController" id="Nnt-9Q-2xL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VkX-4b-nZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1037" y="-601"/>
+        </scene>
         <!--Viewer Controller-->
         <scene sceneID="xGL-3I-6Lh">
             <objects>
-                <viewController id="FWx-c6-X8W" customClass="ViewerController" customModule="CollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Viewer" id="FWx-c6-X8W" customClass="ViewerController" customModule="CollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="E6b-4S-Bry"/>
                         <viewControllerLayoutGuide type="bottom" id="vbo-TY-twd"/>
@@ -156,7 +172,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0Zh-lU-Rx3">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -205,6 +221,7 @@
                             <constraint firstAttribute="bottom" secondItem="sH9-PZ-1WK" secondAttribute="bottom" id="xyY-0A-bIb"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="97T-7v-c82"/>
                     <connections>
                         <outlet property="bottomBarView" destination="gcX-gt-Dpj" id="qCQ-VN-NYj"/>
                         <outlet property="collectionView" destination="sH9-PZ-1WK" id="Rdr-h2-3cp"/>

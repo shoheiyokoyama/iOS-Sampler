@@ -36,6 +36,8 @@ private extension ViewerController {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         collectionView.collectionViewLayout = layout
+        
+        navigationController?.navigationBarHidden = true
     }
     
     private func registerCell() {
@@ -47,7 +49,8 @@ private extension ViewerController {
     @IBAction func tap(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Blick", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("Blick") as! BlickViewController
-        presentViewController(vc, animated: true, completion: nil)
+//        presentViewController(vc, animated: true, completion: nil)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
