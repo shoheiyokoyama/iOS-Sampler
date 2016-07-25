@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     let headerIdentifier = "CustomCollectionReusableView"
 
     @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
