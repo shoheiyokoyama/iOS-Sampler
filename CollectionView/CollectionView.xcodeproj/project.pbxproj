@@ -16,6 +16,8 @@
 		9393CE151D4615BA00F582FC /* ViewerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9393CE131D4615BA00F582FC /* ViewerCollectionViewCell.xib */; };
 		9393CE171D461F8F00F582FC /* BlickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393CE161D461F8F00F582FC /* BlickViewController.swift */; };
 		9393CE191D461FA700F582FC /* Blick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9393CE181D461FA700F582FC /* Blick.storyboard */; };
+		9393CE1C1D46211800F582FC /* BlickCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393CE1A1D46211800F582FC /* BlickCollectionViewCell.swift */; };
+		9393CE1D1D46211800F582FC /* BlickCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9393CE1B1D46211800F582FC /* BlickCollectionViewCell.xib */; };
 		93D111B71D1A572A00B6FF23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D111B61D1A572A00B6FF23 /* AppDelegate.swift */; };
 		93D111B91D1A572A00B6FF23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D111B81D1A572A00B6FF23 /* ViewController.swift */; };
 		93D111BC1D1A572A00B6FF23 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93D111BA1D1A572A00B6FF23 /* Main.storyboard */; };
@@ -57,6 +59,8 @@
 		9393CE131D4615BA00F582FC /* ViewerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewerCollectionViewCell.xib; sourceTree = "<group>"; };
 		9393CE161D461F8F00F582FC /* BlickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlickViewController.swift; sourceTree = "<group>"; };
 		9393CE181D461FA700F582FC /* Blick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Blick.storyboard; sourceTree = "<group>"; };
+		9393CE1A1D46211800F582FC /* BlickCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlickCollectionViewCell.swift; sourceTree = "<group>"; };
+		9393CE1B1D46211800F582FC /* BlickCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BlickCollectionViewCell.xib; sourceTree = "<group>"; };
 		93D111B31D1A572A00B6FF23 /* CollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D111B61D1A572A00B6FF23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93D111B81D1A572A00B6FF23 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 				9393CE131D4615BA00F582FC /* ViewerCollectionViewCell.xib */,
 				9393CE161D461F8F00F582FC /* BlickViewController.swift */,
 				9393CE181D461FA700F582FC /* Blick.storyboard */,
+				9393CE1A1D46211800F582FC /* BlickCollectionViewCell.swift */,
+				9393CE1B1D46211800F582FC /* BlickCollectionViewCell.xib */,
 			);
 			path = viewer;
 			sourceTree = "<group>";
@@ -294,6 +300,7 @@
 				9393CE191D461FA700F582FC /* Blick.storyboard in Resources */,
 				9393CE151D4615BA00F582FC /* ViewerCollectionViewCell.xib in Resources */,
 				93D111ED1D1A5B6E00B6FF23 /* CustomCollectionViewCell.xib in Resources */,
+				9393CE1D1D46211800F582FC /* BlickCollectionViewCell.xib in Resources */,
 				6D88C71D1D23B90900679822 /* OtherCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +334,7 @@
 				6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */,
 				93D111EC1D1A5B6E00B6FF23 /* CustomCollectionViewCell.swift in Sources */,
 				9393CE171D461F8F00F582FC /* BlickViewController.swift in Sources */,
+				9393CE1C1D46211800F582FC /* BlickCollectionViewCell.swift in Sources */,
 				93D111B71D1A572A00B6FF23 /* AppDelegate.swift in Sources */,
 				93D111F21D1A6D1E00B6FF23 /* CustomCollectionReusableView.swift in Sources */,
 				93D111EF1D1A643500B6FF23 /* CustomCollectionViewFlowLayout.swift in Sources */,
