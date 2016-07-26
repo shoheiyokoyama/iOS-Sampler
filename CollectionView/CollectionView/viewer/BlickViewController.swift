@@ -15,12 +15,22 @@ final class BlickViewController: UIViewController {
     private let identifier = "BlickCollectionViewCell"
     
     private var index = 0
+    
+    let animator = TransitionAnimator.sharedInstance
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureCollectionView()
         registerCell()
+        collectionView.reloadData()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        registerHandler()
     }
 }
 
@@ -45,6 +55,22 @@ private extension BlickViewController {
         let nib = UINib(nibName: identifier, bundle: nil)
         collectionView.registerNib(nib, forCellWithReuseIdentifier: identifier)
     }
+    
+    private func registerHandler() {
+        let indexPath = NSIndexPath(forRow: 1, inSection: 0)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath) as! BlickCollectionViewCell
+        animator.toImageSource = {
+            return cell.articleImage
+        }
+        
+        animator.toImageFrame = {
+            return cell.articleImage.frame
+        }
+        
+        animator.setImageHandler = { imageView in
+            cell.articleImage.image = imageView.image
+        }
+    }
 }
 
 extension BlickViewController: UICollectionViewDelegate {
@@ -62,7 +88,6 @@ extension BlickViewController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! BlickCollectionViewCell
-        
         
         if indexPath.row >= index {
             cell.articleImage.alpha = 0

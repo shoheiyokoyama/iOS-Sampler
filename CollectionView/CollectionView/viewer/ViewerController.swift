@@ -18,6 +18,10 @@ final class ViewerController: UIViewController {
     @IBOutlet weak var topBarView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
+    
+    let animator = TransitionAnimator.sharedInstance
+    
+    var vc: BlickViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +29,11 @@ final class ViewerController: UIViewController {
         registerCell()
         configureCollectionView()
         titleLabel.text = "タイトルタイトルタイトル"
+        navigationController?.delegate = self
+        
+        let storyboard = UIStoryboard(name: "Blick", bundle: nil)
+        vc = storyboard.instantiateViewControllerWithIdentifier("Blick") as? BlickViewController
+        vc!.view.setNeedsDisplay()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -53,11 +62,17 @@ private extension ViewerController {
         collectionView.registerNib(nib, forCellWithReuseIdentifier: identifier)
     }
     
-    
     @IBAction func tap(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Blick", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("Blick") as! BlickViewController
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc!, animated: true)
+    }
+}
+
+extension ViewerController: UINavigationControllerDelegate {
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator.operation = operation
+        animator.sourceTransition = fromVC
+        animator.destinationTransition = toVC
+        return animator
     }
 }
 
