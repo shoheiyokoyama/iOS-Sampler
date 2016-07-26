@@ -13,6 +13,8 @@ final class BlickViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let identifier = "BlickCollectionViewCell"
+    
+    private var index = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +61,16 @@ extension BlickViewController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath)
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! BlickCollectionViewCell
+        
+        
+        if indexPath.row >= index {
+            cell.articleImage.alpha = 0
+            UIView.animateWithDuration(0.9, animations: {
+                cell.articleImage.alpha = 1
+            })
+            index = max(indexPath.row, index)
+        }
         return cell
     }
 }

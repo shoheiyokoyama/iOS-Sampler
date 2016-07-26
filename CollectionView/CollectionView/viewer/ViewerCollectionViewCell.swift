@@ -10,6 +10,8 @@ import UIKit
 
 final class ViewerCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var articleImage: UIImageView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

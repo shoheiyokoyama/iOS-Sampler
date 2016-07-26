@@ -38,6 +38,7 @@ private extension ViewerController {
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.pagingEnabled = true
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Horizontal

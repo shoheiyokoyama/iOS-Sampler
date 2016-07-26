@@ -26,6 +26,9 @@
                 <constraint firstItem="SN3-LC-6aE" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sPg-VI-n9t"/>
             </constraints>
             <size key="customSize" width="154" height="122"/>
+            <connections>
+                <outlet property="articleImage" destination="SN3-LC-6aE" id="Tvx-w6-R5W"/>
+            </connections>
             <point key="canvasLocation" x="311" y="378"/>
         </collectionViewCell>
     </objects>
