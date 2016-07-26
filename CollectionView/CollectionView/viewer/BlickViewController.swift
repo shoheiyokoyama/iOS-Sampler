@@ -26,6 +26,7 @@ private extension BlickViewController {
     private func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.whiteColor()
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .Vertical

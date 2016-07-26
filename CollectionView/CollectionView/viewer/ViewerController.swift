@@ -16,12 +16,21 @@ final class ViewerController: UIViewController {
     
     @IBOutlet weak var bottomBarView: UIView!
     @IBOutlet weak var topBarView: UIView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
      
         registerCell()
         configureCollectionView()
+        titleLabel.text = "タイトルタイトルタイトル"
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 }
 
@@ -36,8 +45,6 @@ private extension ViewerController {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         collectionView.collectionViewLayout = layout
-        
-        navigationController?.navigationBarHidden = true
     }
     
     private func registerCell() {
@@ -49,7 +56,6 @@ private extension ViewerController {
     @IBAction func tap(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Blick", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("Blick") as! BlickViewController
-//        presentViewController(vc, animated: true, completion: nil)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
