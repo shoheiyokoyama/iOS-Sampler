@@ -27,6 +27,8 @@ final class ViewerController: UIViewController {
         case viewer, grid
     }
     
+    private var item: [Int] = [Int](count: 35, repeatedValue: 0/*　 適当　*/)
+    
     private var state: State = .viewer {
         didSet {
             if state == .viewer {
@@ -130,7 +132,7 @@ extension ViewerController {
         collectionView.addSubview(alphaView)
         
         let imageView = UIImageView(image: UIImage(named: "article_image２"))
-        imageView.frame = collectionView.frame
+        imageView.frame = CGRect(x: 0, y: self.collectionView.contentOffset.y, width: self.view.frame.width, height: self.view.frame.height)
         collectionView.addSubview(imageView)
         
         UIView.animateWithDuration(0.4,
@@ -201,7 +203,7 @@ extension ViewerController: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 15
+        return item.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
