@@ -29,7 +29,6 @@ final class ViewerController: UIViewController {
         registerCell()
         configureCollectionView()
         titleLabel.text = "タイトルタイトルタイトル"
-        navigationController?.delegate = self
         
         let storyboard = UIStoryboard(name: "Blick", bundle: nil)
         vc = storyboard.instantiateViewControllerWithIdentifier("Blick") as? BlickViewController
@@ -67,15 +66,6 @@ private extension ViewerController {
     }
 }
 
-extension ViewerController: UINavigationControllerDelegate {
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        animator.operation = operation
-        animator.sourceTransition = fromVC
-        animator.destinationTransition = toVC
-        return animator
-    }
-}
-
 extension ViewerController: UICollectionViewDelegate {
     
 }
@@ -99,15 +89,4 @@ extension ViewerController: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         return CGSize(width: view.bounds.width, height: view.bounds.height)
     }
-    
-    //http://dev.classmethod.jp/smartphone/iphone/collection-view-layout-cell-snap/
-//    func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, velocity: CGPoint) -> CGPoint {
-//        let currentPage = collectionView.contentOffset.x / view.bounds.width
-//        if fabs(velocity.x) > 0.2 {
-//            let nextPage = (velocity.x > 0.0) ? ceil(currentPage) : floor(currentPage)
-//            return CGPoint(x: nextPage * view.bounds.width, y: proposedContentOffset.y)
-//        } else {
-//            return CGPoint(x: (round(currentPage) * view.bounds.width), y: proposedContentOffset.y)
-//        }
-//    }
 }
