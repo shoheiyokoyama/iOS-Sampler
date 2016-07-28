@@ -37,6 +37,8 @@ final class ViewerController: UIViewController {
             }
         }
     }
+    
+    // MARK: - View cycle methods -
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +68,8 @@ private extension ViewerController {
         collectionView.registerNib(nib, forCellWithReuseIdentifier: identifier)
     }
     
+    // MARK: - Button Gesture -
+    
     @IBAction private func tap(sender: AnyObject) {
 //        navigationController?.pushViewController(vc!, animated: true)
         
@@ -85,6 +89,8 @@ private extension ViewerController {
         })
         
     }
+    
+    // MARK: - Layout -
     
     private func viewerLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
@@ -118,7 +124,6 @@ private extension ViewerController {
 extension ViewerController {
     func toGridAnimation() {
         let cell = collectionView.cellForItemAtIndexPath(currentIndex) as? ViewerCollectionViewCell
-        print(cell?.frame)
         
         let alphaView = UIView(frame: collectionView.frame)
         alphaView.backgroundColor = UIColor.whiteColor()
@@ -127,7 +132,6 @@ extension ViewerController {
         let imageView = UIImageView(image: UIImage(named: "article_image２"))
         imageView.frame = collectionView.frame
         collectionView.addSubview(imageView)
-        self.collectionView.contentOffset = CGPoint.zero
         
         UIView.animateWithDuration(0.4,
             animations: {
@@ -172,6 +176,8 @@ extension ViewerController {
     }
 }
 
+// MARK: - UICollectionViewDelegate -
+
 extension ViewerController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if state == .grid {
@@ -187,6 +193,8 @@ extension ViewerController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource -
+
 extension ViewerController: UICollectionViewDataSource {
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -198,6 +206,7 @@ extension ViewerController: UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! ViewerCollectionViewCell
+        cell.indexLabel.text = "\(indexPath.row)"
         
         if state == .grid && indexPath.row >= displayedIndex {
             cell.articleImage.alpha = 0
@@ -210,16 +219,6 @@ extension ViewerController: UICollectionViewDataSource {
         return cell
     }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
