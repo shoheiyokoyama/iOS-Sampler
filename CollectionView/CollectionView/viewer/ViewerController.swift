@@ -27,7 +27,8 @@ final class ViewerController: UIViewController {
         case viewer, grid
     }
     
-    private var item: [Int] = [Int](count: 35, repeatedValue: 0/*　 適当　*/)
+    private var item: [Int] = [Int](count: 15, repeatedValue: 0/*　 適当　*/)
+    private var moreItem: [Int] = [Int](count: 10, repeatedValue: 0/*　 適当　*/)
     
     private var state: State = .viewer {
         didSet {
@@ -35,7 +36,6 @@ final class ViewerController: UIViewController {
                 collectionView.pagingEnabled = true
             } else {
                 collectionView.pagingEnabled = false
-                collectionView.setCollectionViewLayout(gridLayout(), animated: false)
             }
         }
     }
@@ -78,7 +78,6 @@ private extension ViewerController {
         let cell = collectionView.visibleCells().first!
         currentIndex = collectionView.indexPathForCell(cell)!
         
-        state = state == .viewer ? .grid : .viewer
         displayedIndex = 0
         topBarView.hidden = true
         bottomBarView.hidden = true
@@ -87,6 +86,7 @@ private extension ViewerController {
             self.collectionView.setCollectionViewLayout(self.gridLayout(), animated: false)
             self.collectionView.reloadData()
             },completion: { _ in
+                self.state = .grid
                 self.toGridAnimation()
         })
         
@@ -172,9 +172,44 @@ extension ViewerController {
                 self.collectionView.performBatchUpdates({
                     self.collectionView.reloadData()
                     },completion: { _ in
+                        self.state = .viewer
                         self.collectionView.scrollToItemAtIndexPath(self.currentIndex, atScrollPosition: .None, animated: false)
                 })
         })
+    }
+}
+
+// MARK: - Lazy Load -
+
+extension ViewerController {
+    func nextLoad() {
+        item = item + moreItem
+        collectionView.reloadData()
+    }
+    
+    func prevLoad() {
+        item = moreItem + item
+        collectionView.reloadData()
+    }
+}
+
+// MARK: - UIScrollViewDelegate -
+
+extension ViewerController: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if state != .grid { return }
+        
+        let offset = scrollView.contentOffset
+        let y = offset.y + scrollView.bounds.height - scrollView.contentInset.bottom
+        let h = scrollView.contentSize.height
+        
+        if y > h - 25 {//画面下から25px
+            nextLoad()
+        }
+        
+        if offset.y - scrollView.contentInset.top < -50 {
+            prevLoad()
+        }
     }
 }
 
@@ -183,7 +218,7 @@ extension ViewerController {
 extension ViewerController: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if state == .grid {
-            state = state == .viewer ? .grid : .viewer
+            
             
             topBarView.hidden = false
             bottomBarView.hidden = false
