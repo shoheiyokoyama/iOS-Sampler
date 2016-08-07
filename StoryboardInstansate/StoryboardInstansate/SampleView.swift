@@ -10,7 +10,6 @@ import UIKit
 
 class SampleView: UIView {
     
-    
     //http://qiita.com/reikubonaga/items/cb52dea471cfe1640773
     
     //コードから生成された時
