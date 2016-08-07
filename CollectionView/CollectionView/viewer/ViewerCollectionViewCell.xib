@@ -15,19 +15,30 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="article_image２" translatesAutoresizingMaskIntoConstraints="NO" id="K8T-W1-tIr">
                         <rect key="frame" x="0.0" y="0.0" width="262" height="326"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YiF-Vt-JPf">
+                        <rect key="frame" x="110" y="152.5" width="42" height="21"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="YiF-Vt-JPf" firstAttribute="centerX" secondItem="K8T-W1-tIr" secondAttribute="centerX" id="NID-Gg-EgY"/>
                 <constraint firstAttribute="trailing" secondItem="K8T-W1-tIr" secondAttribute="trailing" id="Rvj-GO-hcX"/>
                 <constraint firstItem="K8T-W1-tIr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="TqP-sD-kuO"/>
                 <constraint firstItem="K8T-W1-tIr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ZXq-wL-ZOu"/>
                 <constraint firstAttribute="bottom" secondItem="K8T-W1-tIr" secondAttribute="bottom" id="b9w-0L-py1"/>
+                <constraint firstItem="YiF-Vt-JPf" firstAttribute="centerY" secondItem="K8T-W1-tIr" secondAttribute="centerY" id="isf-43-nus"/>
             </constraints>
             <size key="customSize" width="262" height="326"/>
             <connections>
                 <outlet property="articleImage" destination="K8T-W1-tIr" id="2eq-dl-fIk"/>
+                <outlet property="indexLabel" destination="YiF-Vt-JPf" id="5Xc-6M-ORr"/>
             </connections>
             <point key="canvasLocation" x="106" y="248"/>
         </collectionViewCell>

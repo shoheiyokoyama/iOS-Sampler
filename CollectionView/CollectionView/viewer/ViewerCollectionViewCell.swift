@@ -11,6 +11,7 @@ import UIKit
 final class ViewerCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var articleImage: UIImageView!
+    @IBOutlet weak var indexLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

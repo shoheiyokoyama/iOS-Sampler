@@ -164,6 +164,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sH9-PZ-1WK">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rpz-8S-fzF">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -246,7 +247,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="97T-7v-c82"/>
                     <connections>
-                        <outlet property="bottomBarView" destination="gcX-gt-Dpj" id="qCQ-VN-NYj"/>
+                        <outlet property="bottomBarView" destination="gcX-gt-Dpj" id="ux9-3c-c4k"/>
                         <outlet property="collectionView" destination="sH9-PZ-1WK" id="Rdr-h2-3cp"/>
                         <outlet property="titleLabel" destination="yLo-wY-cZE" id="QTF-6t-mFB"/>
                         <outlet property="topBarView" destination="ig1-sK-rBq" id="E8U-3w-ndS"/>
