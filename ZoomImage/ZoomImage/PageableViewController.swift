@@ -6,6 +6,8 @@
 //  Copyright © 2016年 Shohei. All rights reserved.
 //
 
+//https://github.com/yoshimin/PhotoGallerySample/blob/master/ViewController/YSViewController.m
+
 import UIKit
 
 class PageableViewController: UIViewController {
@@ -33,7 +35,7 @@ class PageableViewController: UIViewController {
         view.addSubview(scrollView)
         
         let scroll1 = ZoomableScrollView.instanciate(imageView1.image!)
-        scroll1.frame = view.frame
+//        scroll1.frame = view.frame
         scroll1.frame.origin.x += 0
         scrollView.addSubview(scroll1)
         
