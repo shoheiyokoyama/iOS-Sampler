@@ -18,20 +18,58 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setup()
+        registerGesture()
     }
     
-    func setup() {
+    private func setup() {
         scrollView.frame = view.frame
         scrollView.minimumZoomScale = 1
-        scrollView.maximumZoomScale = 2
+        scrollView.maximumZoomScale = 3
         scrollView.delegate = self
         view.addSubview(scrollView)
         
         imageView.frame = view.frame
         scrollView.addSubview(imageView)
     }
+    
+    private func registerGesture() {
+        let doubleTapGesture = UITapGestureRecognizer(target: self
+            , action:#selector(ViewController.doubleTap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        imageView.userInteractionEnabled = true
+        imageView.addGestureRecognizer(doubleTapGesture)
+    }
 }
+
+// MARK: - Zoom Action
+
+extension ViewController {
+    func doubleTap(gesture: UITapGestureRecognizer) {
+        
+        if (scrollView.zoomScale == scrollView.minimumZoomScale) {
+            let zoomRect = self.zoomRectForScale(scrollView.maximumZoomScale, center: gesture.locationInView(gesture.view))
+            scrollView.zoomToRect(zoomRect, animated: true)
+            
+        } else if (scrollView.zoomScale <= scrollView.maximumZoomScale && scrollView.zoomScale > scrollView.minimumZoomScale) {
+            scrollView.setZoomScale(1.0, animated: true)
+        }
+    }
+    
+    private func zoomRectForScale(scale:CGFloat, center: CGPoint) -> CGRect {
+        var zoomRect = CGRect()
+        zoomRect.size.height = scrollView.frame.size.height / scale
+        zoomRect.size.width = scrollView.frame.size.width / scale
+        
+        zoomRect.origin.x = center.x - zoomRect.size.width / 2.0
+        zoomRect.origin.y = center.y - zoomRect.size.height / 2.0
+        
+        return zoomRect
+    }
+}
+
+// MARK: - UIScrollViewDelegate
 
 extension ViewController: UIScrollViewDelegate {
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
