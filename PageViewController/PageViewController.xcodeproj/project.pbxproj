@@ -14,6 +14,11 @@
 		6D5239FD1D250BA5000E09C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D5239FB1D250BA5000E09C0 /* Main.storyboard */; };
 		6D5239FF1D250BA5000E09C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D5239FE1D250BA5000E09C0 /* Assets.xcassets */; };
 		6D523A021D250BA5000E09C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D523A001D250BA5000E09C0 /* LaunchScreen.storyboard */; };
+		6D7DD6881D58601F00184027 /* MyPageViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DD6871D58601F00184027 /* MyPageViewDataSource.swift */; };
+		6D7DD68A1D58608600184027 /* PageableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DD6891D58608600184027 /* PageableDataSource.swift */; };
+		6D7DD68C1D5860A100184027 /* Pageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DD68B1D5860A100184027 /* Pageable.swift */; };
+		6D7DD68E1D5860F500184027 /* MyDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DD68D1D5860F500184027 /* MyDataViewController.swift */; };
+		6D7DD6901D58619300184027 /* MyRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DD68F1D58619300184027 /* MyRootViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,11 @@
 		6D5239FE1D250BA5000E09C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D523A011D250BA5000E09C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D523A031D250BA5000E09C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D7DD6871D58601F00184027 /* MyPageViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewDataSource.swift; sourceTree = "<group>"; };
+		6D7DD6891D58608600184027 /* PageableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableDataSource.swift; sourceTree = "<group>"; };
+		6D7DD68B1D5860A100184027 /* Pageable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pageable.swift; sourceTree = "<group>"; };
+		6D7DD68D1D5860F500184027 /* MyDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDataViewController.swift; sourceTree = "<group>"; };
+		6D7DD68F1D58619300184027 /* MyRootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyRootViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,12 +72,25 @@
 				6D5239F51D250BA5000E09C0 /* RootViewController.swift */,
 				6D5239F71D250BA5000E09C0 /* DataViewController.swift */,
 				6D5239F91D250BA5000E09C0 /* ModelController.swift */,
+				6D7DD6861D585FCC00184027 /* MyPageView */,
 				6D5239FB1D250BA5000E09C0 /* Main.storyboard */,
 				6D5239FE1D250BA5000E09C0 /* Assets.xcassets */,
 				6D523A001D250BA5000E09C0 /* LaunchScreen.storyboard */,
 				6D523A031D250BA5000E09C0 /* Info.plist */,
 			);
 			path = PageViewController;
+			sourceTree = "<group>";
+		};
+		6D7DD6861D585FCC00184027 /* MyPageView */ = {
+			isa = PBXGroup;
+			children = (
+				6D7DD6871D58601F00184027 /* MyPageViewDataSource.swift */,
+				6D7DD68D1D5860F500184027 /* MyDataViewController.swift */,
+				6D7DD68F1D58619300184027 /* MyRootViewController.swift */,
+				6D7DD6891D58608600184027 /* PageableDataSource.swift */,
+				6D7DD68B1D5860A100184027 /* Pageable.swift */,
+			);
+			path = MyPageView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +166,12 @@
 			files = (
 				6D5239F61D250BA5000E09C0 /* RootViewController.swift in Sources */,
 				6D5239FA1D250BA5000E09C0 /* ModelController.swift in Sources */,
+				6D7DD68C1D5860A100184027 /* Pageable.swift in Sources */,
+				6D7DD6881D58601F00184027 /* MyPageViewDataSource.swift in Sources */,
+				6D7DD68E1D5860F500184027 /* MyDataViewController.swift in Sources */,
+				6D7DD68A1D58608600184027 /* PageableDataSource.swift in Sources */,
 				6D5239F81D250BA5000E09C0 /* DataViewController.swift in Sources */,
+				6D7DD6901D58619300184027 /* MyRootViewController.swift in Sources */,
 				6D5239F41D250BA5000E09C0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -294,6 +322,7 @@
 				6D523A081D250BA5000E09C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
