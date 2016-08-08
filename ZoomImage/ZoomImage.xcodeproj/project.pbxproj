@@ -12,6 +12,8 @@
 		6D7DD6A31D58B79D00184027 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D7DD6A11D58B79D00184027 /* Main.storyboard */; };
 		6D7DD6A51D58B79D00184027 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D7DD6A41D58B79D00184027 /* Assets.xcassets */; };
 		6D7DD6A81D58B79D00184027 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D7DD6A61D58B79D00184027 /* LaunchScreen.storyboard */; };
+		6D7DD6B01D58BD5700184027 /* PageableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DD6AF1D58BD5700184027 /* PageableViewController.swift */; };
+		6D7DD6B21D58C23200184027 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7DD6B11D58C23200184027 /* ZoomableScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		6D7DD6A41D58B79D00184027 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6D7DD6A71D58B79D00184027 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6D7DD6A91D58B79D00184027 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D7DD6AF1D58BD5700184027 /* PageableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageableViewController.swift; sourceTree = "<group>"; };
+		6D7DD6B11D58C23200184027 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			children = (
 				6D7DD69D1D58B79D00184027 /* AppDelegate.swift */,
 				6D7DD69F1D58B79D00184027 /* ViewController.swift */,
+				6D7DD6AF1D58BD5700184027 /* PageableViewController.swift */,
+				6D7DD6B11D58C23200184027 /* ZoomableScrollView.swift */,
 				6D7DD6A11D58B79D00184027 /* Main.storyboard */,
 				6D7DD6A41D58B79D00184027 /* Assets.xcassets */,
 				6D7DD6A61D58B79D00184027 /* LaunchScreen.storyboard */,
@@ -135,7 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D7DD6B01D58BD5700184027 /* PageableViewController.swift in Sources */,
 				6D7DD6A01D58B79D00184027 /* ViewController.swift in Sources */,
+				6D7DD6B21D58C23200184027 /* ZoomableScrollView.swift in Sources */,
 				6D7DD69E1D58B79D00184027 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

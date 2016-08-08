@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PageableViewController.swift
 //  ZoomImage
 //
 //  Created by 横山祥平 on 2016/08/08.
@@ -8,13 +8,12 @@
 
 import UIKit
 
-//http://yoshiminu.tumblr.com/post/50149137374/uiscrollview%E3%81%A7%E3%82%BA%E3%83%BC%E3%83%A0%E5%8F%AF%E8%83%BD%E3%81%AAuiimage%E3%81%AE%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%89%E3%83%93%E3%83%A5%E3%83%BC%E3%83%AF%E3%83%BC%E3%82%92%E3%81%A4%E3%81%8F%E3%82%8B
-
-
-class ViewController: UIViewController {
+class PageableViewController: UIViewController {
     
     var scrollView = UIScrollView()
-    let imageView = UIImageView(image: UIImage(named: "Image1"))
+    let imageView1 = UIImageView(image: UIImage(named: "Image1"))
+    let imageView2 = UIImageView(image: UIImage(named: "Image2"))
+    let imageView3 = UIImageView(image: UIImage(named: "Image3"))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,24 +27,41 @@ class ViewController: UIViewController {
         scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 3
         scrollView.delegate = self
+        scrollView.contentSize = CGSize(width: view.bounds.width * 3, height: view.bounds.height)
+        scrollView.pagingEnabled = true
+        scrollView.bouncesZoom = true
         view.addSubview(scrollView)
         
-        imageView.frame = view.frame
-        scrollView.addSubview(imageView)
+        let scroll1 = ZoomableScrollView.instanciate(imageView1.image!)
+        scroll1.frame = view.frame
+        scroll1.frame.origin.x += 0
+        scrollView.addSubview(scroll1)
+        
+        let scroll2 = ZoomableScrollView.instanciate(imageView2.image!)
+        scroll2.frame = view.frame
+        scroll2.frame.origin.x += view.frame.width
+        scrollView.addSubview(scroll2)
+        
+        let scroll3 = ZoomableScrollView.instanciate(imageView3.image!)
+        scroll3.frame = view.frame
+        scroll3.frame.origin.x += view.frame.width * 2
+        scrollView.addSubview(scroll3)
     }
     
     private func registerGesture() {
         let doubleTapGesture = UITapGestureRecognizer(target: self
             , action:#selector(ViewController.doubleTap(_:)))
         doubleTapGesture.numberOfTapsRequired = 2
-        imageView.userInteractionEnabled = true
-        imageView.addGestureRecognizer(doubleTapGesture)
+        imageView1.userInteractionEnabled = true
+        imageView1.addGestureRecognizer(doubleTapGesture)
     }
+    
+    
 }
 
 // MARK: - Zoom Action
 
-extension ViewController {
+extension PageableViewController {
     func doubleTap(gesture: UITapGestureRecognizer) {
         
         if (scrollView.zoomScale == scrollView.minimumZoomScale) {
@@ -71,9 +87,9 @@ extension ViewController {
 
 // MARK: - UIScrollViewDelegate
 
-extension ViewController: UIScrollViewDelegate {
+extension PageableViewController: UIScrollViewDelegate {
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
-        return imageView
+        return imageView1
     }
 }
 
