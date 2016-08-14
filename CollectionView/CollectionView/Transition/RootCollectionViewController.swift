@@ -28,6 +28,13 @@ final class RootCollectionViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        configureCollectionView()
+        collectionView?.reloadData()
+    }
 
     private var flowLayout: UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
@@ -93,8 +100,31 @@ extension RootCollectionViewController: UINavigationControllerDelegate {
                 animator.fromCell = cell
             }
             return animator
+        } else if operation == .Pop && toVC == self {
+            
+            let animator = CollectionViewTransitionAnimator()
+            
+            guard let vc = fromVC as? DetailCollectionViewController,
+                cell = vc.collectionView?.cellForItemAtIndexPath(vc.selectedIndexPath) as? ViewerCollectionViewCell else {return nil}
+            animator.fromCollectionView = vc.collectionView
+            animator.fromCell = cell
+            animator.goingForward = false
+            return animator
+//            return nil
+            
+        } else {
+            return nil
         }
-        return nil
+    }
+    
+    func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+        if let vc = viewController as? DetailCollectionViewController {
+            vc.collectionView?.dataSource = vc
+            vc.collectionView?.delegate = vc
+        } else if let vc = viewController as? RootCollectionViewController {
+            vc.collectionView?.dataSource = self
+            vc.collectionView?.delegate = self
+        }
     }
 }
 
@@ -102,18 +132,17 @@ extension RootCollectionViewController: UINavigationControllerDelegate {
 
 extension RootCollectionViewController {
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 100
+        return 10
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as? ViewerCollectionViewCell else { return UICollectionViewCell() }
+//        cell.articleImage.image = UIImage(named: "article_image")
         cell.indexLabel.text = "\(indexPath.row)"
         return cell
     }

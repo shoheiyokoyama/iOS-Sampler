@@ -19,7 +19,8 @@ final class DetailCollectionViewController: UICollectionViewController {
         
         registerCell()
         configureCollectionView()
-        navigationController?.delegate = self
+//        useLayoutToLayoutNavigationTransitions = true
+//        navigationController?.delegate = self
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -96,35 +97,17 @@ final class DetailCollectionViewController: UICollectionViewController {
 
 }
 
-extension DetailCollectionViewController: UINavigationControllerDelegate {
-    
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        
-        if operation == .Push && fromVC == self {
-            let animator = CollectionViewTransitionAnimator()
-            animator.fromCollectionView = collectionView
-            animator.goingForward = false
-            if let cell = collectionView?.cellForItemAtIndexPath(selectedIndexPath) as? ViewerCollectionViewCell {
-                animator.fromCell = cell
-            }
-            return animator
-        }
-        return nil
-    }
-}
 
 // MARK: UICollectionViewDataSources
 
 extension DetailCollectionViewController {
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 100
+        return 10
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -141,10 +124,6 @@ extension DetailCollectionViewController {
         print(indexPath.row)
         
         selectedIndexPath = indexPath
-        
-        
         self.navigationController?.popViewControllerAnimated(true)
-//        guard  let vc = storyboard?.instantiateViewControllerWithIdentifier("DetailCollectionViewController") as? UICollectionViewController else { return }
-//        navigationController?.pushViewController(vc, animated: true)
     }
 }

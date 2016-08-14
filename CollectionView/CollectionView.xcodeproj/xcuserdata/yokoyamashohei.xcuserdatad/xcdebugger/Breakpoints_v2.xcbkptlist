@@ -54,16 +54,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CollectionView/Transition/DetailCollectionViewController.swift"
-            timestampString = "492856374.47463"
+            filePath = "CollectionView/Transition/RootCollectionViewController.swift"
+            timestampString = "492857190.139885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "navigationController(_:animationControllerForOperation:fromViewController:toViewController:)"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CollectionView/Transition/DetailCollectionViewController.swift"
-            timestampString = "492856374.47463"
+            filePath = "CollectionView/Transition/CollectionViewTransitionAnimator.swift"
+            timestampString = "492878276.840278"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "collectionView(_:didSelectItemAtIndexPath:)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "animateTransition(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

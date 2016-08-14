@@ -10,17 +10,17 @@
 		6D3E169B1D60373B000236C4 /* RootCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */; };
 		6D3E169D1D603763000236C4 /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */; };
 		6D3E169F1D603C17000236C4 /* CollectionViewTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169E1D603C17000236C4 /* CollectionViewTransitionAnimator.swift */; };
+		6D3E16A41D60979E000236C4 /* BlickCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E16A01D60979E000236C4 /* BlickCollectionViewCell.swift */; };
+		6D3E16A51D60979E000236C4 /* BlickCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E16A11D60979E000236C4 /* BlickCollectionViewCell.xib */; };
+		6D3E16A61D60979E000236C4 /* ViewerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E16A21D60979E000236C4 /* ViewerCollectionViewCell.swift */; };
+		6D3E16A71D60979E000236C4 /* ViewerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3E16A31D60979E000236C4 /* ViewerCollectionViewCell.xib */; };
 		6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88C7131D23B7E600679822 /* OtherViewController.swift */; };
 		6D88C71C1D23B90900679822 /* OtherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88C71A1D23B90800679822 /* OtherCollectionViewCell.swift */; };
 		6D88C71D1D23B90900679822 /* OtherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D88C71B1D23B90800679822 /* OtherCollectionViewCell.xib */; };
 		6D88C71F1D23BA8400679822 /* OtherCollectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88C71E1D23BA8400679822 /* OtherCollectionLayout.swift */; };
 		9393CE111D46139000F582FC /* ViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393CE101D46139000F582FC /* ViewerController.swift */; };
-		9393CE141D4615BA00F582FC /* ViewerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393CE121D4615BA00F582FC /* ViewerCollectionViewCell.swift */; };
-		9393CE151D4615BA00F582FC /* ViewerCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9393CE131D4615BA00F582FC /* ViewerCollectionViewCell.xib */; };
 		9393CE171D461F8F00F582FC /* BlickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393CE161D461F8F00F582FC /* BlickViewController.swift */; };
 		9393CE191D461FA700F582FC /* Blick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9393CE181D461FA700F582FC /* Blick.storyboard */; };
-		9393CE1C1D46211800F582FC /* BlickCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393CE1A1D46211800F582FC /* BlickCollectionViewCell.swift */; };
-		9393CE1D1D46211800F582FC /* BlickCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9393CE1B1D46211800F582FC /* BlickCollectionViewCell.xib */; };
 		9393CE1F1D47642900F582FC /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9393CE1E1D47642900F582FC /* TransitionAnimator.swift */; };
 		93D111B71D1A572A00B6FF23 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D111B61D1A572A00B6FF23 /* AppDelegate.swift */; };
 		93D111B91D1A572A00B6FF23 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D111B81D1A572A00B6FF23 /* ViewController.swift */; };
@@ -57,17 +57,17 @@
 		6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCollectionViewController.swift; sourceTree = "<group>"; };
 		6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		6D3E169E1D603C17000236C4 /* CollectionViewTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewTransitionAnimator.swift; sourceTree = "<group>"; };
+		6D3E16A01D60979E000236C4 /* BlickCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlickCollectionViewCell.swift; path = CollectionView/viewer/BlickCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6D3E16A11D60979E000236C4 /* BlickCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BlickCollectionViewCell.xib; path = CollectionView/viewer/BlickCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
+		6D3E16A21D60979E000236C4 /* ViewerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewerCollectionViewCell.swift; path = CollectionView/viewer/ViewerCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		6D3E16A31D60979E000236C4 /* ViewerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewerCollectionViewCell.xib; path = CollectionView/viewer/ViewerCollectionViewCell.xib; sourceTree = SOURCE_ROOT; };
 		6D88C7131D23B7E600679822 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		6D88C71A1D23B90800679822 /* OtherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherCollectionViewCell.swift; sourceTree = "<group>"; };
 		6D88C71B1D23B90800679822 /* OtherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherCollectionViewCell.xib; sourceTree = "<group>"; };
 		6D88C71E1D23BA8400679822 /* OtherCollectionLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherCollectionLayout.swift; sourceTree = "<group>"; };
 		9393CE101D46139000F582FC /* ViewerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewerController.swift; sourceTree = "<group>"; };
-		9393CE121D4615BA00F582FC /* ViewerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewerCollectionViewCell.swift; path = ../ViewerCollectionViewCell.swift; sourceTree = "<group>"; };
-		9393CE131D4615BA00F582FC /* ViewerCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ViewerCollectionViewCell.xib; path = ../ViewerCollectionViewCell.xib; sourceTree = "<group>"; };
 		9393CE161D461F8F00F582FC /* BlickViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlickViewController.swift; sourceTree = "<group>"; };
 		9393CE181D461FA700F582FC /* Blick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Blick.storyboard; sourceTree = "<group>"; };
-		9393CE1A1D46211800F582FC /* BlickCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlickCollectionViewCell.swift; path = ../BlickCollectionViewCell.swift; sourceTree = "<group>"; };
-		9393CE1B1D46211800F582FC /* BlickCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BlickCollectionViewCell.xib; path = ../BlickCollectionViewCell.xib; sourceTree = "<group>"; };
 		9393CE1E1D47642900F582FC /* TransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 		93D111B31D1A572A00B6FF23 /* CollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		93D111B61D1A572A00B6FF23 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,10 +150,10 @@
 		9393CE201D47650300F582FC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				9393CE121D4615BA00F582FC /* ViewerCollectionViewCell.swift */,
-				9393CE131D4615BA00F582FC /* ViewerCollectionViewCell.xib */,
-				9393CE1A1D46211800F582FC /* BlickCollectionViewCell.swift */,
-				9393CE1B1D46211800F582FC /* BlickCollectionViewCell.xib */,
+				6D3E16A01D60979E000236C4 /* BlickCollectionViewCell.swift */,
+				6D3E16A11D60979E000236C4 /* BlickCollectionViewCell.xib */,
+				6D3E16A21D60979E000236C4 /* ViewerCollectionViewCell.swift */,
+				6D3E16A31D60979E000236C4 /* ViewerCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -324,11 +324,11 @@
 				93D111C11D1A572A00B6FF23 /* LaunchScreen.storyboard in Resources */,
 				93D111BE1D1A572A00B6FF23 /* Assets.xcassets in Resources */,
 				93D111F31D1A6D1E00B6FF23 /* CustomCollectionReusableView.xib in Resources */,
+				6D3E16A71D60979E000236C4 /* ViewerCollectionViewCell.xib in Resources */,
 				93D111BC1D1A572A00B6FF23 /* Main.storyboard in Resources */,
 				9393CE191D461FA700F582FC /* Blick.storyboard in Resources */,
-				9393CE151D4615BA00F582FC /* ViewerCollectionViewCell.xib in Resources */,
+				6D3E16A51D60979E000236C4 /* BlickCollectionViewCell.xib in Resources */,
 				93D111ED1D1A5B6E00B6FF23 /* CustomCollectionViewCell.xib in Resources */,
-				9393CE1D1D46211800F582FC /* BlickCollectionViewCell.xib in Resources */,
 				6D88C71D1D23B90900679822 /* OtherCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,14 +359,14 @@
 				9393CE111D46139000F582FC /* ViewerController.swift in Sources */,
 				6D88C71C1D23B90900679822 /* OtherCollectionViewCell.swift in Sources */,
 				6D88C71F1D23BA8400679822 /* OtherCollectionLayout.swift in Sources */,
-				9393CE141D4615BA00F582FC /* ViewerCollectionViewCell.swift in Sources */,
 				6D3E169D1D603763000236C4 /* DetailCollectionViewController.swift in Sources */,
+				6D3E16A41D60979E000236C4 /* BlickCollectionViewCell.swift in Sources */,
 				6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */,
 				93D111EC1D1A5B6E00B6FF23 /* CustomCollectionViewCell.swift in Sources */,
 				6D3E169F1D603C17000236C4 /* CollectionViewTransitionAnimator.swift in Sources */,
 				9393CE171D461F8F00F582FC /* BlickViewController.swift in Sources */,
-				9393CE1C1D46211800F582FC /* BlickCollectionViewCell.swift in Sources */,
 				93D111B71D1A572A00B6FF23 /* AppDelegate.swift in Sources */,
+				6D3E16A61D60979E000236C4 /* ViewerCollectionViewCell.swift in Sources */,
 				93D111F21D1A6D1E00B6FF23 /* CustomCollectionReusableView.swift in Sources */,
 				93D111EF1D1A643500B6FF23 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				9393CE1F1D47642900F582FC /* TransitionAnimator.swift in Sources */,

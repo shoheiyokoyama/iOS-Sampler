@@ -25,49 +25,90 @@ extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitionin
             fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? UICollectionViewController,
             containerView = transitionContext.containerView() else { return }
         
-        containerView.addSubview(fromVC.view)
-        containerView.addSubview(toVC.view)
+        containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
         
         let alphaView = UIView(frame: transitionContext.finalFrameForViewController(toVC))
         alphaView.backgroundColor = UIColor.whiteColor()
-        containerView.addSubview(alphaView)
+//        containerView.addSubview(alphaView)
         
-        let sourceView = fromCell?.articleImage
-//        sourceView?.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
-        
-        
+//        let imageView = fromCell!.articleImage
+        let imageView = UIImageView(image: fromCell?.articleImage.image)
         
         if goingForward {
+            
             let indexPath = self.fromCollectionView?.indexPathForCell(self.fromCell!)
+            
             toVC.collectionView?.performBatchUpdates({
-                
 
                 toVC.collectionView?.reloadData()
                 
                 }, completion: { _ in
                     
-                    containerView.addSubview(sourceView!)
-                    sourceView?.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+                    containerView.addSubview(imageView)
+                    imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
                     
                     let cell = toVC.collectionView?.cellForItemAtIndexPath(indexPath!)
                     
-                    UIView.animateWithDuration(0.5,
+                    UIView.animateWithDuration(1,
                         animations: {
-                            sourceView?.frame = (cell?.frame)!
-                            sourceView?.frame.origin.y += (fromVC.navigationController?.navigationBar.frame.size.height ?? 0) + 20
+                            imageView.frame = (cell?.frame)!
+                            imageView.frame.origin.y += (fromVC.navigationController?.navigationBar.frame.size.height ?? 0) + 20
                             alphaView.alpha = 0
                         },
                         completion: { _ in
-                            sourceView?.removeFromSuperview()
+                            imageView.removeFromSuperview()
                             alphaView.removeFromSuperview()
                             
                             transitionContext.completeTransition(true)
                     })
                     
             })
-            
+ 
             
         } else {
+            
+            let indexPath = self.fromCollectionView?.indexPathForCell(self.fromCell!)
+            let attributes = self.fromCollectionView?.layoutAttributesForItemAtIndexPath(indexPath!)
+            
+            print(self.fromCollectionView?.convertRect((attributes?.frame)!, toView: self.fromCollectionView!.superview))
+            print(attributes?.frame)
+            
+            imageView.frame = (attributes?.frame)!
+            imageView.frame.origin.y += (fromVC.navigationController?.navigationBar.frame.size.height ?? 0) + 20
+            containerView.addSubview(imageView)
+            
+            toVC.collectionView?.performBatchUpdates({
+            
+                toVC.collectionView?.reloadData()
+                
+            },
+            completion: { _ in
+                
+                toVC.collectionView?.scrollToItemAtIndexPath(indexPath!, atScrollPosition: .None, animated: false)
+                
+                // nilになる
+                let cell = toVC.collectionView?.cellForItemAtIndexPath(indexPath!)
+                
+                UIView.animateWithDuration(1,
+                    animations: {
+                        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+                        
+//                        imageView.frame = (cell?.frame)!
+//                        imageView.frame.origin.y += (toVC.navigationController?.navigationBar.frame.size.height ?? 0) + 20
+                        imageView.frame.origin.y += (toVC.navigationController?.navigationBar.frame.size.height ?? 0)
+                        alphaView.alpha = 0
+                    },
+                    completion: { _ in
+                        imageView.removeFromSuperview()
+                        alphaView.removeFromSuperview()
+                        
+                        transitionContext.completeTransition(true)
+                })
+                
+                
+            })
+
+            
             
         }
         
