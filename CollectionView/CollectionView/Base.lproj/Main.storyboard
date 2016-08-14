@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="IZ1-L4-vOh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GhJ-ig-Q9e">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -134,11 +134,28 @@
             </objects>
             <point key="canvasLocation" x="-873" y="99"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zxL-EL-TaS">
+            <objects>
+                <navigationController id="GhJ-ig-Q9e" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tk9-pL-M4U">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="IZ1-L4-vOh" kind="relationship" relationship="rootViewController" id="TMr-kU-XoJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ftm-Dj-FXB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1561.5" y="-1276"/>
+        </scene>
         <!--Root Collection View Controller-->
         <scene sceneID="YIO-Ns-Ymg">
             <objects>
                 <collectionViewController id="IZ1-L4-vOh" customClass="RootCollectionViewController" customModule="CollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="5G7-yy-Lgp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eCm-ov-WOg">
                             <size key="itemSize" width="50" height="50"/>
@@ -162,6 +179,7 @@
                             <outlet property="delegate" destination="IZ1-L4-vOh" id="WK3-u3-yog"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="qbT-KO-cB0"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ObD-PW-QT8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -170,8 +188,9 @@
         <!--Detail Collection View Controller-->
         <scene sceneID="uxI-el-s7F">
             <objects>
-                <collectionViewController id="Q3s-Bw-kb9" customClass="DetailCollectionViewController" customModule="CollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="DetailCollectionViewController" id="Q3s-Bw-kb9" customClass="DetailCollectionViewController" customModule="CollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="uRV-ER-nRr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Z88-1i-ReS">
                             <size key="itemSize" width="50" height="50"/>
@@ -198,7 +217,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ro-PK-Dpu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="18" y="-1265"/>
+            <point key="canvasLocation" x="-63" y="-1276"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aHZ-Zu-whm">

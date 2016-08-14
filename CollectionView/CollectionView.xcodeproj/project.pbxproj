@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6D3E169B1D60373B000236C4 /* RootCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */; };
 		6D3E169D1D603763000236C4 /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */; };
+		6D3E169F1D603C17000236C4 /* CollectionViewTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169E1D603C17000236C4 /* CollectionViewTransitionAnimator.swift */; };
 		6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88C7131D23B7E600679822 /* OtherViewController.swift */; };
 		6D88C71C1D23B90900679822 /* OtherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88C71A1D23B90800679822 /* OtherCollectionViewCell.swift */; };
 		6D88C71D1D23B90900679822 /* OtherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D88C71B1D23B90800679822 /* OtherCollectionViewCell.xib */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCollectionViewController.swift; sourceTree = "<group>"; };
 		6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
+		6D3E169E1D603C17000236C4 /* CollectionViewTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewTransitionAnimator.swift; sourceTree = "<group>"; };
 		6D88C7131D23B7E600679822 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		6D88C71A1D23B90800679822 /* OtherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherCollectionViewCell.swift; sourceTree = "<group>"; };
 		6D88C71B1D23B90800679822 /* OtherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */,
 				6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */,
+				6D3E169E1D603C17000236C4 /* CollectionViewTransitionAnimator.swift */,
 			);
 			path = Transition;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				6D3E169D1D603763000236C4 /* DetailCollectionViewController.swift in Sources */,
 				6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */,
 				93D111EC1D1A5B6E00B6FF23 /* CustomCollectionViewCell.swift in Sources */,
+				6D3E169F1D603C17000236C4 /* CollectionViewTransitionAnimator.swift in Sources */,
 				9393CE171D461F8F00F582FC /* BlickViewController.swift in Sources */,
 				9393CE1C1D46211800F582FC /* BlickCollectionViewCell.swift in Sources */,
 				93D111B71D1A572A00B6FF23 /* AppDelegate.swift in Sources */,

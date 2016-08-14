@@ -8,25 +8,49 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "ViewerCollectionViewCell"
 
 final class DetailCollectionViewController: UICollectionViewController {
+    
+    var selectedIndexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        registerCell()
+        configureCollectionView()
+        navigationController?.delegate = self
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+//        self.collectionView!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private var flowLayout: UICollectionViewFlowLayout {
+        let margin: CGFloat = 5
+        let height: CGFloat = 150
+        let rowCount: CGFloat = 3
+
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .Vertical
+        layout.minimumLineSpacing = margin
+        layout.minimumInteritemSpacing = margin
+        layout.itemSize = CGSize(width: view.frame.width / rowCount - (margin * (rowCount - 1) / rowCount), height: height)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: margin, right: 0)
+        return layout
+    }
+    
+    private func registerCell() {
+        let nib = UINib(nibName: reuseIdentifier, bundle: nil)
+        collectionView!.registerNib(nib, forCellWithReuseIdentifier: reuseIdentifier)
+    }
+    
+    private func configureCollectionView() {
+        collectionView?.collectionViewLayout = flowLayout
     }
 
     /*
@@ -38,27 +62,6 @@ final class DetailCollectionViewController: UICollectionViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    // MARK: UICollectionViewDataSource
-
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
 
     // MARK: UICollectionViewDelegate
 
@@ -91,4 +94,57 @@ final class DetailCollectionViewController: UICollectionViewController {
     }
     */
 
+}
+
+extension DetailCollectionViewController: UINavigationControllerDelegate {
+    
+    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
+        if operation == .Push && fromVC == self {
+            let animator = CollectionViewTransitionAnimator()
+            animator.fromCollectionView = collectionView
+            animator.goingForward = false
+            if let cell = collectionView?.cellForItemAtIndexPath(selectedIndexPath) as? ViewerCollectionViewCell {
+                animator.fromCell = cell
+            }
+            return animator
+        }
+        return nil
+    }
+}
+
+// MARK: UICollectionViewDataSources
+
+extension DetailCollectionViewController {
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return 100
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as? ViewerCollectionViewCell else { return UICollectionViewCell() }
+        cell.indexLabel.text = "\(indexPath.row)"
+        return cell
+    }
+}
+
+// MARK: UICollectionViewDelegate
+
+extension DetailCollectionViewController {
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        print(indexPath.row)
+        
+        selectedIndexPath = indexPath
+        
+        
+        self.navigationController?.popViewControllerAnimated(true)
+//        guard  let vc = storyboard?.instantiateViewControllerWithIdentifier("DetailCollectionViewController") as? UICollectionViewController else { return }
+//        navigationController?.pushViewController(vc, animated: true)
+    }
 }
