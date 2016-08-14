@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D3E169B1D60373B000236C4 /* RootCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */; };
+		6D3E169D1D603763000236C4 /* DetailCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */; };
 		6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88C7131D23B7E600679822 /* OtherViewController.swift */; };
 		6D88C71C1D23B90900679822 /* OtherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D88C71A1D23B90800679822 /* OtherCollectionViewCell.swift */; };
 		6D88C71D1D23B90900679822 /* OtherCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D88C71B1D23B90800679822 /* OtherCollectionViewCell.xib */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootCollectionViewController.swift; sourceTree = "<group>"; };
+		6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewController.swift; sourceTree = "<group>"; };
 		6D88C7131D23B7E600679822 /* OtherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherViewController.swift; sourceTree = "<group>"; };
 		6D88C71A1D23B90800679822 /* OtherCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherCollectionViewCell.swift; sourceTree = "<group>"; };
 		6D88C71B1D23B90800679822 /* OtherCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OtherCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -108,6 +112,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D3E16991D603401000236C4 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E169C1D603763000236C4 /* DetailCollectionViewController.swift */,
+				6D3E169A1D60373B000236C4 /* RootCollectionViewController.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
 		6D88C7151D23B8A100679822 /* Other */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,13 +178,14 @@
 		93D111B51D1A572A00B6FF23 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				6D3E16991D603401000236C4 /* Transition */,
 				9393CE0F1D46136900F582FC /* viewer */,
 				6D88C7151D23B8A100679822 /* Other */,
+				93D111BA1D1A572A00B6FF23 /* Main.storyboard */,
 				93D111EA1D1A5B6E00B6FF23 /* CustomCollectionViewCell.swift */,
 				93D111EB1D1A5B6E00B6FF23 /* CustomCollectionViewCell.xib */,
 				93D111B61D1A572A00B6FF23 /* AppDelegate.swift */,
 				93D111B81D1A572A00B6FF23 /* ViewController.swift */,
-				93D111BA1D1A572A00B6FF23 /* Main.storyboard */,
 				93D111EE1D1A643500B6FF23 /* CustomCollectionViewFlowLayout.swift */,
 				93D111F01D1A6D1E00B6FF23 /* CustomCollectionReusableView.swift */,
 				93D111F11D1A6D1E00B6FF23 /* CustomCollectionReusableView.xib */,
@@ -337,11 +351,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D3E169B1D60373B000236C4 /* RootCollectionViewController.swift in Sources */,
 				93D111B91D1A572A00B6FF23 /* ViewController.swift in Sources */,
 				9393CE111D46139000F582FC /* ViewerController.swift in Sources */,
 				6D88C71C1D23B90900679822 /* OtherCollectionViewCell.swift in Sources */,
 				6D88C71F1D23BA8400679822 /* OtherCollectionLayout.swift in Sources */,
 				9393CE141D4615BA00F582FC /* ViewerCollectionViewCell.swift in Sources */,
+				6D3E169D1D603763000236C4 /* DetailCollectionViewController.swift in Sources */,
 				6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */,
 				93D111EC1D1A5B6E00B6FF23 /* CustomCollectionViewCell.swift in Sources */,
 				9393CE171D461F8F00F582FC /* BlickViewController.swift in Sources */,
