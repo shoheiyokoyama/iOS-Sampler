@@ -260,7 +260,6 @@ extension ViewerController: UICollectionViewDataSource {
 
 
 
-
 //extension ViewerController: UICollectionViewDelegateFlowLayout {
 //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
 //        if state == .viewer {

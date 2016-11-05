@@ -123,7 +123,12 @@ extension ZoomableScrollView {
     }
     
     func setMaxMinZoomScalesForCurrentBounds() {
-        let boundsSize = bounds.size//一回目でここが0
+        let boundsSize: CGSize
+        if bounds.size == CGSizeZero {
+            boundsSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+        } else {
+            boundsSize = bounds.size
+        }
         
         let xScale = boundsSize.width / imageSize!.width
         let yScale = boundsSize.height / imageSize!.height

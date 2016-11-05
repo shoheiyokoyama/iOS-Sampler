@@ -56,6 +56,8 @@ class MyRootViewController: UIViewController {
         pageViewController.setViewControllers([dataController], direction: .Forward, animated: false, completion: nil)
         
 //        pageViewController.view.frame = CGRect(x: 0, y: controllSwitchHeight, width: view.bounds.width, height: view.bounds.height - controllSwitchHeight)
+        
+        
         view.addSubview(pageViewController.view)
         addChildViewController(pageViewController)
         pageViewController.didMoveToParentViewController(self)

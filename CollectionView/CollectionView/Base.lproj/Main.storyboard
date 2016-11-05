@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="GhJ-ig-Q9e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ObP-1f-0EI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -134,6 +134,76 @@
             </objects>
             <point key="canvasLocation" x="-873" y="99"/>
         </scene>
+        <!--Custom Controller-->
+        <scene sceneID="zh3-DA-YUy">
+            <objects>
+                <viewController id="ObP-1f-0EI" customClass="CustomController" customModule="CollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Cxp-vs-dkk"/>
+                        <viewControllerLayoutGuide type="bottom" id="sFq-qw-0Ti"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vTk-RG-bFl">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H0B-Gv-IqS">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="b0s-4c-Vo1">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Q0J-Z5-idI">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="H0B-Gv-IqS" firstAttribute="leading" secondItem="vTk-RG-bFl" secondAttribute="leading" id="13s-z3-aRi"/>
+                            <constraint firstAttribute="trailing" secondItem="H0B-Gv-IqS" secondAttribute="trailing" id="Q8c-UZ-NSg"/>
+                            <constraint firstItem="H0B-Gv-IqS" firstAttribute="top" secondItem="vTk-RG-bFl" secondAttribute="top" id="bul-iy-ZvF"/>
+                            <constraint firstAttribute="bottom" secondItem="H0B-Gv-IqS" secondAttribute="bottom" id="wdj-rM-tBK"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="H0B-Gv-IqS"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="13s-z3-aRi"/>
+                                <exclude reference="Q8c-UZ-NSg"/>
+                                <exclude reference="bul-iy-ZvF"/>
+                                <exclude reference="wdj-rM-tBK"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="H0B-Gv-IqS"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="13s-z3-aRi"/>
+                                <include reference="Q8c-UZ-NSg"/>
+                                <include reference="bul-iy-ZvF"/>
+                                <include reference="wdj-rM-tBK"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="H0B-Gv-IqS" id="lzc-xC-I14"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BNy-Ib-s9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-688.5" y="803"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="zxL-EL-TaS">
             <objects>
@@ -165,7 +235,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="4VN-ph-RP2">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
