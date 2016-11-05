@@ -24,7 +24,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        let mainQueue = DispatchQueue.main
+        let globalQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
+        globalQueue.async {
+            print("Hi")
+        }
+        mainQueue.async {
+            print("Hi")
+        }
     }
 }
 
