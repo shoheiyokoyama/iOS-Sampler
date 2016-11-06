@@ -29,10 +29,11 @@ fileprivate struct Constsnts {
 class ViewController: UIViewController {
     
     fileprivate let identifier = Constsnts.bundleIdentifier
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        excuteIterations()
         createQueue()
         createSystemQueue()
         excureAcyncAfter()
@@ -69,7 +70,7 @@ private extension ViewController {
          */
         
         // Concurrent Queue
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+        DispatchQueue.global(qos: .default).async {
             print("global")
         }
     }
@@ -81,7 +82,7 @@ private extension ViewController {
     }
     
     func groupExcute() {
-        let group = DispatchGroup()
+        let group  = DispatchGroup()
         let queue1 = DispatchQueue(label: identifier + ".queue1")
         let queue2 = DispatchQueue(label: identifier + ".queue2")
         let queue3 = DispatchQueue(label: identifier + ".queue3")
@@ -113,6 +114,27 @@ private extension ViewController {
         workItem.perform()
         workItem.wait()
         workItem.cancel()
+    }
+    
+    func excuteIterations() {
+        
+        // Concurrent Queue
+        DispatchQueue.concurrentPerform(iterations: 10) { index in
+            sleep(2)
+            print("\(index): concurrent excute")
+        }
+ 
+        // Excute Serial
+        let queue = DispatchQueue(label: identifier + ".serialQueue")
+        (0...10).forEach { index in
+            // Not serial
+            // let queue = DispatchQueue(label: identifier + ".queue" + ".\(index)")
+            
+            queue.async {
+                sleep(UInt32(0.5))
+                print("\(index): serial excute")
+            }
+        }
     }
 }
 
