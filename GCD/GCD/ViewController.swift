@@ -18,20 +18,101 @@ import UIKit
  - [[Swift 3] Swift 3時代のGCDの基本的な使い方](http://dev.classmethod.jp/smartphone/iphone/swift-3-how-to-use-gcd-api-1/)
  */
 
+// MARK: - Constsnts
+
+fileprivate struct Constsnts {
+    static let bundleIdentifier = Bundle.main.infoDictionary?["CFBundleIdentifier"] as? String ?? ""
+}
+
+// MARK: - ViewController
 
 class ViewController: UIViewController {
+    
+    fileprivate let identifier = Constsnts.bundleIdentifier
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        createQueue()
+        createSystemQueue()
+        excureAcyncAfter()
+        groupExcute()
+    }
+}
+
+// MARK: - Private Methods
+
+private extension ViewController {
+    
+    func createQueue() {
+        // Serial Queue
+        DispatchQueue(label: identifier + "serialQueue").async {
+            print("do sub thread")
+        }
         
-        let mainQueue = DispatchQueue.main
-        let globalQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.default)
-        globalQueue.async {
-            print("Hi")
+        // Concurrent Queue
+        let _ = DispatchQueue(label: identifier + "concurrentQueue", attributes: .concurrent)
+    }
+    
+    func createSystemQueue() {
+        // Serial Queue
+        DispatchQueue.main.async {
+            print("main")
         }
-        mainQueue.async {
-            print("Hi")
+        
+        /*
+         - userInteractive
+         - userInitiated
+         - default
+         - utility
+         - unspecified
+         */
+        
+        // Concurrent Queue
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            print("global")
         }
+    }
+    
+    func excureAcyncAfter() {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(5)) {
+            print("5 second after")
+        }
+    }
+    
+    func groupExcute() {
+        let group = DispatchGroup()
+        let queue1 = DispatchQueue(label: identifier + ".queue1")
+        let queue2 = DispatchQueue(label: identifier + ".queue2")
+        let queue3 = DispatchQueue(label: identifier + ".queue3")
+        
+        queue1.async(group: group) {
+            sleep(4)
+            print("excute queue1")
+        }
+        
+        queue2.async(group: group) {
+            sleep(2)
+            print("excute queue2")
+        }
+        
+        queue3.async(group: group) {
+            sleep(1)
+            print("excute queue3")
+        }
+        
+        group.notify(queue: DispatchQueue.main) {
+            print("All task Done")
+        }
+    }
+    
+    func workItemQueue() {
+        let workItem = DispatchWorkItem {
+            print("work item")
+        }
+        workItem.perform()
+        workItem.wait()
+        workItem.cancel()
     }
 }
 
