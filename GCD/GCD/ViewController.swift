@@ -30,20 +30,37 @@ class ViewController: UIViewController {
     
     fileprivate let identifier = Constsnts.bundleIdentifier
     
+    lazy var once: Void = { self.excuteOnce() }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+/*
+        excuteWithSuspend()
+        excuteConcurrentTaskWithBarrier()
         excuteIterations()
         createQueue()
         createSystemQueue()
         excureAcyncAfter()
         groupExcute()
+        
+        // excute just once
+        _ = once
+        _ = once
+        _ = once
+ */
+        //semaphoreExample1()
+        //semaphoreExample2()
+        semaphoreExample3()
     }
 }
 
 // MARK: - Private Methods
 
 private extension ViewController {
+    
+    func excuteOnce() {
+        print("this method excute just once")
+    }
     
     func createQueue() {
         // Serial Queue
@@ -67,17 +84,34 @@ private extension ViewController {
          - default
          - utility
          - unspecified
+         
+         
+         The lower priority, the more concurrent I guess ..
          */
         
         // Concurrent Queue
         DispatchQueue.global(qos: .default).async {
             print("global")
         }
+        // qos default value is .default. so bellow same
+        //DispatchQueue.global().async { }
     }
     
     func excureAcyncAfter() {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(5)) {
-            print("5 second after")
+        
+        /*
+         
+         enum DispatchTimeInterval {
+            case seconds(Int)
+            case milliseconds(Int)
+            case microseconds(Int)
+            case nanoseconds(Int)
+         }
+        */
+        let after = 5
+        _ = DispatchTime.now() + 3 // ok
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(after)) {
+            print("excute \(after) second after")
         }
     }
     
@@ -135,6 +169,111 @@ private extension ViewController {
                 print("\(index): serial excute")
             }
         }
+    }
+    
+    func excuteConcurrentTaskWithBarrier() {
+        
+        // grobal is concurrent Queue
+        let queue: DispatchQueue = .global(qos: .background)
+        
+        (0...100).forEach { index in
+            
+            let closure: () -> ()
+            
+            // index of 30~50 is secured as serial task
+            if 30...50 ~= index {
+                closure = { print("excute index: \(index) task as barrier") }
+            } else {
+                closure = { print("excute index: \(index) task as concurrent") }
+            }
+            
+            queue.async(execute: closure)
+        }
+    }
+    
+    func excuteWithSuspend() {
+        
+        // NOTE: suspend() available private queue only.
+        
+        let queue = DispatchQueue(label: identifier + ".concurrentQueue")
+        
+        queue.suspend()
+        
+        var number = 30
+        
+        // Second, this output as log
+        (0...100).forEach { index in queue.async { print("number: \(number)") } }
+        
+        number = 10
+        
+        // First, this output as log
+        print("change number to 10")
+        
+        // excute added closure
+        queue.resume()
+    }
+}
+
+// MARK: - DispatchSemaphore
+
+extension ViewController {
+    func semaphoreExample1() {
+        
+        // excute 2 task at a time.
+        let semaphone = DispatchSemaphore(value: 2)
+        let queue = DispatchQueue.global()
+        
+        (0...10).forEach { index in
+            queue.async {
+                semaphone.wait() //decrement
+                print("Excute sleep: \(index)")
+                sleep(2)
+                print("end sleep: \(index)")
+                semaphone.signal() //increment
+            }
+        }
+    }
+    
+    // wait task complete
+    func semaphoreExample2() {
+        let semaphone = DispatchSemaphore(value: 0)
+        let queue = DispatchQueue.global()
+        
+        queue.async {
+            print("Excute sleep")
+            sleep(2)
+            print("end sleep")
+            
+            semaphone.signal() //increment
+        }
+        
+        print("wait")
+        semaphone.wait() //decrement
+        print("task finished")
+    }
+    
+    // wait muiltiple task complete
+    func semaphoreExample3() {
+        let semaphone = DispatchSemaphore(value: 0)
+        let queue = DispatchQueue.global()
+        
+        let i = 5
+        (0...i).forEach { index in
+            queue.async {
+                print("Excute sleep: \(index)")
+                sleep(2)
+                print("end sleep: \(index)")
+                
+                semaphone.signal() //increment
+            }
+        }
+        
+        (0...i).forEach { index in
+            semaphone.wait() //decrement
+            print("complete: \(index)")
+        }
+        
+        print("finish all task")
     }
 }
 
