@@ -54,14 +54,17 @@ class ViewController: UIViewController {
     }
 }
 
-// MARK: - Private Methods
+// MARK: - Excute only once
 
-private extension ViewController {
-    
+extension ViewController {
     func excuteOnce() {
         print("this method excute just once")
     }
-    
+}
+
+// MARK: - Private Methods
+
+private extension ViewController {
     func createQueue() {
         // Serial Queue
         DispatchQueue(label: identifier + "serialQueue").async {
@@ -217,24 +220,32 @@ private extension ViewController {
 // MARK: - DispatchSemaphore
 
 extension ViewController {
+    
+    /*
+     DispatchSemaphore(value: 2)
+     value: initial count
+     
+     semaphone.wait() decrement count
+     semaphone.signal() increment count
+     */
+    
+    // excute only 2 task at a time.
     func semaphoreExample1() {
-        
-        // excute 2 task at a time.
         let semaphone = DispatchSemaphore(value: 2)
         let queue = DispatchQueue.global()
         
         (0...10).forEach { index in
             queue.async {
-                semaphone.wait() //decrement
+                semaphone.wait()
                 print("Excute sleep: \(index)")
                 sleep(2)
-                print("end sleep: \(index)")
-                semaphone.signal() //increment
+                print("End sleep: \(index)")
+                semaphone.signal()
             }
         }
     }
     
-    // wait task complete
+    // Wait task complete
     func semaphoreExample2() {
         let semaphone = DispatchSemaphore(value: 0)
         let queue = DispatchQueue.global()
@@ -242,17 +253,17 @@ extension ViewController {
         queue.async {
             print("Excute sleep")
             sleep(2)
-            print("end sleep")
+            print("End sleep")
             
-            semaphone.signal() //increment
+            semaphone.signal()
         }
         
-        print("wait")
-        semaphone.wait() //decrement
-        print("task finished")
+        print("Wait task")
+        semaphone.wait()
+        print("Task finished")
     }
     
-    // wait muiltiple task complete
+    // Wait muiltiple task complete
     func semaphoreExample3() {
         let semaphone = DispatchSemaphore(value: 0)
         let queue = DispatchQueue.global()
@@ -262,18 +273,18 @@ extension ViewController {
             queue.async {
                 print("Excute sleep: \(index)")
                 sleep(2)
-                print("end sleep: \(index)")
+                print("End sleep: \(index)")
                 
-                semaphone.signal() //increment
+                semaphone.signal()
             }
         }
         
         (0...i).forEach { index in
-            semaphone.wait() //decrement
-            print("complete: \(index)")
+            semaphone.wait()
+            print("Complete: \(index)")
         }
         
-        print("finish all task")
+        print("All task finished")
     }
 }
 
