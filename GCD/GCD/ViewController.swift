@@ -34,20 +34,21 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-/*
-        excuteWithSuspend()
-        excuteConcurrentTaskWithBarrier()
-        excuteIterations()
+
+        suspendExample()
+        barrierExample()
+        iterationsExample()
         createQueue()
         createSystemQueue()
-        excureAcyncAfter()
-        groupExcute()
+        asyncAfterExample()
+        groupExample()
+        workItemExample()
         
         // excute just once
         _ = once
         _ = once
         _ = once
- */
+
         //semaphoreExample1()
         //semaphoreExample2()
         semaphoreExample3()
@@ -62,9 +63,9 @@ extension ViewController {
     }
 }
 
-// MARK: - Private Methods
+// MARK: - Create queue
 
-private extension ViewController {
+extension ViewController {
     func createQueue() {
         // Serial Queue
         DispatchQueue(label: identifier + "serialQueue").async {
@@ -99,26 +100,33 @@ private extension ViewController {
         // qos default value is .default. so bellow same
         //DispatchQueue.global().async { }
     }
-    
-    func excureAcyncAfter() {
-        
-        /*
-         
-         enum DispatchTimeInterval {
-            case seconds(Int)
-            case milliseconds(Int)
-            case microseconds(Int)
-            case nanoseconds(Int)
-         }
-        */
+}
+
+// MARK: - asyncAfter
+
+extension ViewController {
+    /*
+     
+     enum DispatchTimeInterval {
+     case seconds(Int)
+     case milliseconds(Int)
+     case microseconds(Int)
+     case nanoseconds(Int)
+     }
+     */
+    func asyncAfterExample() {
         let after = 5
         _ = DispatchTime.now() + 3 // ok
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(after)) {
             print("excute \(after) second after")
         }
     }
-    
-    func groupExcute() {
+}
+
+// MARK: - DispatchGroup
+
+extension ViewController {
+    func groupExample() {
         let group  = DispatchGroup()
         let queue1 = DispatchQueue(label: identifier + ".queue1")
         let queue2 = DispatchQueue(label: identifier + ".queue2")
@@ -143,24 +151,19 @@ private extension ViewController {
             print("All task Done")
         }
     }
-    
-    func workItemQueue() {
-        let workItem = DispatchWorkItem {
-            print("work item")
-        }
-        workItem.perform()
-        workItem.wait()
-        workItem.cancel()
-    }
-    
-    func excuteIterations() {
+}
+
+// MARK: - Iterations
+
+extension ViewController {
+    func iterationsExample() {
         
         // Concurrent Queue
         DispatchQueue.concurrentPerform(iterations: 10) { index in
             sleep(2)
             print("\(index): concurrent excute")
         }
- 
+        
         // Excute Serial
         let queue = DispatchQueue(label: identifier + ".serialQueue")
         (0...10).forEach { index in
@@ -173,29 +176,35 @@ private extension ViewController {
             }
         }
     }
-    
-    func excuteConcurrentTaskWithBarrier() {
-        
-        // grobal is concurrent Queue
-        let queue: DispatchQueue = .global(qos: .background)
+}
+
+// MARK: - barrier flag
+
+extension ViewController {
+    func barrierExample() {
+        // NOTE: barrier available private concurrent queue only??.
+        let queue = DispatchQueue(label: "com.sample.barrier", attributes: .concurrent)
         
         (0...100).forEach { index in
             
-            let closure: () -> ()
-            
             // index of 30~50 is secured as serial task
             if 30...50 ~= index {
-                closure = { print("excute index: \(index) task as barrier") }
+                queue.async(flags: .barrier) {
+                    print("excute index: \(index) task as barrier")
+                }
             } else {
-                closure = { print("excute index: \(index) task as concurrent") }
+                queue.async {
+                    print("excute index: \(index) task as concurrent")
+                }
             }
-            
-            queue.async(execute: closure)
         }
     }
-    
-    func excuteWithSuspend() {
-        
+}
+
+// MARK: - Queue suepend
+
+extension ViewController {
+    func suspendExample() {
         // NOTE: suspend() available private queue only.
         
         let queue = DispatchQueue(label: identifier + ".concurrentQueue")
@@ -217,15 +226,29 @@ private extension ViewController {
     }
 }
 
+// MARK: -
+
+extension ViewController {
+    func workItemExample() {
+        let workItem = DispatchWorkItem {
+            print("work item")
+        }
+        workItem.perform()
+        workItem.wait()
+        workItem.cancel()
+    }
+}
+
 // MARK: - DispatchSemaphore
 
 extension ViewController {
     
     /*
      DispatchSemaphore(value: 2)
+     
      value: initial count
      
-     semaphone.wait() decrement count
+     semaphone.wait()   decrement count
      semaphone.signal() increment count
      */
     
