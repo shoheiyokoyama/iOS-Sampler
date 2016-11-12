@@ -35,23 +35,28 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        workItemExample()
+        
+            /*
+         groupExample()
         suspendExample()
         barrierExample()
         iterationsExample()
         createQueue()
         createSystemQueue()
         asyncAfterExample()
-        groupExample()
+        
         workItemExample()
+        
+        semaphoreExample1()
+        semaphoreExample2()
+        semaphoreExample3()
         
         // excute just once
         _ = once
         _ = once
         _ = once
-
-        //semaphoreExample1()
-        //semaphoreExample2()
-        semaphoreExample3()
+ */
     }
 }
 
@@ -114,6 +119,7 @@ extension ViewController {
      case nanoseconds(Int)
      }
      */
+    
     func asyncAfterExample() {
         let after = 5
         _ = DispatchTime.now() + 3 // ok
@@ -128,24 +134,31 @@ extension ViewController {
 extension ViewController {
     func groupExample() {
         let group  = DispatchGroup()
+        
+        // Serial queue
         let queue1 = DispatchQueue(label: identifier + ".queue1")
         let queue2 = DispatchQueue(label: identifier + ".queue2")
         let queue3 = DispatchQueue(label: identifier + ".queue3")
         
+        // these task is concurrent because defference queue
         queue1.async(group: group) {
+            print("start queue1")
             sleep(4)
-            print("excute queue1")
+            print("end queue1")
         }
         
         queue2.async(group: group) {
+            print("start queue2")
             sleep(2)
-            print("excute queue2")
+            print("end queue2")
         }
         
         queue3.async(group: group) {
+            print("start queue3")
             sleep(1)
-            print("excute queue3")
+            print("end queue3")
         }
+        
         
         group.notify(queue: DispatchQueue.main) {
             print("All task Done")
@@ -226,16 +239,22 @@ extension ViewController {
     }
 }
 
-// MARK: -
+// MARK: - DispatchWorkItem
 
 extension ViewController {
     func workItemExample() {
         let workItem = DispatchWorkItem {
-            print("work item")
+            (0...5).forEach { index in
+                sleep(1)
+                print("index: \(index)")
+            }
         }
+        
+        // excute without queue
         workItem.perform()
-        workItem.wait()
-        workItem.cancel()
+        
+        // excute with queue
+        //DispatchQueue.global().async(execute: workItem)
     }
 }
 
