@@ -13,7 +13,24 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        confirmAuthorization()
+    }
+}
+
+// MARK: - Authorization
+
+private extension ViewController {
+    func confirmAuthorization() {
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {
+            granted, error in
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            // Register notification
+            UIApplication.shared.registerForRemoteNotifications()
+        }
     }
 }
 
