@@ -1,6 +1,0 @@
-version: "Apple Swift version 3.0.1 (swiftlang-800.0.58.6 clang-800.0.42.1)"
-options: "89a886a739e7a798b6dbfe8589230538"
-build_time: [532240216, 773813000]
-inputs:
-  "/Users/a18968/Develop/swift-standard-framework/GCD/GCD/ViewController.swift": [532240216, 0]
-  "/Users/a18968/Develop/swift-standard-framework/GCD/GCD/AppDelegate.swift": [532237945, 0]
