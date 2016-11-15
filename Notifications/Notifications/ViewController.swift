@@ -9,37 +9,51 @@
 import UIKit
 import UserNotifications
 
+// [iOS User Notifications framework – シリーズ –](http://dev.classmethod.jp/series/ios-user-notifications-framework/)
+
 class ViewController: UIViewController {
     
-    let userNotification  = UNUserNotificationCenter.current()
+    let userNotification = UNUserNotificationCenter.current()
     
     // UserNotificatonIdentifier
     struct UNI {
         static let local  = "localNotification"
         static let custom = "customUserNotification"
         static let category = "category-message"
+        static let attachment = "attachmentUserNotification"
         
+        // Action
         struct Action {
             static let replay = "replay-action"
             static let delete = "delete-action"
+        }
+        
+        // Attachment
+        struct Attachment {
+            static let image = "image-attachment1"
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // First time only
         confirmAuthorization()
         configureUserNotification()
         
         //addLocalNotification()
         
-        /*
+        /* Change Notification
         updateUserNotificaton()
         removeUserNotification()
          */
         
+        /* Custom Notification
         registerCustomNotification()
         addCustomNotification()
+        */
+        
+        addNotificationWithAttachment()
     }
     
     private func configureUserNotification() {
@@ -93,9 +107,14 @@ extension ViewController: UNUserNotificationCenterDelegate {
         }
         completionHandler()
     }
+    
+    // foreground
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
 }
 
-// MARK: - Update and Remove -
+// MARK: - Update and Remove (iOS10~) -
 
 extension ViewController {
     func removeUserNotification() {
@@ -136,6 +155,28 @@ extension ViewController {
         let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: 5, repeats: false)
         let request = UNNotificationRequest(identifier: UNI.custom, content: content, trigger: trigger)
         userNotification.add(request)
+    }
+}
+
+// Attachment
+
+extension ViewController {
+    func addNotificationWithAttachment() {
+        let content = UNMutableNotificationContent()
+        content.title = "Title"
+        content.body  = "body"
+        content.sound = .default()
+        
+        let imageURL = Bundle.main.url(forResource: "58692051", withExtension: "jpeg")
+        
+        do {
+            let attachment = try UNNotificationAttachment(identifier: UNI.Attachment.image, url: imageURL!, options: [:])
+            content.attachments = [attachment]
+        } catch { print("Error") }
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: UNI.attachment, content: content, trigger: trigger)
+        userNotification.add(request) { _ in }
     }
 }
 

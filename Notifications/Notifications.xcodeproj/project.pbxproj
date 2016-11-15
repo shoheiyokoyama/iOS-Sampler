@@ -14,6 +14,8 @@
 		930E67741DD9C910008A8EEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 930E67721DD9C910008A8EEB /* LaunchScreen.storyboard */; };
 		930E677F1DD9C910008A8EEB /* NotificationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E677E1DD9C910008A8EEB /* NotificationsTests.swift */; };
 		930E678A1DD9C911008A8EEB /* NotificationsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930E67891DD9C911008A8EEB /* NotificationsUITests.swift */; };
+		93CA69131DDAD6FB0014535B /* 58692051.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 93CA69121DDAD6FB0014535B /* 58692051.jpeg */; };
+		93CA69151DDAD97C0014535B /* 73754.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 93CA69141DDAD97C0014535B /* 73754.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		930E67851DD9C910008A8EEB /* NotificationsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotificationsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		930E67891DD9C911008A8EEB /* NotificationsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsUITests.swift; sourceTree = "<group>"; };
 		930E678B1DD9C911008A8EEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93CA69121DDAD6FB0014535B /* 58692051.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 58692051.jpeg; path = ../../../../Dropbox/58692051.jpeg; sourceTree = "<group>"; };
+		93CA69141DDAD97C0014535B /* 73754.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 73754.jpg; path = ../../../../Dropbox/73754.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 				930E67691DD9C910008A8EEB /* AppDelegate.swift */,
 				930E676B1DD9C910008A8EEB /* ViewController.swift */,
 				930E676D1DD9C910008A8EEB /* Main.storyboard */,
+				93CA69141DDAD97C0014535B /* 73754.jpg */,
+				93CA69121DDAD6FB0014535B /* 58692051.jpeg */,
 				930E67701DD9C910008A8EEB /* Assets.xcassets */,
 				930E67721DD9C910008A8EEB /* LaunchScreen.storyboard */,
 				930E67751DD9C910008A8EEB /* Info.plist */,
@@ -236,7 +242,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				930E67741DD9C910008A8EEB /* LaunchScreen.storyboard in Resources */,
+				93CA69131DDAD6FB0014535B /* 58692051.jpeg in Resources */,
 				930E67711DD9C910008A8EEB /* Assets.xcassets in Resources */,
+				93CA69151DDAD97C0014535B /* 73754.jpg in Resources */,
 				930E676F1DD9C910008A8EEB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -514,6 +522,7 @@
 				930E67901DD9C911008A8EEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		930E67911DD9C911008A8EEB /* Build configuration list for PBXNativeTarget "NotificationsTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +531,7 @@
 				930E67931DD9C911008A8EEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		930E67941DD9C911008A8EEB /* Build configuration list for PBXNativeTarget "NotificationsUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +540,7 @@
 				930E67961DD9C911008A8EEB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
