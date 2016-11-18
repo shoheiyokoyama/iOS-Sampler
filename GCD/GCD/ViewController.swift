@@ -30,22 +30,23 @@ class ViewController: UIViewController {
     
     fileprivate let identifier = Constsnts.bundleIdentifier
     
+    typealias CallBack = @convention(c) () -> Void
+    
     lazy var once: Void = { self.excuteOnce() }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        workItemExample()
         
-            /*
-         groupExample()
+        /*
+        workItemExample()
+        groupExample()
         suspendExample()
         barrierExample()
         iterationsExample()
         createQueue()
         createSystemQueue()
         asyncAfterExample()
-        
+        callBackExample()
         workItemExample()
         
         semaphoreExample1()
@@ -56,7 +57,29 @@ class ViewController: UIViewController {
         _ = once
         _ = once
         _ = once
- */
+         */
+    }
+}
+
+// MARK: - Excute with closure
+
+extension ViewController {
+    func callBackExample() {
+        let closure: (DispatchQueue, @escaping CallBack) -> Void = { queue, callBack in
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3)) {
+                queue.async(execute: callBack)
+            }
+        }
+        
+        let queue = DispatchQueue.global()
+        
+        closure(queue) {
+            print("callback 3 second after")
+        }
+        
+        queue.async {
+            print("excute")
+        }
     }
 }
 
@@ -249,8 +272,6 @@ extension ViewController {
                 print("index: \(index)")
             }
         }
-        
-        let a = OperationQueue
         
         // excute without queue
         workItem.perform()
