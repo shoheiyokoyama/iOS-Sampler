@@ -34,7 +34,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        suspendExample()
+        /*
         suspendExample()
         barrierExample()
         iterationsExample()
@@ -43,6 +44,7 @@ class ViewController: UIViewController {
         asyncAfterExample()
         groupExample()
         workItemExample()
+        addTask()
         
         // excute just once
         _ = once
@@ -52,6 +54,7 @@ class ViewController: UIViewController {
         //semaphoreExample1()
         //semaphoreExample2()
         semaphoreExample3()
+ */
     }
 }
 
@@ -60,6 +63,19 @@ class ViewController: UIViewController {
 extension ViewController {
     func excuteOnce() {
         print("this method excute just once")
+    }
+}
+
+// MARK: - async or sync
+
+extension ViewController {
+    func addTask() {
+        DispatchQueue.global().async {
+            sleep(1)
+            print("Excute Task")
+        }
+        
+        print("Qiita")
     }
 }
 
@@ -73,7 +89,9 @@ extension ViewController {
         }
         
         // Concurrent Queue
-        let _ = DispatchQueue(label: identifier + "concurrentQueue", attributes: .concurrent)
+        DispatchQueue(label: identifier + "concurrentQueue", attributes: .concurrent).async {
+            print("do sub thread")
+        }
     }
     
     func createSystemQueue() {
@@ -117,7 +135,7 @@ extension ViewController {
     func asyncAfterExample() {
         let after = 5
         _ = DispatchTime.now() + 3 // ok
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(after)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(after)) {
             print("excute \(after) second after")
         }
     }
@@ -214,7 +232,9 @@ extension ViewController {
         var number = 30
         
         // Second, this output as log
-        (0...100).forEach { index in queue.async { print("number: \(number)") } }
+        (0...10).forEach { index in queue.async { print("number: \(number)") } }
+        
+        sleep(1)
         
         number = 10
         
