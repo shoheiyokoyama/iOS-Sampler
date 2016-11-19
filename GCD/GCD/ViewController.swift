@@ -8,16 +8,6 @@
 
 import UIKit
 
-/*
- - [Swift GCD入門](http://qiita.com/ShoichiKuraoka/items/bb2a280688d29de3ff18)
- - [Swift3のGCD周りのまとめ](http://qiita.com/marty-suzuki/items/f0547e40dc09e790328f)
- - [並列プログラミングガイド](https://developer.apple.com/jp/documentation/ConcurrencyProgrammingGuide.pdf)
- - [Concurrent Programming With GCD in Swift 3](https://developer.apple.com/videos/play/wwdc2016/720/)
- - ※[【iPhoneアプリ】これを使えるようにならないと「マルチスレッド」について　概要編](http://kassans.hatenablog.com/entry/2014/03/13/125332)
- - [GCD のディスパッチセマフォを活用する (Objective-C〜Swift 3 対応)](https://blog.ymyzk.com/2015/08/gcd-grand-central-dispatch-semaphore/)
- - [[Swift 3] Swift 3時代のGCDの基本的な使い方](http://dev.classmethod.jp/smartphone/iphone/swift-3-how-to-use-gcd-api-1/)
- */
-
 // MARK: - Constsnts
 
 fileprivate struct Constsnts {
@@ -30,31 +20,57 @@ class ViewController: UIViewController {
     
     fileprivate let identifier = Constsnts.bundleIdentifier
     
+    typealias CallBack = @convention(c) () -> Void
+    
     lazy var once: Void = { self.excuteOnce() }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        suspendExample()
+        
         /*
+        workItemExample()
+        groupExample()
         suspendExample()
         barrierExample()
         iterationsExample()
         createQueue()
         createSystemQueue()
         asyncAfterExample()
-        groupExample()
+        callBackExample()
         workItemExample()
         addTask()
+        
+        semaphoreExample1()
+        semaphoreExample2()
+        semaphoreExample3()
         
         // excute just once
         _ = once
         _ = once
         _ = once
+         */
+    }
+}
 
-        //semaphoreExample1()
-        //semaphoreExample2()
-        semaphoreExample3()
- */
+// MARK: - Excute with closure
+
+extension ViewController {
+    func callBackExample() {
+        let closure: (DispatchQueue, @escaping CallBack) -> Void = { queue, callBack in
+            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(3)) {
+                queue.async(execute: callBack)
+            }
+        }
+        
+        let queue = DispatchQueue.global()
+        
+        closure(queue) {
+            print("callback 3 second after")
+        }
+        
+        queue.async {
+            print("excute")
+        }
     }
 }
 
@@ -132,6 +148,7 @@ extension ViewController {
      case nanoseconds(Int)
      }
      */
+    
     func asyncAfterExample() {
         let after = 5
         _ = DispatchTime.now() + 3 // ok
@@ -146,24 +163,31 @@ extension ViewController {
 extension ViewController {
     func groupExample() {
         let group  = DispatchGroup()
+        
+        // Serial queue
         let queue1 = DispatchQueue(label: identifier + ".queue1")
         let queue2 = DispatchQueue(label: identifier + ".queue2")
         let queue3 = DispatchQueue(label: identifier + ".queue3")
         
+        // these task is concurrent because defference queue
         queue1.async(group: group) {
+            print("start queue1")
             sleep(4)
-            print("excute queue1")
+            print("end queue1")
         }
         
         queue2.async(group: group) {
+            print("start queue2")
             sleep(2)
-            print("excute queue2")
+            print("end queue2")
         }
         
         queue3.async(group: group) {
+            print("start queue3")
             sleep(1)
-            print("excute queue3")
+            print("end queue3")
         }
+        
         
         group.notify(queue: DispatchQueue.main) {
             print("All task Done")
@@ -246,16 +270,22 @@ extension ViewController {
     }
 }
 
-// MARK: -
+// MARK: - DispatchWorkItem
 
 extension ViewController {
     func workItemExample() {
         let workItem = DispatchWorkItem {
-            print("work item")
+            (0...5).forEach { index in
+                sleep(1)
+                print("index: \(index)")
+            }
         }
+        
+        // excute without queue
         workItem.perform()
-        workItem.wait()
-        workItem.cancel()
+        
+        // excute with queue
+        //DispatchQueue.global().async(execute: workItem)
     }
 }
 

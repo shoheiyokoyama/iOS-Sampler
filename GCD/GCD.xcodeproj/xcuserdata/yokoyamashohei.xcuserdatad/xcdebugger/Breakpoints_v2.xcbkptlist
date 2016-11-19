@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
             endingLineNumber = "179"
-            landmarkName = "iterationsExample()"
+            landmarkName = "groupExample()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "227"
             endingLineNumber = "227"
-            landmarkName = "suspendExample()"
+            landmarkName = "iterationsExample()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
