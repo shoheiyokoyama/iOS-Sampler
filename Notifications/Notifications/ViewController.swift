@@ -53,7 +53,8 @@ class ViewController: UIViewController {
         addCustomNotification()
         */
         
-        addNotificationWithAttachment()
+        //addNotificationWithAttachment()
+        registerNotificationWithAttachmentAndAction()
     }
     
     private func configureUserNotification() {
@@ -166,6 +167,33 @@ extension ViewController {
         content.title = "Title"
         content.body  = "body"
         content.sound = .default()
+        
+        let imageURL = Bundle.main.url(forResource: "58692051", withExtension: "jpeg")
+        
+        do {
+            let attachment = try UNNotificationAttachment(identifier: UNI.Attachment.image, url: imageURL!, options: [:])
+            content.attachments = [attachment]
+        } catch { print("Error") }
+        
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let request = UNNotificationRequest(identifier: UNI.attachment, content: content, trigger: trigger)
+        userNotification.add(request) { _ in }
+    }
+    
+    func registerNotificationWithAttachmentAndAction() {
+        let replayAction = UNNotificationAction(identifier: UNI.Action.replay, title: "replay", options: [])
+        let deleteAction = UNNotificationAction(identifier: UNI.Action.delete, title: "delete", options: [])
+        
+        let category = UNNotificationCategory(identifier: UNI.category, actions: [replayAction, deleteAction], intentIdentifiers: [], options: [])
+        userNotification.setNotificationCategories([category])
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Title"
+        content.body  = "body"
+        content.sound = .default()
+        
+        // UNNotificationCategory identifier
+        content.categoryIdentifier = UNI.category
         
         let imageURL = Bundle.main.url(forResource: "58692051", withExtension: "jpeg")
         
