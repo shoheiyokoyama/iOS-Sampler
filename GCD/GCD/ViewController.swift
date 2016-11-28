@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         asyncAfterExample()
         callBackExample()
         workItemExample()
+        addTask()
         
         semaphoreExample1()
         semaphoreExample2()
@@ -81,6 +82,19 @@ extension ViewController {
     }
 }
 
+// MARK: - async or sync
+
+extension ViewController {
+    func addTask() {
+        DispatchQueue.global().async {
+            sleep(1)
+            print("Excute Task")
+        }
+        
+        print("Qiita")
+    }
+}
+
 // MARK: - Create queue
 
 extension ViewController {
@@ -91,7 +105,9 @@ extension ViewController {
         }
         
         // Concurrent Queue
-        let _ = DispatchQueue(label: identifier + "concurrentQueue", attributes: .concurrent)
+        DispatchQueue(label: identifier + "concurrentQueue", attributes: .concurrent).async {
+            print("do sub thread")
+        }
     }
     
     func createSystemQueue() {
@@ -136,7 +152,7 @@ extension ViewController {
     func asyncAfterExample() {
         let after = 5
         _ = DispatchTime.now() + 3 // ok
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(after)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(after)) {
             print("excute \(after) second after")
         }
     }
@@ -240,7 +256,9 @@ extension ViewController {
         var number = 30
         
         // Second, this output as log
-        (0...100).forEach { index in queue.async { print("number: \(number)") } }
+        (0...10).forEach { index in queue.async { print("number: \(number)") } }
+        
+        sleep(1)
         
         number = 10
         
