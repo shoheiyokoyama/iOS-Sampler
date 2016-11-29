@@ -54,11 +54,21 @@ class ViewController: UIViewController {
         */
         
         //addNotificationWithAttachment()
-        registerNotificationWithAttachmentAndAction()
+        //registerNotificationWithAttachmentAndAction()
     }
     
     private func configureUserNotification() {
         userNotification.delegate = self
+    }
+    
+    // Update exist notification in Notification Center
+    @IBAction func tap(_ sender: Any) {
+        let content = UNMutableNotificationContent()
+        content.title = "New title"
+        content.subtitle = "New sub Title"
+        content.body  = "New body"
+        let newRequest = UNNotificationRequest(identifier: UNI.local, content: content, trigger: nil)
+        userNotification.add(newRequest)
     }
 }
 
