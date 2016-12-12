@@ -15,8 +15,18 @@ extension UITableView {
         register(nib, forCellReuseIdentifier: className)
     }
     
+    func registerHeader<T: UITableViewHeaderFooterView>(_ type: T.Type) {
+        let className = String.className(type)
+        let nib       = UINib(nibName: className, bundle: nil)
+        register(nib, forHeaderFooterViewReuseIdentifier: className)
+    }
+    
     func dequeueCell<T: UITableViewCell>(_ type: T.Type, indexPath: IndexPath) -> T {
         return dequeueReusableCell(withIdentifier: String.className(type), for: indexPath) as! T
+    }
+    
+    func dequeueHeader<T: UITableViewHeaderFooterView>(_ type: T.Type) -> T {
+        return dequeueReusableHeaderFooterView(withIdentifier: String.className(type)) as! T
     }
 }
 
@@ -36,6 +46,7 @@ class ViewController: UIViewController {
         tableView.delegate   = self
         tableView.dataSource = self
         tableView.registerCell(MyCell.self)
+        tableView.registerHeader(MyHeaderView.self)
     }
 }
 
@@ -51,7 +62,7 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 200
     }
 }
 
@@ -59,7 +70,9 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return UIView()
+        let header = tableView.dequeueHeader(MyHeaderView.self)
+        header.contentView.backgroundColor = UIColor.cyan
+        return header
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

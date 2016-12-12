@@ -14,6 +14,8 @@
 		6D3A233D1DFEE51C0086E7C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D3A233B1DFEE51C0086E7C1 /* LaunchScreen.storyboard */; };
 		6D3A23461DFEE7AB0086E7C1 /* MyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A23441DFEE7AB0086E7C1 /* MyCell.swift */; };
 		6D3A23471DFEE7AB0086E7C1 /* MyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3A23451DFEE7AB0086E7C1 /* MyCell.xib */; };
+		6D3A23491DFEE8E20086E7C1 /* MyHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D3A23481DFEE8E20086E7C1 /* MyHeaderView.xib */; };
+		6D3A234B1DFEE90A0086E7C1 /* MyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3A234A1DFEE90A0086E7C1 /* MyHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		6D3A233E1DFEE51C0086E7C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D3A23441DFEE7AB0086E7C1 /* MyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCell.swift; sourceTree = "<group>"; };
 		6D3A23451DFEE7AB0086E7C1 /* MyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCell.xib; sourceTree = "<group>"; };
+		6D3A23481DFEE8E20086E7C1 /* MyHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyHeaderView.xib; sourceTree = "<group>"; };
+		6D3A234A1DFEE90A0086E7C1 /* MyHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 			children = (
 				6D3A23321DFEE51C0086E7C1 /* AppDelegate.swift */,
 				6D3A23341DFEE51C0086E7C1 /* ViewController.swift */,
+				6D3A23481DFEE8E20086E7C1 /* MyHeaderView.xib */,
+				6D3A234A1DFEE90A0086E7C1 /* MyHeaderView.swift */,
 				6D3A23441DFEE7AB0086E7C1 /* MyCell.swift */,
 				6D3A23451DFEE7AB0086E7C1 /* MyCell.xib */,
 				6D3A23361DFEE51C0086E7C1 /* Main.storyboard */,
@@ -131,6 +137,7 @@
 			files = (
 				6D3A233D1DFEE51C0086E7C1 /* LaunchScreen.storyboard in Resources */,
 				6D3A23471DFEE7AB0086E7C1 /* MyCell.xib in Resources */,
+				6D3A23491DFEE8E20086E7C1 /* MyHeaderView.xib in Resources */,
 				6D3A233A1DFEE51C0086E7C1 /* Assets.xcassets in Resources */,
 				6D3A23381DFEE51C0086E7C1 /* Main.storyboard in Resources */,
 			);
@@ -146,6 +153,7 @@
 				6D3A23461DFEE7AB0086E7C1 /* MyCell.swift in Sources */,
 				6D3A23351DFEE51C0086E7C1 /* ViewController.swift in Sources */,
 				6D3A23331DFEE51C0086E7C1 /* AppDelegate.swift in Sources */,
+				6D3A234B1DFEE90A0086E7C1 /* MyHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
