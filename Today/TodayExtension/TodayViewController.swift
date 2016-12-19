@@ -13,7 +13,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view from its nib.
+        
+        //拡大可能
+        self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
     
     override func didReceiveMemoryWarning() {
@@ -29,6 +31,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         // If there's an update, use NCUpdateResult.NewData
         
         completionHandler(NCUpdateResult.newData)
+    }
+    
+    func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
+        if case .compact = activeDisplayMode {
+            self.preferredContentSize = maxSize
+        } else {
+            self.preferredContentSize.height = 250
+        }
     }
     
 }
