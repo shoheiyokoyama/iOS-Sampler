@@ -13,6 +13,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     @IBOutlet private weak var textLabel: UILabel!
     @IBOutlet private weak var imageView: UIImageView!
+    @IBOutlet weak var button: UIButton! {
+        didSet { button.layer.cornerRadius = 5 }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,4 +55,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }
     }
     
+    @IBAction func tappedButton(_ sender: Any) {
+        let url = URL(string: "todaySample://")
+        extensionContext?.open(url!, completionHandler: nil)
+    }
 }
