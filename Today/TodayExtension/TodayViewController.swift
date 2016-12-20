@@ -10,27 +10,38 @@ import UIKit
 import NotificationCenter
 
 class TodayViewController: UIViewController, NCWidgetProviding {
-        
+    
+    @IBOutlet private weak var textLabel: UILabel!
+    @IBOutlet private weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //拡大可能
         self.extensionContext?.widgetLargestAvailableDisplayMode = .expanded
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        coordinator.animate(alongsideTransition: { [weak self] context in
+            self?.textLabel.alpha = 0.3
+            self?.imageView.alpha = 0.3
+        }, completion: { [weak self] _ in
+            self?.textLabel.alpha = 1
+            self?.imageView.alpha = 1
+        })
     }
     
     func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
-        
-        // If an error is encountered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-        
-        completionHandler(NCUpdateResult.newData)
+
+//        fethTodayData() { data, error in
+//            guard let _ = error else { completionHandler(.failed) }
+//            updateUI()
+//            completionHandler(.newData)
+//        }
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd hh:mm:ss"
+        textLabel.text = "Now: " + formatter.string(from: Date())
+        completionHandler(.newData)
     }
     
     func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {

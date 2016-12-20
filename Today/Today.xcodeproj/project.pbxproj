@@ -18,6 +18,7 @@
 		93130E9E1E07E14400EC4043 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93130E9D1E07E14400EC4043 /* TodayViewController.swift */; };
 		93130EA11E07E14400EC4043 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 93130E9F1E07E14400EC4043 /* MainInterface.storyboard */; };
 		93130EA51E07E14400EC4043 /* TodayExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 93130E981E07E14400EC4043 /* TodayExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		933711091E08FC3D00E0F88F /* noti.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 933711081E08FC3D00E0F88F /* noti.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		93130E9D1E07E14400EC4043 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		93130EA01E07E14400EC4043 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		93130EA21E07E14400EC4043 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		933711081E08FC3D00E0F88F /* noti.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = noti.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 		93130E9C1E07E14400EC4043 /* TodayExtension */ = {
 			isa = PBXGroup;
 			children = (
+				933711081E08FC3D00E0F88F /* noti.jpg */,
 				93130E9D1E07E14400EC4043 /* TodayViewController.swift */,
 				93130E9F1E07E14400EC4043 /* MainInterface.storyboard */,
 				93130EA21E07E14400EC4043 /* Info.plist */,
@@ -344,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93130EA11E07E14400EC4043 /* MainInterface.storyboard in Resources */,
+				933711091E08FC3D00E0F88F /* noti.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +659,7 @@
 				93130E8D1E07E0BD00EC4043 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		93130E8E1E07E0BD00EC4043 /* Build configuration list for PBXNativeTarget "TodayTests" */ = {
 			isa = XCConfigurationList;
@@ -663,6 +668,7 @@
 				93130E901E07E0BD00EC4043 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		93130E911E07E0BD00EC4043 /* Build configuration list for PBXNativeTarget "TodayUITests" */ = {
 			isa = XCConfigurationList;
@@ -671,6 +677,7 @@
 				93130E931E07E0BD00EC4043 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		93130EA61E07E14400EC4043 /* Build configuration list for PBXNativeTarget "TodayExtension" */ = {
 			isa = XCConfigurationList;
@@ -679,6 +686,7 @@
 				93130EA81E07E14400EC4043 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
