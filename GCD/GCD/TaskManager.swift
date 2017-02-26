@@ -1,5 +1,5 @@
 //
-//  Task.swift
+//  TaskManager.swift
 //  GCD
 //
 //  Created by Shohei Yokoyama on 2016/11/19.
@@ -8,17 +8,13 @@
 
 import UIKit
 
-// serial class
-// concurrent class
-
 final class TaskManager {
-    
-    var tasks: [NextObjectErrorClosure] = []
-    
     typealias NextObjectErrorClosure = (Any? , @escaping (Any?) -> Void, @escaping (Error?) -> Void) -> Void
     typealias NextObjectClosure = (Any? , @escaping (Any?) -> Void) -> Void
     typealias ObjectNextClosure = (@escaping (Any?) -> Void) -> Void
     typealias VoidNextClosure = () -> Void
+    
+    var tasks: [NextObjectErrorClosure] = []
     
     init(_ closure: @escaping NextObjectErrorClosure) {
         tasks.append(closure)
@@ -45,6 +41,9 @@ final class TaskManager {
         }
         self.init(task)
     }
+    
+    //http://ameblo.jp/principia-ca/entry-12142313027.html
+    //var testArray: [Task] = []
 }
 
 extension TaskManager {
@@ -66,6 +65,12 @@ extension TaskManager {
 }
 
 extension TaskManager {
+    func next<T>(closure: @escaping ConcurrentTask<T>.NextObjectErrorClosure) {
+        let taskobj = ConcurrentTask<T>()
+        taskobj.make(closure: closure)
+        //testArray.append(taskobj)
+    }
+    
     func next(closure: @escaping VoidNextClosure) -> Self {
         let task: NextObjectErrorClosure = { _, done, _ in
             closure()
@@ -97,4 +102,4 @@ extension TaskManager {
     }
 }
 
-class Task { }
+
