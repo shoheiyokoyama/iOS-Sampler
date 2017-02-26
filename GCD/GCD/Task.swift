@@ -2,7 +2,7 @@
 //  Task.swift
 //  GCD
 //
-//  Created by Shiohei Yokoyama on 2016/11/19.
+//  Created by Shohei Yokoyama on 2016/11/19.
 //  Copyright © 2016年 Shohei. All rights reserved.
 //
 
@@ -20,12 +20,56 @@ final class TaskManager {
     typealias ObjectNextClosure = (@escaping (Any?) -> Void) -> Void
     typealias VoidNextClosure = () -> Void
     
-    //init(_ closure: () -> Void) {}
+    init(_ closure: @escaping NextObjectErrorClosure) {
+        tasks.append(closure)
+    }
     
-    func next(closure: @escaping VoidNextClosure) -> Self {
+    convenience init(_ closure: @escaping NextObjectClosure) {
+        let task: NextObjectErrorClosure = { object, done, _ in
+            closure(object, done)
+        }
+        self.init(task)
+    }
+    
+    convenience init(_ closure: @escaping ObjectNextClosure) {
+        let task: NextObjectErrorClosure = { object, done, _ in
+            closure(done)
+        }
+        self.init(task)
+    }
+    
+    convenience init(_ closure: @escaping VoidNextClosure) {
         let task: NextObjectErrorClosure = { _, done, _ in
             closure()
             done(nil)
+        }
+        self.init(task)
+    }
+}
+
+extension TaskManager {
+    func run() {
+        runNext()
+    }
+    
+    func runNext(object: Any? = nil) {
+        if tasks.isEmpty { return }
+        
+        let task = tasks.remove(at: 0)
+        
+        task(object, { nextObject in
+            self.runNext(object: nextObject)
+        }, { error in
+            print(error ?? "Nil")
+        })
+    }
+}
+
+extension TaskManager {
+    func next(closure: @escaping VoidNextClosure) -> Self {
+        let task: NextObjectErrorClosure = { _, done, _ in
+            closure()
+            done(nil)//doneをしてない場合は同期的にdone処理
         }
         tasks.append(task)
         return self
@@ -50,22 +94,6 @@ final class TaskManager {
     func next(closure: @escaping NextObjectErrorClosure) -> Self {
         tasks.append(closure)
         return self
-    }
-    
-    func run() {
-        runNext()
-    }
-    
-    func runNext(object: Any? = nil) {
-        if tasks.isEmpty { return }
-        
-        let task = tasks.remove(at: 0)
-        
-        task(object, { nextObject in
-            self.runNext(object: nextObject)
-        }, { error in
-            print(error ?? "Nil")
-        })
     }
 }
 

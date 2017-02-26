@@ -28,13 +28,14 @@ class TaskViewController: UIViewController {
 
 extension TaskViewController {
     func test() {
-        let manager = TaskManager()
-        manager.next { object, done in
+        TaskManager {
+            print("Start")
+        }.next { object, done in
             print("excute 1", object)
             done(1)
         }.next { object, done in
             print("excute 2", object)
-                done(2)
+            done(2)
         }.next { object, done in
             print("excute 3", object)
             done(3)
