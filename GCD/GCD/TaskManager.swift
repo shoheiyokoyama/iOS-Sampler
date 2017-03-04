@@ -8,7 +8,11 @@
 
 import UIKit
 
-final class TaskManager {
+protocol TaskManageable {
+    func run()
+}
+
+final class TaskManager: TaskManageable {
     typealias NextObjectErrorClosure = (Any? , @escaping (Any?) -> Void, @escaping (Error?) -> Void) -> Void
     typealias NextObjectClosure = (Any? , @escaping (Any?) -> Void) -> Void
     typealias ObjectNextClosure = (@escaping (Any?) -> Void) -> Void
@@ -65,11 +69,15 @@ extension TaskManager {
 }
 
 extension TaskManager {
-    func next<T>(closure: @escaping ConcurrentTask<T>.NextObjectErrorClosure) {
-        let taskobj = ConcurrentTask<T>()
-        taskobj.make(closure: closure)
-        //testArray.append(taskobj)
+    func next<T>(closure: @escaping ConcurrentTask<T>.NextObjectErrorClosure) -> ObjectCarryable {
+        let concurrent = ConcurrentTask<T>()
+        concurrent.make(closure: closure)
+        return concurrent
     }
+}
+
+extension TaskManager {
+    
     
     func next(closure: @escaping VoidNextClosure) -> Self {
         let task: NextObjectErrorClosure = { _, done, _ in
