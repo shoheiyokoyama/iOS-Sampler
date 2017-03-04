@@ -2,7 +2,7 @@
 //  ConcurrentTask.swift
 //  GCD
 //
-//  Created by 横山祥平 on 2017/03/04.
+//  Created by Shohei Yokoyama on 2017/03/04.
 //  Copyright © 2017年 Shohei. All rights reserved.
 //
 
@@ -12,7 +12,7 @@ protocol ObjectCarryable: Convertible {
     associatedtype ElementType
 }
 
-class ConcurrentTask<Element>: ObjectCarryable {
+final class ConcurrentTask<Element>: ObjectCarryable {
     typealias ElementType = Element
     
     //task
@@ -47,5 +47,9 @@ class ConcurrentTask<Element>: ObjectCarryable {
     
     func make(closure: @escaping NextObjectErrorClosure) {
         self.task = closure
+    }
+    
+    func run() {
+        
     }
 }

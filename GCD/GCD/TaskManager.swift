@@ -19,9 +19,11 @@ final class TaskManager: TaskManageable {
     typealias VoidNextClosure = () -> Void
     
     var tasks: [NextObjectErrorClosure] = []
+    let initialTask: NextObjectErrorClosure
     
     init(_ closure: @escaping NextObjectErrorClosure) {
         tasks.append(closure)
+        initialTask = closure
     }
     
     convenience init(_ closure: @escaping NextObjectClosure) {
@@ -48,6 +50,8 @@ final class TaskManager: TaskManageable {
     
     //http://ameblo.jp/principia-ca/entry-12142313027.html
     //var testArray: [Task] = []
+    
+    
 }
 
 extension TaskManager {
@@ -68,11 +72,38 @@ extension TaskManager {
     }
 }
 
+// run
 extension TaskManager {
-    func next<T>(closure: @escaping ConcurrentTask<T>.NextObjectErrorClosure) -> ObjectCarryable {
-        let concurrent = ConcurrentTask<T>()
-        concurrent.make(closure: closure)
-        return concurrent
+    func _run() {
+        initialTask(nil, { nextObject in
+            self.runNext(object: nextObject)
+        }, { error in
+            print(error ?? "Nil")
+        })
+    }
+    
+    func next<T>(closure: @escaping ConcurrentTask<T>.NextObjectErrorClosure) -> ConcurrentTask<T> {
+        let nextConcurrentTask = ConcurrentTask<T>()
+        nextConcurrentTask.make(closure: closure)
+        return nextConcurrentTask
+    }
+    
+    func next<T>(closure: @escaping ConcurrentTask<T>.NextObjectClosure) -> ConcurrentTask<T> {
+        let nextConcurrentTask = ConcurrentTask<T>()
+        nextConcurrentTask.make(closure: closure)
+        return nextConcurrentTask
+    }
+    
+    func next<T>(closure: @escaping ConcurrentTask<T>.ObjectNextClosure) -> ConcurrentTask<T> {
+        let nextConcurrentTask = ConcurrentTask<T>()
+        nextConcurrentTask.make(closure: closure)
+        return nextConcurrentTask
+    }
+    
+    func next<T: Any>(closure: @escaping ConcurrentTask<T>.VoidNextClosure) -> ConcurrentTask<T> {
+        let nextConcurrentTask = ConcurrentTask<T>()
+        nextConcurrentTask.make(closure: closure)
+        return nextConcurrentTask
     }
 }
 
