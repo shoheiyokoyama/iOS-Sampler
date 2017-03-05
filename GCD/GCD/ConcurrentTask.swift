@@ -40,12 +40,19 @@ final class ConcurrentTask<Element>: ObjectCarryable {
         self.init(task)
     }
     
+    convenience init(value: Element) {
+        let task: fullfillWithFailure = { fullfill, failure in
+            fullfill(value)
+        }
+        self.init(task)
+    }
+    
     func run() {
         
         self.task!({ fullfill in
             print(fullfill ?? "")
             self.manager.value = fullfill
-            self.manager.handler?()
+            self.manager.excuteHandler()
             
         }, { error in
             print(error ?? "")
@@ -54,15 +61,27 @@ final class ConcurrentTask<Element>: ObjectCarryable {
 }
 
 extension ConcurrentTask {
-    func next<Element2>(_ closure: @escaping (Element?) -> Element2) {
-        let handler: () -> Void = {
-            let _ = closure(self.manager.value)
+    @discardableResult
+    func next<Element2>(_ closure: @escaping (Element?) -> Element2) -> ConcurrentTask<Element2> {
+        
+        
+        let completeHandler: () -> Void = {
+            
+            //ここで新しいConcurrentTaskを取得する必要がある。
+            let value: Element2 = closure(self.manager.value)
+            let newManager = Manager<Element2>()
+            newManager.value = value
+            print(value)
         }
         
-        self.manager.handler = handler
+        self.manager.handlers.append(completeHandler)
+        
+        let nextTask = ConcurrentTask<Element2> { a, b in
+            //
+        }
+        return nextTask
     }
 }
-
 
 extension ConcurrentTask {
     func make(closure: @escaping completionHandler) {
@@ -87,5 +106,9 @@ extension ConcurrentTask {
 
 class Manager<V> {
     var value: V?
-    var handler: (() -> Void)?
+    var handlers: [(() -> Void)] = []
+    
+    func excuteHandler() {
+        handlers.forEach { $0() }
+    }
 }

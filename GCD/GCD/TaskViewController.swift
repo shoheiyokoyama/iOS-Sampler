@@ -31,13 +31,13 @@ extension TaskViewController {
         TaskManager {
             print("Start")
         }.next { object, done in
-            print("excute 1", object)
+            print("excute 1", object ?? "")
             done(1)
         }.next { object, done in
-            print("excute 2", object)
+            print("excute 2", object ?? "")
             done(2)
         }.next { object, done in
-            print("excute 3", object)
+            print("excute 3", object ?? "")
             done(3)
         }.run()
     }
@@ -48,8 +48,16 @@ extension TaskViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 f("OK")
             }
-        }.next { n in
+        }.next { n -> Int in
             print(n!)
+            return 1
         }
+        //TODO: -
+        .next { n -> Bool in
+            
+            print(n!)
+            return false
+        }
+        
     }
 }
