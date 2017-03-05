@@ -15,41 +15,77 @@ protocol ObjectCarryable: Convertible {
 final class ConcurrentTask<Element>: ObjectCarryable {
     typealias ElementType = Element
     
+    typealias FullFill = (Element?) -> Void
+    typealias Failure  = (Error?) -> Void
+    
     //task
-    typealias NextObjectErrorClosure = (Element? , @escaping (Element?) -> Void, @escaping (Error?) -> Void) -> Void
-    typealias NextObjectClosure = (Element? , @escaping (Element?) -> Void) -> Void
-    typealias ObjectNextClosure = (@escaping (Element?) -> Void) -> Void
-    typealias VoidNextClosure = () -> Void
+    typealias fullfillWithFailure = (@escaping FullFill, @escaping Failure) -> Void
+    typealias fullfillClosure = (@escaping FullFill) -> Void
+    typealias completionHandler = () -> Void
     
-    var task: NextObjectErrorClosure?
+    var task: fullfillWithFailure?
     
-    func make(closure: @escaping VoidNextClosure) {
-        let task: NextObjectErrorClosure = { _, done, _ in
+   
+    var manager: Manager = Manager<Element>()
+    
+    init(_ closure: @escaping fullfillWithFailure) {
+        self.task = closure
+        run()
+    }
+    
+    convenience init(_ closure: @escaping fullfillClosure) {
+        let task: fullfillWithFailure = { fullfill, failure in
+            closure(fullfill)
+        }
+        self.init(task)
+    }
+    
+    func run() {
+        
+        self.task!({ fullfill in
+            print(fullfill ?? "")
+            self.manager.value = fullfill
+            self.manager.handler?()
+            
+        }, { error in
+            print(error ?? "")
+        })
+    }
+}
+
+extension ConcurrentTask {
+    func next<Element2>(_ closure: @escaping (Element?) -> Element2) {
+        let handler: () -> Void = {
+            let _ = closure(self.manager.value)
+        }
+        
+        self.manager.handler = handler
+    }
+}
+
+
+extension ConcurrentTask {
+    func make(closure: @escaping completionHandler) {
+        let task: fullfillWithFailure = { done, _ in
             closure()
             done(nil)
         }
         self.task = task
     }
     
-    func make(closure: @escaping ObjectNextClosure) {
-        let task: NextObjectErrorClosure = { object, done, _ in
+    func make(closure: @escaping fullfillClosure) {
+        let task: fullfillWithFailure = { done, _ in
             closure(done)
         }
         self.task = task
     }
     
-    func make(closure: @escaping NextObjectClosure) {
-        let task: NextObjectErrorClosure = { object, done, _ in
-            closure(object, done)
-        }
-        self.task = task
-    }
-    
-    func make(closure: @escaping NextObjectErrorClosure) {
+    func make(closure: @escaping fullfillWithFailure) {
         self.task = closure
     }
-    
-    func run() {
-        
-    }
+}
+
+class Manager<V> {
+    var value: V?
+    var handler: (() -> Void)?
 }

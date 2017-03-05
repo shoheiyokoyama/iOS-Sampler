@@ -82,6 +82,7 @@ extension TaskManager {
         })
     }
     
+    /*
     func next<T>(closure: @escaping ConcurrentTask<T>.NextObjectErrorClosure) -> ConcurrentTask<T> {
         let nextConcurrentTask = ConcurrentTask<T>()
         nextConcurrentTask.make(closure: closure)
@@ -105,6 +106,7 @@ extension TaskManager {
         nextConcurrentTask.make(closure: closure)
         return nextConcurrentTask
     }
+ */
 }
 
 extension TaskManager {

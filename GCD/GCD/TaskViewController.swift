@@ -12,7 +12,7 @@ class TaskViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        test()
+        test2()
     }
 }
 
@@ -40,5 +40,16 @@ extension TaskViewController {
             print("excute 3", object)
             done(3)
         }.run()
+    }
+    
+    func test2() {
+        
+        ConcurrentTask<String> { f, e in
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                f("OK")
+            }
+        }.next { n in
+            print(n!)
+        }
     }
 }
