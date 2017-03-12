@@ -8,5 +8,13 @@
 
 import UIKit
 
-protocol Convertible {}
+protocol Convertible {
+    
+}
 
+class Task: Convertible {
+    
+    init<E>(_ e: E) {
+        
+    }
+}

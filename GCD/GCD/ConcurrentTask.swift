@@ -8,22 +8,32 @@
 
 import Foundation
 
-protocol ObjectCarryable: Convertible {
-    associatedtype ElementType
+enum TaskError: Error {
+    case valueNil
 }
 
-final class ConcurrentTask<Element>: ObjectCarryable {
+protocol ConcurrentExecutable: Convertible {
+    associatedtype ElementType
+    
+    //Needs?
+    var task: (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void { get set }
+    init(_ closure: @escaping (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void)
+}
+
+final class ConcurrentTask<Element>: ConcurrentExecutable {
+    
     typealias ElementType = Element
     
-    typealias FullFill = (Element?) -> Void
-    typealias Failure  = (Error?) -> Void
-    
     //task
+    typealias FullFill = (ElementType?) -> Void
+    typealias Failure  = (Error?) -> Void
     typealias fullfillWithFailure = (@escaping FullFill, @escaping Failure) -> Void
     typealias fullfillClosure = (@escaping FullFill) -> Void
-    typealias completionHandler = () -> Void
     
-    var task: fullfillWithFailure?
+    typealias CompletionHandler = () -> Void
+    var catchErrorHandler: ((Error) -> Void)?
+    
+    var task: fullfillWithFailure
     
     var manager: Manager = Manager<Element>()
     
@@ -33,10 +43,9 @@ final class ConcurrentTask<Element>: ObjectCarryable {
     }
     
     convenience init(_ closure: @escaping fullfillClosure) {
-        let task: fullfillWithFailure = { fullfill, failure in
+        self.init({ fullfill, failure in
             closure(fullfill)
-        }
-        self.init(task)
+        })
     }
     
     /*
@@ -48,7 +57,6 @@ final class ConcurrentTask<Element>: ObjectCarryable {
     }*/
     
     func run() {
-        
         let fulFill: FullFill = { value in
             self.manager.value = value
             self.manager.excuteSuccessHandler()
@@ -60,12 +68,11 @@ final class ConcurrentTask<Element>: ObjectCarryable {
             self.catchErrorHandler?(error!)
         }
         
-        self.task!(fulFill, failure)
+        self.task(fulFill, failure)
     }
-    
-    var catchErrorHandler: ((Error) -> Void)?
 }
 
+// Operator
 extension ConcurrentTask {
     @discardableResult
     func map<Element2>(_ closure: @escaping (Element) -> Element2) -> ConcurrentTask<Element2> {
@@ -93,8 +100,11 @@ extension ConcurrentTask {
     }
 }
 
+
+//TODO: -
+/*
 extension ConcurrentTask {
-    func make(closure: @escaping completionHandler) {
+    func make(closure: @escaping CompletionHandler) {
         let task: fullfillWithFailure = { done, _ in
             closure()
             done(nil)
@@ -113,31 +123,4 @@ extension ConcurrentTask {
         self.task = closure
     }
 }
-
-class Manager<V> {
-    var value: V?
-    var error: Error?
-    
-    var successHandler: ((V) -> Void)?
-    var FailureHandler: ((Error) -> Void)?
-    
-    func excuteSuccessHandler() {
-        successHandler?(value!)
-    }
-    
-    func excuteFailureHandler() {
-        FailureHandler?(error!)
-    }
-    
-    func appendSuccessHandler(_ handler: @escaping (V) -> Void) {
-        self.successHandler = handler
-    }
-    
-    func appendFailureHandler(_ handler: @escaping (Error) -> Void) {
-        self.FailureHandler = handler
-    }
-}
-
-enum TaskError: Error {
-    case valueNil
-}
+*/
