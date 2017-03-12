@@ -25,7 +25,6 @@ final class ConcurrentTask<Element>: ObjectCarryable {
     
     var task: fullfillWithFailure?
     
-   
     var manager: Manager = Manager<Element>()
     
     init(_ closure: @escaping fullfillWithFailure) {
@@ -40,42 +39,57 @@ final class ConcurrentTask<Element>: ObjectCarryable {
         self.init(task)
     }
     
+    /*
     convenience init(value: Element) {
         let task: fullfillWithFailure = { fullfill, failure in
             fullfill(value)
         }
         self.init(task)
-    }
+    }*/
     
     func run() {
         
         let fulFill: FullFill = { value in
             self.manager.value = value
-            self.manager.excuteHandler()
+            self.manager.excuteSuccessHandler()
         }
         
         let failure: Failure = { error in
-            print(error)
+            self.manager.error = error
+            self.manager.excuteFailureHandler()
+            self.catchErrorHandler?(error!)
         }
         
         self.task!(fulFill, failure)
     }
+    
+    var catchErrorHandler: ((Error) -> Void)?
 }
 
 extension ConcurrentTask {
     @discardableResult
-    func next<Element2>(_ closure: @escaping (Element?) -> Element2) -> ConcurrentTask<Element2> {
+    func map<Element2>(_ closure: @escaping (Element) -> Element2) -> ConcurrentTask<Element2> {
         
         return ConcurrentTask<Element2> { fullfill,  error in
+            //let _ = ConcurrentTask<Element2>(value: newValue) 
             
-            let completionHandler : (Element) -> Void = { value1 in
-                let newValue = closure(self.manager.value)
-                let _ = ConcurrentTask<Element2>(value: newValue)
+            let success: (Element) -> Void = { value1 in
+                let newValue = closure(self.manager.value!)
                 fullfill(newValue)
             }
-           
-            self.manager.handler = completionHandler
+            
+            let failure: (Error) -> Void = { errorInfo in
+                error(errorInfo)
+            }
+            
+            self.manager.successHandler = success
+            self.manager.FailureHandler = failure
         }
+    }
+    
+    @discardableResult 
+    func catchError(_ closure: @escaping (Error) -> Void) {
+        self.catchErrorHandler = closure
     }
 }
 
@@ -102,13 +116,28 @@ extension ConcurrentTask {
 
 class Manager<V> {
     var value: V?
-    var handler: ((V) -> Void)?
+    var error: Error?
     
-    func excuteHandler() {
-        handler?(value!)
+    var successHandler: ((V) -> Void)?
+    var FailureHandler: ((Error) -> Void)?
+    
+    func excuteSuccessHandler() {
+        successHandler?(value!)
     }
     
-    func appendHandler(_ handler: @escaping (V) -> Void) {
-        self.handler = handler
+    func excuteFailureHandler() {
+        FailureHandler?(error!)
     }
+    
+    func appendSuccessHandler(_ handler: @escaping (V) -> Void) {
+        self.successHandler = handler
+    }
+    
+    func appendFailureHandler(_ handler: @escaping (Error) -> Void) {
+        self.FailureHandler = handler
+    }
+}
+
+enum TaskError: Error {
+    case valueNil
 }

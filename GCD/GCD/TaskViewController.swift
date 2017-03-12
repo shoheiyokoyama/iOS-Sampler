@@ -24,6 +24,7 @@ class TaskViewController: UIViewController {
  - condition
  - filter, map, zip...
  - error handling
+ - POP
  */
 
 extension TaskViewController {
@@ -45,25 +46,26 @@ extension TaskViewController {
     func test2() {
         
         ConcurrentTask<String> { f, e in
+            var error: TaskError?
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
-                f("OK")
+                if let error = error {
+                    e(error)
+                } else {
+                    f("OK")
+                }
             }
-        }.next { okSt -> Int in
-            print(okSt!)
+        }.map { okSt -> Int in
+            print(okSt)
             return 1
-        }
-        .next { num1 -> Bool in
-            print(num1!)
+        }.map { num1 -> Bool in
+            print(num1)
             return false
-        }
-        .next { bool -> CGFloat in
-            print(bool!)
+        }.map { bool -> CGFloat in
+            print(bool)
             return 0.2
         }
-        .next { float -> Bool in
-            print(float!)
-            return false
+        .catchError { error in
+            print(error)
         }
-        
     }
 }
