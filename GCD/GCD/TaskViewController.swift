@@ -48,14 +48,20 @@ extension TaskViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 f("OK")
             }
-        }.next { n -> Int in
-            print(n!)
+        }.next { okSt -> Int in
+            print(okSt!)
             return 1
         }
-        //TODO: -
-        .next { n -> Bool in
-            
-            print(n!)
+        .next { num1 -> Bool in
+            print(num1!)
+            return false
+        }
+        .next { bool -> CGFloat in
+            print(bool!)
+            return 0.2
+        }
+        .next { float -> Bool in
+            print(float!)
             return false
         }
         
