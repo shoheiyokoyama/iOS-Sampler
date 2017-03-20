@@ -46,7 +46,7 @@ extension TaskViewController {
     }
     
     func test2() {
-        ConcurrentTask<String> { f, e in
+        SerialTask<String> { f, e in
             var error: TaskError?
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
