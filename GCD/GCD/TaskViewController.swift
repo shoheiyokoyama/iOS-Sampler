@@ -25,6 +25,8 @@ class TaskViewController: UIViewController {
  - filter, map, zip...
  - error handling
  - POP
+ - main
+ - Qality of Service
  */
 
 extension TaskViewController {
@@ -44,9 +46,9 @@ extension TaskViewController {
     }
     
     func test2() {
-        
         ConcurrentTask<String> { f, e in
             var error: TaskError?
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 if let error = error {
                     e(error)
@@ -67,5 +69,17 @@ extension TaskViewController {
         .catchError { error in
             print(error)
         }
+    }
+    
+    func serialTest() {
+        /*
+         Task {
+         
+        }.do {
+         
+        }.do {
+         
+        }
+         */
     }
 }

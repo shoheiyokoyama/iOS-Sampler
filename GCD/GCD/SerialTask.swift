@@ -14,4 +14,5 @@ protocol SerialExecutable {
 
 final class SerialTask: SerialExecutable {
     
+    
 }
