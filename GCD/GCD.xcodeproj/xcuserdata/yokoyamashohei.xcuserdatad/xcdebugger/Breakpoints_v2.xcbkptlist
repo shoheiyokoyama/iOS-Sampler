@@ -49,38 +49,6 @@
             endingLineNumber = "63"
             landmarkName = "test2()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GCD.TaskViewController.test2 () -&gt; ()"
-                  moduleName = "GCD"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/TaskViewController.swift"
-                  timestampString = "511705827.616974"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "284">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GCD.TaskViewController.(test2 () -&gt; ()).(closure #4)"
-                  moduleName = "GCD"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/TaskViewController.swift"
-                  timestampString = "511705827.621178"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "64"
-                  endingLineNumber = "64"
-                  offsetFromSymbolStart = "24">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -113,53 +81,6 @@
             endingLineNumber = "57"
             landmarkName = "test2()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GCD.TaskViewController.test2 () -&gt; ()"
-                  moduleName = "GCD"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/TaskViewController.swift"
-                  timestampString = "511705827.630116"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "77">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GCD.TaskViewController.(test2 () -&gt; ()).(closure #1)"
-                  moduleName = "GCD"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/TaskViewController.swift"
-                  timestampString = "511705827.6326"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "57"
-                  endingLineNumber = "57"
-                  offsetFromSymbolStart = "360">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GCD.TaskViewController.(test2 () -&gt; ()).(closure #2)"
-                  moduleName = "GCD"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/TaskViewController.swift"
-                  timestampString = "511705827.635188"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "58"
-                  endingLineNumber = "58"
-                  offsetFromSymbolStart = "27">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -176,38 +97,70 @@
             endingLineNumber = "60"
             landmarkName = "test2()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GCD/TaskViewController.swift"
+            timestampString = "512801816.405197"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "test2()"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "GCD.TaskViewController.test2 () -&gt; ()"
+                  symbolName = "GCD.TaskViewController.(test2 () -&gt; ()).(closure #1)"
                   moduleName = "GCD"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/TaskViewController.swift"
-                  timestampString = "511705827.64081"
+                  timestampString = "512802004.041876"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "60"
-                  endingLineNumber = "60"
-                  offsetFromSymbolStart = "170">
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "31">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "GCD.TaskViewController.(test2 () -&gt; ()).(closure #3)"
+                  symbolName = "function signature specialization &lt;Arg[0] = Value Promoted from Box&gt; of GCD.TaskViewController.(test2 () -&gt; ()).(closure #1).(closure #1)"
                   moduleName = "GCD"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/TaskViewController.swift"
-                  timestampString = "511705827.643244"
+                  timestampString = "512802004.043656"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "38">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "GCD/SerialTask.swift"
+            timestampString = "512801969.529394"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "setup()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

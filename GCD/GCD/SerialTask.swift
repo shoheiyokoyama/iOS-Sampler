@@ -65,6 +65,7 @@ final class SerialTask<Element>: SerialExecutable {
     
     func setup() {
         let fulFill: Fullfill = { value in
+            //valueを保持しない方向性で
             self.manager.value = value
             self.manager.excuteSuccessHandler()
         }
