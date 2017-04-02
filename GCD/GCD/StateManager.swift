@@ -2,32 +2,30 @@
 //  StateManager.swift
 //  GCD
 //
-//  Created by 横山祥平 on 2017/03/12.
+//  Created by Shohei Yokoyama on 2017/03/12.
 //  Copyright © 2017年 Shohei. All rights reserved.
 //
 
 import Foundation
 
-class Manager<V> {
-    var value: V?
-    var error: Error?
+final class Manager<V> {
+    // Optionalについては再検討
+    var nextHandler: ((V?) -> Void)?
+    var errorHandler: ((Error?) -> Void)?
     
-    var successHandler: ((V) -> Void)?
-    var FailureHandler: ((Error) -> Void)?
-    
-    func excuteSuccessHandler() {
-        successHandler?(value!)
+    func excuteNextHandler(with value: V?) {
+        nextHandler?(value)
     }
     
-    func excuteFailureHandler() {
-        FailureHandler?(error!)
+    func excuteErrorHandler(with error: Error?) {
+        errorHandler?(error)
     }
     
-    func appendSuccessHandler(_ handler: @escaping (V) -> Void) {
-        self.successHandler = handler
+    func appendNextHandler(_ handler: @escaping (V?) -> Void) {
+        nextHandler = handler
     }
     
-    func appendFailureHandler(_ handler: @escaping (Error) -> Void) {
-        self.FailureHandler = handler
+    func appendErrorHandler(_ handler: @escaping (Error?) -> Void) {
+        errorHandler = handler
     }
 }

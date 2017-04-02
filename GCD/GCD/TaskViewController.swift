@@ -47,7 +47,7 @@ extension TaskViewController {
     
     func test2() {
         SerialTask<String> { fullfill, error in
-            var e: TaskError?
+            var e: TaskError? = .valueNil
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 if let e = e {

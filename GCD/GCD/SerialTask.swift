@@ -65,15 +65,12 @@ final class SerialTask<Element>: SerialExecutable {
     
     func setup() {
         let fulFill: Fullfill = { value in
-            //valueを保持しない方向性で
-            self.manager.value = value
-            self.manager.excuteSuccessHandler()
+            self.manager.excuteNextHandler(with: value)
         }
         
         let failure: Failure = { error in
-            self.manager.error = error
-            self.manager.excuteFailureHandler()
-            self.catchErrorHandler?(error!)
+            self.manager.excuteErrorHandler(with: error)
+            self.catchErrorHandler?(error!)//catchErrorHandlerのクロージャまでnilなのでそこまで行ったら実行される
         }
         
         task(fulFill, failure)
@@ -83,28 +80,31 @@ final class SerialTask<Element>: SerialExecutable {
 // Operator
 extension SerialTask {
     @discardableResult
-    func map<Element2>(_ closure: @escaping (Element) -> Element2) -> SerialTask<Element2> {
+    func map<NewElement>(_ closure: @escaping (Element) -> NewElement) -> SerialTask<NewElement> {
         
-        return SerialTask<Element2> { fullfill,  error in
+        return SerialTask<NewElement> { [weak manager] fullfill, error in
             //let _ = ConcurrentTask<Element2>(value: newValue)
             
-            let success: (Element) -> Void = { value1 in
-                let newValue = closure(self.manager.value!)
+            guard let manager = manager else { return }
+            
+            let next: (Element?) -> Void = { value in
+                guard let value = value else { return /* errorの検討 */ }
+                let newValue = closure(value)
                 fullfill(newValue)
             }
             
-            let failure: (Error) -> Void = { errorInfo in
-                error(errorInfo)
+            let failure: (Error?) -> Void = { errorInfo in
+                error(errorInfo)//初期化時のfailue実行
             }
             
-            self.manager.successHandler = success
-            self.manager.FailureHandler = failure
+            manager.appendNextHandler(next)
+            manager.appendErrorHandler(failure)
         }
     }
     
     @discardableResult
     func catchError(_ closure: @escaping (Error) -> Void) {
-        self.catchErrorHandler = closure
+        catchErrorHandler = closure
     }
 }
 
