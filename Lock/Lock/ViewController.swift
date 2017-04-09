@@ -15,32 +15,66 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        excuteOnSeparateThread { [weak self] in
+        appendTest()
+        syncTest()
+        semaphoreTest()
+        nsLockTest()
+    }
+    
+    func check(expect: Int = 10000) -> Bool {
+        return number == expect
+    }
+    
+    func clean() {
+        number = 0
+    }
+    
+    func excuteOnSeparateThread(_ count: Int = 10000, closure: @escaping () -> Void) {
+        (0..<count).forEach { _ in
+            Thread.detachNewThread {
+                closure()
+            }
+        }
+    }
+}
+
+// test
+extension ViewController {
+    func appendTest() {
+        defer { clean() }
+        
+        let count = 100000
+        excuteOnSeparateThread(count) { [weak self] in
             self?.number += 1
         }
         
-        sleep(2)
-        var result = check()
+        sleep(1)
+        let result = check(expect: count)
         // result is false
         print(result)
-        
-        clean()
+    }
+    
+    // MARK: - DispatchQueue sync
+    func syncTest() {
+        defer { clean() }
         
         let lockQueue = DispatchQueue(label: "serialQueue")
-        
         excuteOnSeparateThread {
             lockQueue.sync { [weak self] in
                 self?.number += 1
             }
         }
         
-        sleep(2)
+        sleep(1)
         
-        result = check()
+        let result = check()
         // result is true
         print(result)
-        
-        clean()
+    }
+    
+    // MARK: - DispatchSemaphore
+    func semaphoreTest() {
+        defer { clean() }
         
         let semaphore = DispatchSemaphore(value: 1)
         
@@ -50,29 +84,29 @@ class ViewController: UIViewController {
             semaphore.signal()
         }
         
-        sleep(2)
+        sleep(1)
         
-        result = check()
+        let result = check()
         // result is true
         print(result)
+    }
+    
+    // MARK: - NSLock
+    func nsLockTest() {
+        defer { clean() }
         
-        clean()
-    }
-    
-    func check() -> Bool {
-        return number == loop
-    }
-    
-    func clean() {
-        number = 0
-    }
-    
-    func excuteOnSeparateThread(_ closure: @escaping () -> Void) {
-        (0..<loop).forEach { _ in
-            Thread.detachNewThread {
-                closure()
-            }
+        let nsLock = NSLock()
+        excuteOnSeparateThread { [weak self] in
+            nsLock.lock()
+            self?.number += 1
+            nsLock.unlock()
         }
+        
+        sleep(1)
+        
+        let result = check()
+        // result is true
+        print(result)
     }
 }
 
