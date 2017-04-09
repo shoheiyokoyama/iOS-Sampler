@@ -8,13 +8,7 @@
 
 import UIKit
 
+// thenとかreturnやcompletionを扱わないoperatorに準拠させるべき
 protocol Convertible {
     
-}
-
-class Task: Convertible {
-    
-    init<E>(_ e: E) {
-        
-    }
 }

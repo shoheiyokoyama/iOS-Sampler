@@ -10,14 +10,27 @@ import Foundation
 
 // for in
 // error
-
+// switch task
 
 protocol ConcurrentExecutable {
     
 }
 
+extension ConcurrentExecutable {
+    static var key: String {
+        return "consurrentKey"
+    }
+}
+
+/*
+ - group
+ - Semaphore
+ */
+
+// serialのobjectで帰り値、completionHadndlerがないものに対して切り替えられるようにする
 final class ConcurrentTask: ConcurrentExecutable {
-    private let queue = DispatchQueue(label: "consurrentKey", attributes: .concurrent)
+    
+    private let queue = DispatchQueue(label: key, attributes: .concurrent)
     /*
     func execute(_ closure: @escaping () -> Void) -> ConcurrentTask {
         queue.async(execute: closure)

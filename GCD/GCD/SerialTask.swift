@@ -20,6 +20,8 @@ protocol SerialExecutable: Convertible {
     init(_ closure: @escaping (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void)
 }
 
+//asyncAfter
+
 final class SerialTask<Element>: SerialExecutable {
     
     typealias ElementType = Element
@@ -28,7 +30,7 @@ final class SerialTask<Element>: SerialExecutable {
     typealias Fullfill = (ElementType?) -> Void
     typealias Failure  = (Error?) -> Void
     typealias FullfillWithFailureClosure = (@escaping Fullfill, @escaping Failure) -> Void
-    typealias fullfillClosure = (@escaping Fullfill) -> Void
+    typealias FullfillClosure = (@escaping Fullfill) -> Void
     typealias Closure = () -> Void
     
     fileprivate var catchErrorHandler: ((Error) -> Void)?
@@ -42,7 +44,7 @@ final class SerialTask<Element>: SerialExecutable {
         setup()
     }
     
-    convenience init(_ closure: @escaping fullfillClosure) {
+    convenience init(_ closure: @escaping FullfillClosure) {
         self.init({ fullfill, failure in
             closure(fullfill)
         })
@@ -69,6 +71,7 @@ final class SerialTask<Element>: SerialExecutable {
         }
         
         let failure: Failure = { error in
+            //errroの値で分岐入れたほうがわかりやすいかも
             self.manager.excuteErrorHandler(with: error)
             self.catchErrorHandler?(error!)//catchErrorHandlerのクロージャまでnilなのでそこまで行ったら実行される
         }
@@ -79,9 +82,11 @@ final class SerialTask<Element>: SerialExecutable {
 
 // Operator
 extension SerialTask {
+    // Mapのインスタンスを返す設計にすればMap operatorのインタフェースが明確にできる
+    //http://jutememo.blogspot.jp/2008/10/haskell-fmap.html
     @discardableResult
-    func map<NewElement>(_ closure: @escaping (Element) -> NewElement) -> SerialTask<NewElement> {
-        
+    func fmap<NewElement>(_ closure: @escaping (Element) -> NewElement) -> SerialTask<NewElement> {//functorを返す
+        // return Fmap<NewElement>() .....
         return SerialTask<NewElement> { [weak manager] fullfill, error in
             //let _ = ConcurrentTask<Element2>(value: newValue)
             
@@ -106,6 +111,11 @@ extension SerialTask {
     func catchError(_ closure: @escaping (Error) -> Void) {
         catchErrorHandler = closure
     }
+}
+
+// Functor
+protocol Functor {
+    func fmap()
 }
 
 //TODO: -

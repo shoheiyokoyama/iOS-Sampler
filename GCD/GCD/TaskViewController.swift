@@ -47,7 +47,7 @@ extension TaskViewController {
     
     func test2() {
         SerialTask<String> { fullfill, error in
-            var e: TaskError? = .valueNil
+            let e: TaskError? = .valueNil
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 if let e = e {
@@ -56,34 +56,18 @@ extension TaskViewController {
                     fullfill("OK")
                 }
             }
-        }.map { okSt -> Int in
-            print(okSt)
+        }.fmap { st -> Int in
+            print(st)
             return 1
-        }.map { num1 -> Bool in
-            print(num1)
+        }.fmap { num -> Bool in
+            print(num)
             return false
-        }.map { bool -> CGFloat in
+        }.fmap { bool -> CGFloat in
             print(bool)
             return 0.2
         }
         .catchError { error in
             print(error)
         }
-    }
-    
-    func serialTest() {
-        //let t = DispatchQueue(label: "com.GCD.barrier", attributes: .concurrent)
-        //t.async(execute: <#T##() -> Void#>)
-        
-        
-        /*
-         Task {
-         
-        }.do {
-         
-        }.do {
-         
-        }
-         */
     }
 }
