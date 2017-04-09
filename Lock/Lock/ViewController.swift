@@ -15,10 +15,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        appendTest()
-        syncTest()
-        semaphoreTest()
-        nsLockTest()
+        //appendTest()
+        //syncTest()
+        //semaphoreTest()
+        //nsLockTest()
+        //nsLockErrorTest()
+        nsRecursiveLockTest()
     }
     
     func check(expect: Int = 10000) -> Bool {
@@ -107,6 +109,65 @@ extension ViewController {
         let result = check()
         // result is true
         print(result)
+    }
+    
+    func nsLockErrorTest() {
+        let lock = NSLock()
+        
+        var _number: Int = 3
+        var number: Int {
+            get {
+                lock.lock(); defer { lock.unlock() }
+                return _number
+            }
+            set {
+                lock.lock(); defer { lock.unlock() }
+                _number = newValue
+            }
+        }
+        
+        lock.lock()
+        // Occur NSLockError because of recursive lock
+        print(number)//*** -[NSLock lock]: deadlock (<NSLock: 0x6080000dabe0> '(null)') *** Break on _NSLockError() to debug
+        lock.unlock()
+    }
+    
+    // MARK: - NSRecursiveLock
+    func nsRecursiveLockTest() {
+        defer { clean() }
+        
+        let lock = NSRecursiveLock()
+        excuteOnSeparateThread { [weak self] in
+            lock.lock()
+            self?.number += 1
+            lock.unlock()
+        }
+        
+        sleep(1)
+        
+        let result = check()
+        // result is true
+        print(result)
+        
+        clean()
+        
+        var _number: Int = 3
+        var number: Int {
+            get {
+                lock.lock(); defer { lock.unlock() }
+                return _number
+            }
+            set {
+                lock.lock(); defer { lock.unlock() }
+                _number = newValue
+            }
+        }
+        
+        
+        lock.lock()
+        // don't Occur NSLockError
+        print(number)
+        lock.unlock()
     }
 }
 
