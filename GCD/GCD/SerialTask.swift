@@ -53,7 +53,7 @@ final class SerialTask<Element>: SerialExecutable {
     convenience init(_ closure: @escaping Closure) {
         self.init({ fullfill, failure in
             closure()
-            fullfill(nil)//todo
+            fullfill(nil)//nilを送るのはちょっといけてない
         })
     }
     
@@ -111,6 +111,11 @@ extension SerialTask {
     func catchError(_ closure: @escaping (Error) -> Void) {
         catchErrorHandler = closure
     }
+    
+    /*
+    func `do`() -> Convertible {
+        return
+    }*/
 }
 
 // Functor
