@@ -9,44 +9,70 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let lockQueue = DispatchQueue(label: "serialQueue")
-    var numbers: [Int] = []
+    var number = 0
+    let loop = 10000
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - sync
-        (0..<1000).forEach { index in
-            lockQueue.sync {
-                numbers.append(index)
+        excuteOnSeparateThread { [weak self] in
+            self?.number += 1
+        }
+        
+        sleep(2)
+        var result = check()
+        // result is false
+        print(result)
+        
+        clean()
+        
+        let lockQueue = DispatchQueue(label: "serialQueue")
+        
+        excuteOnSeparateThread {
+            lockQueue.sync { [weak self] in
+                self?.number += 1
             }
         }
         
-        sleep(1)
+        sleep(2)
         
-        var result = check()
+        result = check()
         // result is true
         print(result)
         
-        (0..<1000).forEach { index in
-            numbers.append(index)
+        clean()
+        
+        let semaphore = DispatchSemaphore(value: 1)
+        
+        excuteOnSeparateThread { [weak self] in
+            semaphore.wait()
+            self?.number += 1
+            semaphore.signal()
         }
         
-        sleep(1)
+        sleep(2)
         
         result = check()
-        // result is false
+        // result is true
         print(result)
+        
+        clean()
     }
     
     func check() -> Bool {
-        var result = true
-        numbers.enumerated().forEach { index, num in
-            if num != index {
-                result = false
+        return number == loop
+    }
+    
+    func clean() {
+        number = 0
+    }
+    
+    func excuteOnSeparateThread(_ closure: @escaping () -> Void) {
+        (0..<loop).forEach { _ in
+            Thread.detachNewThread {
+                closure()
             }
         }
-        return result
     }
 }
 
