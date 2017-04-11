@@ -23,6 +23,7 @@ class ViewController: UIViewController {
         nsRecursiveLockTest()
         unfairLockTest()
         objcSyncTest()
+        mutexLockTest()
     }
     
     func check(expect: Int = 10000) -> Bool {
@@ -216,6 +217,45 @@ extension ViewController {
             objc_sync_enter(self)
             self?.number += 1
             objc_sync_exit(self)
+        }
+        
+        sleep(1)
+        
+        let result = check()
+        // result is true
+        print(result)
+    }
+    
+    func spinLockTest() {
+        defer { clean() }
+        var spinLock = OS_SPINLOCK_INIT
+        excuteOnSeparateThread { [weak self] in
+            // OSSSpinLock was deprecated in iOS10.0 Use os_unfair_lock_s instead
+            OSSpinLockLock(&spinLock)
+            self?.number += 1
+            OSSpinLockUnlock(&spinLock)
+        }
+        
+        sleep(1)
+        
+        let result = check()
+        // result is true
+        print(result)
+    }
+    
+    func mutexLockTest() {
+        var mutex = pthread_mutex_t()
+        pthread_mutex_init(&mutex, nil)
+        
+        defer {
+            pthread_mutex_destroy(&mutex)
+            clean()
+        }
+        
+        excuteOnSeparateThread { [weak self] in
+            pthread_mutex_lock(&mutex)
+            self?.number += 1
+            pthread_mutex_unlock(&mutex)
         }
         
         sleep(1)
