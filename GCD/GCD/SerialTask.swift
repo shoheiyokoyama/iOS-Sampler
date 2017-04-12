@@ -14,7 +14,7 @@ enum TaskError: Error {
     case valueNil
 }
 
-protocol SerialExecutable: Convertible {
+protocol SerialExecutable {
     associatedtype ElementType
     
     init(_ closure: @escaping (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void)
@@ -29,19 +29,16 @@ final class SerialTask<Element>: SerialExecutable {
     //task
     typealias Fullfill = (ElementType?) -> Void
     typealias Failure  = (Error?) -> Void
-    typealias FullfillWithFailureClosure = (@escaping Fullfill, @escaping Failure) -> Void
+    typealias InitialTask = (@escaping Fullfill, @escaping Failure) -> Void
     typealias FullfillClosure = (@escaping Fullfill) -> Void
     typealias Closure = () -> Void
     
-    fileprivate var catchErrorHandler: ((Error) -> Void)?
-    
-    fileprivate var task: FullfillWithFailureClosure
+    fileprivate var errorHandler: ((Error) -> Void)?
     
     fileprivate var manager: Manager = Manager<Element>()
     
-    init(_ closure: @escaping FullfillWithFailureClosure) {
-        self.task = closure
-        setup()
+    init(_ closure: @escaping InitialTask) {
+        excuteTask(closure)
     }
     
     convenience init(_ closure: @escaping FullfillClosure) {
@@ -53,7 +50,7 @@ final class SerialTask<Element>: SerialExecutable {
     convenience init(_ closure: @escaping Closure) {
         self.init({ fullfill, failure in
             closure()
-            fullfill(nil)//nilを送るのはちょっといけてない
+            fullfill(nil)//nilを送るのはちょっといけてない fillFill以外のを用意するか
         })
     }
     
@@ -65,7 +62,7 @@ final class SerialTask<Element>: SerialExecutable {
      self.init(task)
      }*/
     
-    func setup() {
+    func excuteTask(_ task: InitialTask) {
         let fulFill: Fullfill = { value in
             self.manager.excuteNextHandler(with: value)
         }
@@ -73,7 +70,7 @@ final class SerialTask<Element>: SerialExecutable {
         let failure: Failure = { error in
             //errroの値で分岐入れたほうがわかりやすいかも
             self.manager.excuteErrorHandler(with: error)
-            self.catchErrorHandler?(error!)//catchErrorHandlerのクロージャまでnilなのでそこまで行ったら実行される
+            self.errorHandler?(error!)//catchErrorHandlerのクロージャまでnilなのでそこまで行ったら実行される
         }
         
         task(fulFill, failure)
@@ -93,7 +90,7 @@ extension SerialTask {
             guard let manager = manager else { return }
             
             let next: (Element?) -> Void = { value in
-                guard let value = value else { return /* errorの検討 */ }
+                guard let value = value else { return /* errorの検討 */ }//TODO: - Closure Initの場合はじかれる
                 let newValue = closure(value)
                 fullfill(newValue)
             }
@@ -107,20 +104,33 @@ extension SerialTask {
         }
     }
     
-    @discardableResult
-    func catchError(_ closure: @escaping (Error) -> Void) {
-        catchErrorHandler = closure
-    }
-    
     /*
     func `do`() -> Convertible {
         return
     }*/
 }
 
+
+protocol ErrorCatchable {
+    func catchError(_ errorHandler: @escaping (Error) -> Void)
+}
+
+extension SerialTask: ErrorCatchable {
+    @discardableResult
+    func catchError(_ errorHandler: @escaping (Error) -> Void) {
+        self.errorHandler = errorHandler
+    }
+}
+
 // Functor
 protocol Functor {
     func fmap()
+}
+
+//TODO: -
+class Fmap<Element> {
+    
+    
 }
 
 //TODO: -

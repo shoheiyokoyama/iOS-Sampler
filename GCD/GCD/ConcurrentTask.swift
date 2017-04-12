@@ -12,6 +12,9 @@ import Foundation
 // error
 // switch task
 
+// Serial -> Concurrent : Objectを返さないOperator
+// ConcurrentGrrent -> Serial : Group以外？
+
 protocol ConcurrentExecutable {
     
 }
