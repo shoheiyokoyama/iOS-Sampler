@@ -9,6 +9,11 @@
 import UIKit
 
 // thenとかreturnやcompletionを扱わないoperatorに準拠させるべき
-protocol Convertible {
+protocol ConcurrentConvertible {
     
 }
+
+protocol SerialConvertible {
+    
+}
+
