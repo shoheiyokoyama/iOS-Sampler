@@ -17,7 +17,7 @@ enum TaskError: Error {
 protocol Serializable {
     associatedtype ElementType
     
-    //init(_ closure: @escaping (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void)
+    init(_ closure: @escaping (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void)
     func fmap<Result>(_ transform: @escaping (ElementType) -> Result) -> SerialTask<Result>
 }
 
@@ -65,7 +65,7 @@ final class SerialTask<Element>: Serializable {
      }*/
     
     func excuteTask(_ task: InitialTask) {
-        let fulFill: Fullfill = { value in
+        let fulfill: Fullfill = { value in
             self.manager.excuteNextHandler(with: value)
         }
         
@@ -75,7 +75,7 @@ final class SerialTask<Element>: Serializable {
             self.errorHandler?(error!)//catchErrorHandlerのクロージャまでnilなのでそこまで行ったら実行される
         }
         
-        task(fulFill, failure)
+        task(fulfill, failure)
     }
 }
 
@@ -88,6 +88,8 @@ extension SerialTask {
     @discardableResult
     func fmap<Result>(_ transform: @escaping (Element) -> Result) -> SerialTask<Result> {
         // return Fmap<NewElement>() .....
+        
+        
         return SerialTask<Result> { [weak manager] fullfill, error in
             //let _ = ConcurrentTask<Element2>(value: newValue)
             
@@ -114,6 +116,8 @@ extension SerialTask {
     func `do`() -> Convertible {
         return
     }*/
+    
+    //fmapWith
 }
 
 protocol ErrorCatchable {
@@ -131,8 +135,22 @@ extension SerialTask: ErrorCatchable {
 //protocol Functor { }
 
 //TODO: - serialize ErrorCatchableなど継承 convertibleは準拠させない
-final class Fmap<Element> {
-    init(_ transfrom: () -> Void) {
+final class Fmap<Element>: Serializable {
+    
+    // - stateどうするか
+    // - 継承すべきか
+    
+    typealias ElementType =  Element
+    //task
+    typealias Fullfill = (ElementType?) -> Void
+    typealias Failure  = (Error?) -> Void
+    typealias InitialTask = (@escaping Fullfill, @escaping Failure) -> Void
+    
+    init(_ closure: @escaping InitialTask) {
+        //excuteTask(closure)
+    }
+    
+    func fmap<Result>(_ transform: @escaping (Element) -> Result) -> SerialTask<Result> {
         
     }
 }
