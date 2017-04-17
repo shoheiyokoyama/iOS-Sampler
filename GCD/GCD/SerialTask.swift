@@ -18,7 +18,7 @@ protocol Serializable {
     associatedtype ElementType
     
     init(_ closure: @escaping (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void)
-    func fmap<Result>(_ transform: @escaping (ElementType) -> Result) -> SerialTask<Result>
+    //func fmap<Result>(_ transform: @escaping (ElementType) -> Result) -> SerialTask<Result>
 }
 
 //asyncAfter
@@ -37,7 +37,8 @@ final class SerialTask<Element>: Serializable {
     
     fileprivate var errorHandler: ((Error) -> Void)?
     
-    fileprivate var manager: Manager = Manager<Element>()
+    fileprivate var nextFullfillHandler: ((Element?) -> Void)?
+    fileprivate var nextErrorHandler: ((Error?) -> Void)?
     
     init(_ closure: @escaping InitialTask) {
         excuteTask(closure)
@@ -65,14 +66,18 @@ final class SerialTask<Element>: Serializable {
      }*/
     
     func excuteTask(_ task: InitialTask) {
-        let fulfill: Fullfill = { value in
-            self.manager.excuteNextHandler(with: value)
+        //weak self にすると解放されてしまう
+        let fulfill: Fullfill = {  value in
+            self.nextFullfillHandler?(value)
         }
         
-        let failure: Failure = { error in
-            //errroの値で分岐入れたほうがわかりやすいかも
-            self.manager.excuteErrorHandler(with: error)
-            self.errorHandler?(error!)//catchErrorHandlerのクロージャまでnilなのでそこまで行ったら実行される
+        let failure: Failure = {  error in
+            // errorを非optionalにしてもいいかも
+            if let handler = self.errorHandler, let error = error {
+                handler(error)
+            } else {
+                self.nextErrorHandler?(error)
+            }
         }
         
         task(fulfill, failure)
@@ -85,15 +90,14 @@ final class SerialTask<Element>: Serializable {
 extension SerialTask {
     // Mapのインスタンスを返す設計にすればMap operatorのインタフェースが明確にできる
     //http://jutememo.blogspot.jp/2008/10/haskell-fmap.html
-    @discardableResult
     func fmap<Result>(_ transform: @escaping (Element) -> Result) -> SerialTask<Result> {
         // return Fmap<NewElement>() .....
         
         
-        return SerialTask<Result> { [weak manager] fullfill, error in
+        return SerialTask<Result> { [weak self] fullfill, error in
             //let _ = ConcurrentTask<Element2>(value: newValue)
             
-            guard let manager = manager else { return }
+            guard let me = self else { return }
             
             let next: (Element?) -> Void = { value in
                 guard let value = value else { return /* errorの検討 */ }//TODO: - Closure Initの場合はじかれる
@@ -105,8 +109,8 @@ extension SerialTask {
                 error(errorInfo)//初期化時のfailue実行
             }
             
-            manager.appendNextHandler(next)
-            manager.appendErrorHandler(failure)
+            me.nextFullfillHandler = next
+            me.nextErrorHandler    = failure
         }
     }
     
@@ -150,9 +154,10 @@ final class Fmap<Element>: Serializable {
         //excuteTask(closure)
     }
     
+    /*
     func fmap<Result>(_ transform: @escaping (Element) -> Result) -> SerialTask<Result> {
-        
-    }
+        return SerialTask<Result>()
+    }*/
 }
 
 //TODO: -
