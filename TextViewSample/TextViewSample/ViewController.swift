@@ -26,6 +26,7 @@ extension String {
 }
 
 // Linkable textview
+//https://github.com/ThornTechPublic/SwiftTextViewHashtag
 class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
