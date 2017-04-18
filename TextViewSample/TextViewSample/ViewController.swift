@@ -29,10 +29,17 @@ extension String {
 class ViewController: UIViewController {
 
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textView2: UITextView!
+    @IBOutlet weak var textViewHeight: NSLayoutConstraint!
+    
+    var lastTextViewHeight:CGFloat = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         textView.delegate = self
+        textView2.delegate = self
+        textView2.tag = 1
+        
         highlightMention()
     }
 
@@ -106,6 +113,25 @@ extension ViewController: UITextViewDelegate {
             print("tapped linkable")
         }
         return true
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        guard textView.tag == 1 else {
+            return
+        }
+        
+        let newSize: CGSize = textView.sizeThatFits(CGSize(width: textView.frame.size.width, height: CGFloat.greatestFiniteMagnitude))
+        // remember that new height
+        let newHeight = newSize.height
+        // change the height constraint only if it's different.
+        // otherwise, it get set on every single character the user types.
+        if lastTextViewHeight != newHeight {
+            lastTextViewHeight = newHeight
+            // the 7.0 is to account for the top of the text getting scrolled up slightly
+            // to account for a potential new line
+            textViewHeight.constant = newSize.height + 7.0
+        }
+        
     }
 }
 

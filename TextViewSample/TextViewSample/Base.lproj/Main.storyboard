@@ -32,15 +32,29 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jhP-JD-zwY">
+                                <rect key="frame" x="67.5" y="47" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="CNt-lq-A3a"/>
+                                    <constraint firstAttribute="width" constant="240" id="iI8-VX-VPf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="jhP-JD-zwY" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="27" id="diW-1K-cCN"/>
+                            <constraint firstItem="jhP-JD-zwY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="evl-Uo-vq4"/>
                             <constraint firstItem="BIE-va-KCq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rb2-dn-yoP"/>
                             <constraint firstItem="BIE-va-KCq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="yhO-Lo-8Di"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="textView" destination="BIE-va-KCq" id="Vez-mF-vXe"/>
+                        <outlet property="textView2" destination="jhP-JD-zwY" id="YKm-vf-ruE"/>
+                        <outlet property="textViewHeight" destination="CNt-lq-A3a" id="zkr-gb-PFC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
