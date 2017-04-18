@@ -24,7 +24,7 @@ protocol Serializable {
 //asyncAfter
 //抽象クラス　継承して各operatorクラスを作る
 
-final class SerialTask<Element>: Serializable {
+class SerialTask<Element>: Serializable {
     
     typealias ElementType = Element
     
@@ -37,9 +37,10 @@ final class SerialTask<Element>: Serializable {
     
     fileprivate var errorHandler: ((Error) -> Void)?
     
-    fileprivate var manager: Manager = Manager<Element>()
+    fileprivate var nextFullfillHandler: ((Element?) -> Void)?
+    fileprivate var nextErrorHandler: ((Error?) -> Void)?
     
-    init(_ closure: @escaping InitialTask) {
+    required init(_ closure: @escaping InitialTask) {
         excuteTask(closure)
     }
     
@@ -52,7 +53,7 @@ final class SerialTask<Element>: Serializable {
     convenience init(_ closure: @escaping Closure) {
         self.init({ fullfill, failure in
             closure()
-            fullfill(nil)//nilを送るのはちょっといけてない fillFill以外のを用意するか
+            fullfill(nil)//nilを送るのはちょっといけてない fillFill以外のを用意するか//voidをうまく送りたい
         })
     }
     
@@ -65,14 +66,18 @@ final class SerialTask<Element>: Serializable {
      }*/
     
     func excuteTask(_ task: InitialTask) {
+        //weak self にすると解放されてしまう
         let fulfill: Fullfill = { value in
-            self.manager.excuteNextHandler(with: value)
+            self.nextFullfillHandler?(value)
         }
         
-        let failure: Failure = { error in
-            //errroの値で分岐入れたほうがわかりやすいかも
-            self.manager.excuteErrorHandler(with: error)
-            self.errorHandler?(error!)//catchErrorHandlerのクロージャまでnilなのでそこまで行ったら実行される
+        let failure: Failure = {  error in
+            // errorを非optionalにしてもいいかも
+            if let handler = self.errorHandler, let error = error {
+                handler(error)
+            } else {
+                self.nextErrorHandler?(error)
+            }
         }
         
         task(fulfill, failure)
@@ -85,15 +90,14 @@ final class SerialTask<Element>: Serializable {
 extension SerialTask {
     // Mapのインスタンスを返す設計にすればMap operatorのインタフェースが明確にできる
     //http://jutememo.blogspot.jp/2008/10/haskell-fmap.html
-    @discardableResult
     func fmap<Result>(_ transform: @escaping (Element) -> Result) -> SerialTask<Result> {
-        // return Fmap<NewElement>() .....
         
-        
-        return SerialTask<Result> { [weak manager] fullfill, error in
+        //今の所Fmap使わなくてもいいかも
+        // nextFullfillHandlerはFmapがもつべき
+        return Fmap<Result> { [weak self] fullfill, error in
             //let _ = ConcurrentTask<Element2>(value: newValue)
             
-            guard let manager = manager else { return }
+            guard let me = self else { return }
             
             let next: (Element?) -> Void = { value in
                 guard let value = value else { return /* errorの検討 */ }//TODO: - Closure Initの場合はじかれる
@@ -105,17 +109,45 @@ extension SerialTask {
                 error(errorInfo)//初期化時のfailue実行
             }
             
-            manager.appendNextHandler(next)
-            manager.appendErrorHandler(failure)
+            me.nextFullfillHandler = next
+            me.nextErrorHandler    = failure
         }
     }
     
-    //引数がある場合も
+    
     // convetible準拠させる
-    /*
-    func `do`() -> Convertible {
-        return
-    }*/
+    // 帰り値なし
+    // - 引数あり
+    // - errorあり
+    // - 引数なし
+    // - fullfill
+    
+    
+    //何も引数を受け取らずに何も返さないDo
+    //valueを捨てること許容する？do onNextみたいにvalueは保持して次に流す
+    func `do`(_ completionHandler: @escaping () -> Void) -> Do<Element> {
+        return Do<Element> { [weak self] fullfill, error in
+            //let _ = ConcurrentTask<Element2>(value: newValue)
+            
+            guard let me = self else { return }
+            
+            let next: (Element) -> Void = { value in
+                completionHandler()
+                fullfill()//value
+            }
+            
+            let failure: (Error?) -> Void = { errorInfo in
+                error(errorInfo)//初期化時のfailue実行
+            }
+            
+            me.nextFullfillHandler = next
+            me.nextErrorHandler    = failure
+        }
+    }
+    
+    func doWith() {
+        
+    }
     
     //fmapWith
 }
@@ -135,23 +167,38 @@ extension SerialTask: ErrorCatchable {
 //protocol Functor { }
 
 //TODO: - serialize ErrorCatchableなど継承 convertibleは準拠させない
-final class Fmap<Element>: Serializable {
+final class Fmap<Element>: SerialTask<Element> {
     
-    // - stateどうするか
-    // - 継承すべきか
-    
-    typealias ElementType =  Element
-    //task
-    typealias Fullfill = (ElementType?) -> Void
-    typealias Failure  = (Error?) -> Void
-    typealias InitialTask = (@escaping Fullfill, @escaping Failure) -> Void
+    required init(_ closure: @escaping InitialTask) {
+        super.init(closure)
+    }
+}
+
+//valueは内部的に次に流す（rxのDoと同じ）SerialTask継承してもいいかも
+final class Do<Element> {
+    //completehandler
+    typealias InitialTask = (@escaping () -> Void, @escaping (Error?) -> Void) -> Void
     
     init(_ closure: @escaping InitialTask) {
-        //excuteTask(closure)
+        excuteTask(closure)
     }
     
-    func fmap<Result>(_ transform: @escaping (Element) -> Result) -> SerialTask<Result> {
+    func excuteTask(_ task: InitialTask) {
+        //weak self にすると解放されてしまう
+        let fulfill: () -> Void = { value in
+            
+        }
         
+        let failure: (Error?) -> Void = {  error in
+            // errorを非optionalにしてもいいかも
+            if let handler = self.errorHandler, let error = error {
+                handler(error)
+            } else {
+                self.nextErrorHandler?(error)
+            }
+        }
+        
+        task(fulfill, failure)
     }
 }
 
