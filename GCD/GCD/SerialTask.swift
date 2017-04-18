@@ -53,7 +53,7 @@ class SerialTask<Element>: Serializable {
     convenience init(_ closure: @escaping Closure) {
         self.init({ fullfill, failure in
             closure()
-            fullfill(nil)//nilを送るのはちょっといけてない fillFill以外のを用意するか
+            fullfill(nil)//nilを送るのはちょっといけてない fillFill以外のを用意するか//voidをうまく送りたい
         })
     }
     
@@ -174,7 +174,7 @@ final class Fmap<Element>: SerialTask<Element> {
     }
 }
 
-//valueは内部的に次に流す（rxのDoと同じ）
+//valueは内部的に次に流す（rxのDoと同じ）SerialTask継承してもいいかも
 final class Do<Element> {
     //completehandler
     typealias InitialTask = (@escaping () -> Void, @escaping (Error?) -> Void) -> Void
