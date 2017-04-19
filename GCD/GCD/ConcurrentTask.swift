@@ -28,14 +28,16 @@ extension ConcurrentExecutable {
 /*
  - group
  - Semaphore
+ - iterator
  */
 
 // serialのobjectで帰り値、completionHadndlerがないものに対して切り替えられるようにする
 final class ConcurrentTask: ConcurrentExecutable {
     
     private let queue = DispatchQueue(label: key, attributes: .concurrent)
-    /*
-    func execute(_ closure: @escaping () -> Void) -> ConcurrentTask {
+    
+    func `do`(_ closure: @escaping () -> Void) -> ConcurrentTask {
         queue.async(execute: closure)
-    }*/
+        return self
+    }
 }

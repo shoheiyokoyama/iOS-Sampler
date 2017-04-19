@@ -12,7 +12,8 @@ class TaskViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        test2()
+        //test2()
+        test3()
     }
 }
 
@@ -47,7 +48,7 @@ extension TaskViewController {
     
     func test2() {
         SerialTask<String> { fullfill, error in
-            let e: TaskError? = .valueNil
+            var e: TaskError?
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                 if let e = e {
@@ -59,6 +60,8 @@ extension TaskViewController {
         }.fmap { st -> Int in
             print(st)
             return 1
+        }.do {
+            print("do")
         }.fmap { num -> Bool in
             print(num)
             return false
@@ -69,5 +72,28 @@ extension TaskViewController {
         .catchError { error in
             print(error)
         }
+    }
+    
+    func test3() {
+        SerialTask<String> { fullfill, error in
+                //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                    fullfill("OK")
+                //}
+            }.fmap { st -> Int in
+                print(st)
+                return 1
+            }.do {
+                print("do")
+            }
+            .convertToConcurrent()
+            .do {
+                print("do1")
+            }
+            .do {
+                print("do2")
+            }
+            .do {
+                print("do3")
+            }
     }
 }

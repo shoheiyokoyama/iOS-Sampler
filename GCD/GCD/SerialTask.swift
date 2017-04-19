@@ -122,22 +122,19 @@ extension SerialTask {
     // - 引数なし
     // - fullfill
     
-    
     //何も引数を受け取らずに何も返さないDo
-    //valueを捨てること許容する？do onNextみたいにvalueは保持して次に流す
-    func `do`(_ completionHandler: @escaping () -> Void) -> Do<Element> {
+    //do onNextみたいにvalueは保持して次に流す
+    func `do`(_ excute: @escaping () -> Void) -> Do<Element> {
         return Do<Element> { [weak self] fullfill, error in
-            //let _ = ConcurrentTask<Element2>(value: newValue)
-            
             guard let me = self else { return }
             
-            let next: (Element) -> Void = { value in
-                completionHandler()
-                fullfill()//value
+            let next: (Element?) -> Void = { value in
+                excute()
+                fullfill(value)
             }
             
             let failure: (Error?) -> Void = { errorInfo in
-                error(errorInfo)//初期化時のfailue実行
+                error(errorInfo)
             }
             
             me.nextFullfillHandler = next
@@ -145,8 +142,23 @@ extension SerialTask {
         }
     }
     
-    func doWith() {
-        
+    func `do`(_ excuteWith: @escaping (Element) -> Void) -> Do<Element> {
+        return Do<Element> { [weak self] fullfill, error in
+            guard let me = self else { return }
+            
+            let next: (Element?) -> Void = { value in
+                guard let value = value else { return }
+                excuteWith(value)
+                fullfill(value)
+            }
+            
+            let failure: (Error?) -> Void = { errorInfo in
+                error(errorInfo)
+            }
+            
+            me.nextFullfillHandler = next
+            me.nextErrorHandler    = failure
+        }
     }
     
     //fmapWith
@@ -174,31 +186,17 @@ final class Fmap<Element>: SerialTask<Element> {
     }
 }
 
-//valueは内部的に次に流す（rxのDoと同じ）SerialTask継承してもいいかも
-final class Do<Element> {
-    //completehandler
-    typealias InitialTask = (@escaping () -> Void, @escaping (Error?) -> Void) -> Void
+final class Do<Element>: SerialTask<Element>  {
     
-    init(_ closure: @escaping InitialTask) {
-        excuteTask(closure)
+    required init(_ closure: @escaping InitialTask) {
+        super.init(closure)
     }
-    
-    func excuteTask(_ task: InitialTask) {
-        //weak self にすると解放されてしまう
-        let fulfill: () -> Void = { value in
-            
-        }
-        
-        let failure: (Error?) -> Void = {  error in
-            // errorを非optionalにしてもいいかも
-            if let handler = self.errorHandler, let error = error {
-                handler(error)
-            } else {
-                self.nextErrorHandler?(error)
-            }
-        }
-        
-        task(fulfill, failure)
+}
+
+extension Do: ConcurrentConvertible {
+    // taskが終了するまで　ConcurrentTaskを実行しないように
+    func convertToConcurrent() -> ConcurrentTask {
+        return ConcurrentTask()
     }
 }
 

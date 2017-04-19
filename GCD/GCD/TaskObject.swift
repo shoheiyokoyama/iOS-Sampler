@@ -10,7 +10,7 @@ import UIKit
 
 // thenとかreturnやcompletionを扱わないoperatorに準拠させるべき
 protocol ConcurrentConvertible {
-    
+    func convertToConcurrent() -> ConcurrentTask
 }
 
 protocol SerialConvertible {
