@@ -12,14 +12,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        loadJSON()
     }
 
 
+    func loadJSON() {
+        guard let file = Bundle.main.url(forResource: "emoji", withExtension: "json"),
+            let data = try? Data(contentsOf: file),
+            let json = try? JSONSerialization.jsonObject(with: data, options: []),
+            let object = json as? [[String: AnyObject]] else {
+                return 
+        }
+        
+        print(object)
+    }
 }
 

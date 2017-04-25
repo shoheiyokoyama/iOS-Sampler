@@ -14,6 +14,7 @@
 		E052956C1EAEDD5D00420688 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E052956A1EAEDD5D00420688 /* LaunchScreen.storyboard */; };
 		E05295771EAEDD5E00420688 /* LocalJSONTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05295761EAEDD5E00420688 /* LocalJSONTests.swift */; };
 		E05295821EAEDD5E00420688 /* LocalJSONUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E05295811EAEDD5E00420688 /* LocalJSONUITests.swift */; };
+		E05295911EAEDFB700420688 /* emoji.json in Resources */ = {isa = PBXBuildFile; fileRef = E05295901EAEDFB700420688 /* emoji.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E052957D1EAEDD5E00420688 /* LocalJSONUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalJSONUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E05295811EAEDD5E00420688 /* LocalJSONUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalJSONUITests.swift; sourceTree = "<group>"; };
 		E05295831EAEDD5E00420688 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E05295901EAEDFB700420688 /* emoji.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emoji.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 		E05295601EAEDD5D00420688 /* LocalJSON */ = {
 			isa = PBXGroup;
 			children = (
+				E052958F1EAEDF7800420688 /* Resources */,
 				E05295611EAEDD5D00420688 /* AppDelegate.swift */,
 				E05295631EAEDD5D00420688 /* ViewController.swift */,
 				E05295651EAEDD5D00420688 /* Main.storyboard */,
@@ -123,6 +126,14 @@
 				E05295831EAEDD5E00420688 /* Info.plist */,
 			);
 			path = LocalJSONUITests;
+			sourceTree = "<group>";
+		};
+		E052958F1EAEDF7800420688 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E05295901EAEDFB700420688 /* emoji.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 				TargetAttributes = {
 					E052955D1EAEDD5D00420688 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 3KU3GWQLG8;
 						ProvisioningStyle = Automatic;
 					};
 					E05295711EAEDD5E00420688 = {
@@ -234,6 +246,7 @@
 			files = (
 				E052956C1EAEDD5D00420688 /* LaunchScreen.storyboard in Resources */,
 				E05295691EAEDD5D00420688 /* Assets.xcassets in Resources */,
+				E05295911EAEDFB700420688 /* emoji.json in Resources */,
 				E05295671EAEDD5D00420688 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,7 +425,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = LocalJSON/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shoheiyokoyama.LocalJSON;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -424,7 +440,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = LocalJSON/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shoheiyokoyama.LocalJSON;
 				PRODUCT_NAME = "$(TARGET_NAME)";
