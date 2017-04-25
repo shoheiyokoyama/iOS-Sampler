@@ -36,6 +36,11 @@ final class ConcurrentTask: ConcurrentExecutable {
     
     private let queue = DispatchQueue(label: key, attributes: .concurrent)
     
+    convenience init(_ completionHandler: () -> Void) {
+        self.init()
+        
+    }
+    
     func `do`(_ closure: @escaping () -> Void) -> ConcurrentTask {
         queue.async(execute: closure)
         return self

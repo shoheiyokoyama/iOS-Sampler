@@ -76,9 +76,9 @@ extension TaskViewController {
     
     func test3() {
         SerialTask<String> { fullfill, error in
-                //DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2)) {
                     fullfill("OK")
-                //}
+                }
             }.fmap { st -> Int in
                 print(st)
                 return 1
@@ -95,5 +95,20 @@ extension TaskViewController {
             .do {
                 print("do3")
             }
+        
+        //http://stackoverflow.com/questions/38105105/difference-between-dispatching-to-a-queue-with-sync-and-using-a-work-item-with
+        let queue = DispatchQueue(label: "aaaa", attributes: .concurrent)
+        let workItem = DispatchWorkItem {
+            print("Work")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(5)) {
+            workItem.perform()
+        }
+        workItem.wait()
+        
+        queue.async(execute: workItem)
+        
+        
     }
 }
