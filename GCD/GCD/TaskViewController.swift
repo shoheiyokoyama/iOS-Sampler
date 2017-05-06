@@ -95,11 +95,5 @@ extension TaskViewController {
             .do {
                 print("do3")
             }
-        
-        
-        
-        testWorkItemNotify()
-        
-        
     }
 }

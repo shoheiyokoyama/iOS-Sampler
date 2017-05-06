@@ -3,10 +3,6 @@
 import UIKit
 import PlaygroundSupport
 
-var str = "Hello, playground"
-
-//http://stackoverflow.com/questions/38105105/difference-between-dispatching-to-a-queue-with-sync-and-using-a-work-item-with
-
 PlaygroundPage.current.needsIndefiniteExecution = true
 
 // Concurrent Programming With GCD in Swift 3
@@ -56,20 +52,23 @@ func testWorkItemCancel() {
 func testWorkItemWaitTimeOut() {
     let queue = DispatchQueue(label: "queue", attributes: .concurrent)
     let workItem = DispatchWorkItem {
-        sleep(5)
+        sleep(3)
         print("done")
     }
    
     queue.async(execute: workItem)
     print("before waiting")
     
-    // If task isn't executed within the time, excute task after time
-    let time: DispatchTime = .now() + .seconds(3)
-    let result = workItem.wait(timeout: time)
+    // If task isn't executed within the time, wait for time
+    let time: DispatchTime = .now() + .seconds(1)
+    let result: DispatchTimeoutResult = workItem.wait(timeout: time)
+    
     
     // result is timeout or success
     print("after waiting: result is \(result)")
 }
+testWorkItemWaitTimeOut()
+
 
 // dispatch_block_notify
 // https://github.com/apple/swift-corelibs-libdispatch/blob/master/dispatch/block.h#L327-L369
