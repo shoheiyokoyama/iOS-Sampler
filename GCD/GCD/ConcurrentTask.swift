@@ -26,7 +26,7 @@ extension ConcurrentExecutable {
 }
 
 /*
- - group
+ - group //keyごとに
  - Semaphore
  - iterator
  */
@@ -34,15 +34,37 @@ extension ConcurrentExecutable {
 // serialのobjectで帰り値、completionHadndlerがないものに対して切り替えられるようにする
 final class ConcurrentTask: ConcurrentExecutable {
     
+    typealias Block = () -> Void
+    
     private let queue = DispatchQueue(label: key, attributes: .concurrent)
     
-    convenience init(_ completionHandler: () -> Void) {
+    private var tasks: [Block] = []
+    
+    // ConcurrentConvertibleの時のinitializerはinternalにして　ConcurrentTaskのinitializerはpublicにしたい
+    internal convenience init(_ block: @escaping (@escaping Block) -> Void) {
         self.init()
+        
+        let c: Block = {
+            self.run()
+        }
+        block(c)
+    }
+    
+    public convenience init(initialBlock: @escaping Block) {
+        self.init()
+        
         
     }
     
-    func `do`(_ closure: @escaping () -> Void) -> ConcurrentTask {
-        queue.async(execute: closure)
+    func `do`(_ closure: @escaping Block) -> ConcurrentTask {
+        tasks.append(closure)
         return self
+    }
+    
+    //serialのタスク完了時か初期化時
+    private func run() {
+        tasks.forEach { [weak self] task in
+            self?.queue.async(execute: task)
+        }
     }
 }

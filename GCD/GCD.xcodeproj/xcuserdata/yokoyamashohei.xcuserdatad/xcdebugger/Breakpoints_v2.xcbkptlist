@@ -17,38 +17,6 @@
             endingLineNumber = "179"
             landmarkName = "groupExample()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GCD.ViewController.groupExample () -&gt; ()"
-                  moduleName = "GCD"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/ViewController.swift"
-                  timestampString = "515754104.872733"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "940">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "GCD.ViewController.(groupExample () -&gt; ()).(closure #2)"
-                  moduleName = "GCD"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/yokoyamashohei/Documents/Application/iOS/iOS-Sampler/GCD/GCD/ViewController.swift"
-                  timestampString = "515754104.875325"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "180"
-                  endingLineNumber = "180"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

@@ -18,7 +18,7 @@ protocol Serializable {
     associatedtype ElementType
     
     init(_ closure: @escaping (@escaping (ElementType?) -> Void, @escaping (Error?) -> Void) -> Void)
-    func fmap<Result>(_ transform: @escaping (ElementType) -> Result) -> SerialTask<Result>
+    func fmap<Result>(_ transform: @escaping (ElementType) -> Result) -> SerialTask<Result>//fmapを返す
 }
 
 //asyncAfter
@@ -71,7 +71,7 @@ class SerialTask<Element>: Serializable {
             self.nextFullfillHandler?(value)
         }
         
-        let failure: Failure = {  error in
+        let failure: Failure = { error in
             // errorを非optionalにしてもいいかも
             if let handler = self.errorHandler, let error = error {
                 handler(error)
@@ -124,8 +124,9 @@ extension SerialTask {
     
     //何も引数を受け取らずに何も返さないDo
     //do onNextみたいにvalueは保持して次に流す
-    func `do`(_ excute: @escaping () -> Void) -> Do<Element> {
-        return Do<Element> { [weak self] fullfill, error in
+    //concurrentで使ってるからthenとかにする
+    func then(_ excute: @escaping () -> Void) -> Then<Element> {
+        return Then<Element> { [weak self] fullfill, error in
             guard let me = self else { return }
             
             let next: (Element?) -> Void = { value in
@@ -142,8 +143,8 @@ extension SerialTask {
         }
     }
     
-    func `do`(_ excuteWith: @escaping (Element) -> Void) -> Do<Element> {
-        return Do<Element> { [weak self] fullfill, error in
+    func then(_ excuteWith: @escaping (Element) -> Void) -> Then<Element> {
+        return Then<Element> { [weak self] fullfill, error in
             guard let me = self else { return }
             
             let next: (Element?) -> Void = { value in
@@ -186,17 +187,31 @@ final class Fmap<Element>: SerialTask<Element> {
     }
 }
 
-final class Do<Element>: SerialTask<Element>  {
+final class Then<Element>: SerialTask<Element>  {
     
     required init(_ closure: @escaping InitialTask) {
         super.init(closure)
     }
 }
 
-extension Do: ConcurrentConvertible {
+extension Then: ConcurrentConvertible {
     // taskが終了するまで　ConcurrentTaskを実行しないように
+    // taskを配列に格納
     func convertToConcurrent() -> ConcurrentTask {
-        return ConcurrentTask()
+        return ConcurrentTask( { [weak self] c in
+            guard let me = self else { return }
+            
+            let next: (Element?) -> Void = { _ in
+                c()
+            }
+            
+            let failure: (Error?) -> Void = { errorInfo in
+                //error(errorInfo)
+            }
+            
+            me.nextFullfillHandler = next
+            me.nextErrorHandler    = failure
+        })
     }
 }
 

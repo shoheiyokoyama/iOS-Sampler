@@ -60,7 +60,7 @@ extension TaskViewController {
         }.fmap { st -> Int in
             print(st)
             return 1
-        }.do {
+        }.then {
             print("do")
         }.fmap { num -> Bool in
             print(num)
@@ -82,8 +82,8 @@ extension TaskViewController {
             }.fmap { st -> Int in
                 print(st)
                 return 1
-            }.do {
-                print("do")
+            }.then {
+                print("then")
             }
             .convertToConcurrent()
             .do {
