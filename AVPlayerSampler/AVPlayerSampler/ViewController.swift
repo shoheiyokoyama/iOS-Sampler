@@ -7,16 +7,26 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var playerView: PlayerView!
+    
+    var localMovieURL: URL {
+        let urlString = Bundle.main.path(forResource: "waterfall", ofType: "mp4") ?? ""
+        return URL(fileURLWithPath: urlString)
+    }
+    
+    var sampleMovieURL: URL {
+        return URL(string: "http://techslides.com/demos/sample-videos/small.mp4")!
+    }
 
+    //sample video
+    //http://techslides.com/sample-webm-ogg-and-mp4-video-files-for-html5
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let urlString = Bundle.main.path(forResource: "waterfall", ofType: "mp4") ?? ""
-        let url = URL(fileURLWithPath: urlString)
-        playerView.setVideoURL(url)
+        playerView.setVideoURL(sampleMovieURL)
     }
     
     @IBAction func stop(_ sender: Any) {
@@ -26,7 +36,6 @@ class ViewController: UIViewController {
     @IBAction func replay(_ sender: Any) {
         playerView.replay()
     }
-    
     
     @IBAction func play(_ sender: Any) {
         playerView.start()

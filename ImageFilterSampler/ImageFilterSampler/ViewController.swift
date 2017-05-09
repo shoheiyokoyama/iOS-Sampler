@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     }
     var originalImage: UIImage?
     
+    var ciContext = CIContext(options: nil)
+    
     var filterNames = [
         "CIPhotoEffectChrome",
         "CIPhotoEffectFade",
@@ -43,7 +45,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let name = filterNames[indexPath.row]
         
-        let ciContext = CIContext(options: nil)
         let coreImage = CIImage(image: originalImage!)
         let filter = CIFilter(name: name)
         filter!.setDefaults()
@@ -67,15 +68,15 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return .init()
         }
         
-        
-        let ciContext = CIContext(options: nil)
-        let coreImage = CIImage(image: cell.contentImageView.image!)
+        let coreImage = CIImage(image: cell.originnalImage!)
         let filter = CIFilter(name: filterNames[indexPath.row])
         filter!.setDefaults()
-        filter!.setValue(coreImage, forKey: kCIInputImageKey)
         
-        let filteredImageData = filter!.value(forKey: kCIOutputImageKey) as! CIImage
-        let filteredImageRef = ciContext.createCGImage(filteredImageData, from: filteredImageData.extent)
+        filter!.setValue(coreImage, forKey: kCIInputImageKey)
+        //filter!.setValue(0.3, forKey: kCIInputIntensityKey)
+                
+        let filteredImageData = filter!.outputImage
+        let filteredImageRef = ciContext.createCGImage(filteredImageData!, from: (filteredImageData?.extent)!)
         cell.contentImageView.image = UIImage(cgImage: filteredImageRef!)
         
         return cell

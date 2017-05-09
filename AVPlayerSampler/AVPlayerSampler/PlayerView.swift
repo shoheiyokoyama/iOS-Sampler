@@ -40,8 +40,7 @@ class PlayerView: UIView {
     func setVideoURL(_ url: URL) {
         let asset      = AVURLAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
-        let player     = AVPlayer(playerItem: playerItem)
-        playerLayer.player = player
+        playerLayer.player = AVPlayer(playerItem: playerItem)
     }
     
     func start() {
@@ -51,7 +50,6 @@ class PlayerView: UIView {
     func stop() {
         player?.pause()
     }
-    
     
     func replay() {
         player?.pause()

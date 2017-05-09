@@ -10,7 +10,13 @@ import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
 
-    @IBOutlet weak var contentImageView: UIImageView!
+    @IBOutlet weak var contentImageView: UIImageView! {
+        didSet {
+            originnalImage = contentImageView.image
+        }
+    }
+    
+    var originnalImage: UIImage?
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -16,6 +16,7 @@
 		E064DED61EC1764F00F5CC48 /* AVPlayerSamplerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DED51EC1764F00F5CC48 /* AVPlayerSamplerUITests.swift */; };
 		E064DEE41EC1768C00F5CC48 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DEE31EC1768C00F5CC48 /* PlayerView.swift */; };
 		E064DEE71EC1823E00F5CC48 /* waterfall.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E064DEE61EC1823E00F5CC48 /* waterfall.mp4 */; };
+		E064DF281EC2091100F5CC48 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DF271EC2091100F5CC48 /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		E064DED71EC1764F00F5CC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E064DEE31EC1768C00F5CC48 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		E064DEE61EC1823E00F5CC48 /* waterfall.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = waterfall.mp4; sourceTree = "<group>"; };
+		E064DF271EC2091100F5CC48 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				E064DEE61EC1823E00F5CC48 /* waterfall.mp4 */,
 				E064DEB51EC1764F00F5CC48 /* AppDelegate.swift */,
 				E064DEB71EC1764F00F5CC48 /* ViewController.swift */,
+				E064DF271EC2091100F5CC48 /* PlayerViewController.swift */,
 				E064DEE31EC1768C00F5CC48 /* PlayerView.swift */,
 				E064DEB91EC1764F00F5CC48 /* Main.storyboard */,
 				E064DEBC1EC1764F00F5CC48 /* Assets.xcassets */,
@@ -267,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E064DEE41EC1768C00F5CC48 /* PlayerView.swift in Sources */,
+				E064DF281EC2091100F5CC48 /* PlayerViewController.swift in Sources */,
 				E064DEB81EC1764F00F5CC48 /* ViewController.swift in Sources */,
 				E064DEB61EC1764F00F5CC48 /* AppDelegate.swift in Sources */,
 			);
@@ -515,6 +519,7 @@
 				E064DEDC1EC1764F00F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E064DEDD1EC1764F00F5CC48 /* Build configuration list for PBXNativeTarget "AVPlayerSamplerTests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +528,7 @@
 				E064DEDF1EC1764F00F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E064DEE01EC1764F00F5CC48 /* Build configuration list for PBXNativeTarget "AVPlayerSamplerUITests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +537,7 @@
 				E064DEE21EC1764F00F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
