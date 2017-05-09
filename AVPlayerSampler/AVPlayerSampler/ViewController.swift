@@ -9,17 +9,27 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var playerView: PlayerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let urlString = Bundle.main.path(forResource: "waterfall", ofType: "mp4") ?? ""
+        let url = URL(fileURLWithPath: urlString)
+        playerView.setVideoURL(url)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func stop(_ sender: Any) {
+        playerView.stop()
     }
-
-
+    
+    @IBAction func replay(_ sender: Any) {
+        playerView.replay()
+    }
+    
+    
+    @IBAction func play(_ sender: Any) {
+        playerView.start()
+    }
 }
 

@@ -14,6 +14,8 @@
 		E064DEC01EC1764F00F5CC48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E064DEBE1EC1764F00F5CC48 /* LaunchScreen.storyboard */; };
 		E064DECB1EC1764F00F5CC48 /* AVPlayerSamplerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DECA1EC1764F00F5CC48 /* AVPlayerSamplerTests.swift */; };
 		E064DED61EC1764F00F5CC48 /* AVPlayerSamplerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DED51EC1764F00F5CC48 /* AVPlayerSamplerUITests.swift */; };
+		E064DEE41EC1768C00F5CC48 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DEE31EC1768C00F5CC48 /* PlayerView.swift */; };
+		E064DEE71EC1823E00F5CC48 /* waterfall.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E064DEE61EC1823E00F5CC48 /* waterfall.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		E064DED11EC1764F00F5CC48 /* AVPlayerSamplerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVPlayerSamplerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E064DED51EC1764F00F5CC48 /* AVPlayerSamplerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerSamplerUITests.swift; sourceTree = "<group>"; };
 		E064DED71EC1764F00F5CC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E064DEE31EC1768C00F5CC48 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
+		E064DEE61EC1823E00F5CC48 /* waterfall.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = waterfall.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +101,10 @@
 		E064DEB41EC1764F00F5CC48 /* AVPlayerSampler */ = {
 			isa = PBXGroup;
 			children = (
+				E064DEE61EC1823E00F5CC48 /* waterfall.mp4 */,
 				E064DEB51EC1764F00F5CC48 /* AppDelegate.swift */,
 				E064DEB71EC1764F00F5CC48 /* ViewController.swift */,
+				E064DEE31EC1768C00F5CC48 /* PlayerView.swift */,
 				E064DEB91EC1764F00F5CC48 /* Main.storyboard */,
 				E064DEBC1EC1764F00F5CC48 /* Assets.xcassets */,
 				E064DEBE1EC1764F00F5CC48 /* LaunchScreen.storyboard */,
@@ -234,6 +240,7 @@
 			files = (
 				E064DEC01EC1764F00F5CC48 /* LaunchScreen.storyboard in Resources */,
 				E064DEBD1EC1764F00F5CC48 /* Assets.xcassets in Resources */,
+				E064DEE71EC1823E00F5CC48 /* waterfall.mp4 in Resources */,
 				E064DEBB1EC1764F00F5CC48 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E064DEE41EC1768C00F5CC48 /* PlayerView.swift in Sources */,
 				E064DEB81EC1764F00F5CC48 /* ViewController.swift in Sources */,
 				E064DEB61EC1764F00F5CC48 /* AppDelegate.swift in Sources */,
 			);
