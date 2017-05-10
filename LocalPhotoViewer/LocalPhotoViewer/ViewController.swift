@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import Photos
 
+//https://developer.apple.com/reference/photos/phasset#//apple_ref/doc/uid/TP40014383-CH1-SW2
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    
+    var photoAssets: [PHAsset] = []
+    var images: [UIImage] = []
+    
+    let assetsManager = PHImageManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +26,35 @@ class ViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: "ImageCollectionViewCell")
         collectionView.delegate   = self
         collectionView.dataSource = self
+        
+        getLoaclPhoto()
+    }
+    
+    func getLoaclPhoto() {
+        let assets: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
+        
+        let size = CGSize(width: view.bounds.size.width / 3, height: view.bounds.size.height / 3)
+        
+        assets.enumerateObjects({ asset, index, stop in
+            self.photoAssets.append(asset as PHAsset)
+            
+            self.assetsManager.requestImage(for: asset, targetSize: size, contentMode: PHImageContentMode.aspectFill, options: nil) { image, info in
+                self.images.append(image!)
+            }
+        })
+        
+        PHPhotoLibrary.requestAuthorization { state in
+            switch state {
+            case .notDetermined:
+                ()
+            case .restricted:
+                ()
+            case .denied:
+                ()
+            case .authorized:
+                self.collectionView.reloadData()
+            }
+        }
     }
 }
 
@@ -32,7 +68,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -40,6 +76,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return .init()
         }
         
+        cell.imageView.image = images[indexPath.row]
         cell.backgroundColor = .red
         return cell
     }
