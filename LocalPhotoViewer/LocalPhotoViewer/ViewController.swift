@@ -9,7 +9,11 @@
 import UIKit
 import Photos
 
-//https://developer.apple.com/reference/photos/phasset#//apple_ref/doc/uid/TP40014383-CH1-SW2
+//https://developer.apple.com/reference/photos/phasset#//apple_ref/doc/uid/TP40014383-CH1-SW2¥
+
+//https://developer.apple.com/library/content/samplecode/UsingPhotosFramework/Introduction/Intro.html#//apple_ref/doc/uid/TP40014575-Intro-DontLinkElementID_2
+
+
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -18,7 +22,7 @@ class ViewController: UIViewController {
     var images: [UIImage] = []
     
     let assetsManager = PHImageManager()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +35,12 @@ class ViewController: UIViewController {
     }
     
     func getLoaclPhoto() {
-        let assets: PHFetchResult = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
+        let options = PHFetchOptions()
+        options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        
+        options.fetchLimit = 20
+        
+        let assets: PHFetchResult = PHAsset.fetchAssets(with: .image, options: options)
         
         let size = CGSize(width: view.bounds.size.width / 3, height: view.bounds.size.height / 3)
         
@@ -60,7 +69,7 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        self.collectionView.reloadData()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
