@@ -11,13 +11,15 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var imageView: UIImageView! {
-        didSet {
-            originalImage = imageView.image
-        }
-    }
-    var originalImage: UIImage?
     
+    @IBOutlet weak var imageView: UIImageView!
+    var originalImage = UIImage(named: "Sample")
+    lazy var coreImage: CIImage = {
+        let i = CIImage(image: self.originalImage!)
+        return i!
+    }()
+    
+    //for peformance
     var ciContext = CIContext(options: nil)
     
     var filterNames = [
@@ -45,10 +47,10 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let name = filterNames[indexPath.row]
         
-        let coreImage = CIImage(image: originalImage!)
         let filter = CIFilter(name: name)
-        filter!.setDefaults()
-        filter!.setValue(coreImage, forKey: kCIInputImageKey)
+        filter?.name = name
+        filter?.setDefaults()
+        filter?.setValue(coreImage, forKey: kCIInputImageKey)
         
         let filteredImageData = filter!.value(forKey: kCIOutputImageKey) as! CIImage
         let filteredImageRef = ciContext.createCGImage(filteredImageData, from: filteredImageData.extent)
@@ -68,7 +70,6 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return .init()
         }
         
-        let coreImage = CIImage(image: cell.originnalImage!)
         let filter = CIFilter(name: filterNames[indexPath.row])
         filter!.setDefaults()
         

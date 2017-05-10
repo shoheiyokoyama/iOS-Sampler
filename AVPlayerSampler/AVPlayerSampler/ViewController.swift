@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     }
     
     var sampleMovieURL: URL {
-        return URL(string: "http://techslides.com/demos/sample-videos/small.mp4")!
+        return URL(string: "https://storage.googleapis.com/instavideo/waterfall.mp4")!
     }
 
     //sample video
@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         playerView.setVideoURL(sampleMovieURL)
+        playerView.player?.play()
     }
     
     @IBAction func stop(_ sender: Any) {

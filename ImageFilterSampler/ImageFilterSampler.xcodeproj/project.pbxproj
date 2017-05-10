@@ -199,6 +199,7 @@
 				TargetAttributes = {
 					E064DEF01EC19D2000F5CC48 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 3KU3GWQLG8;
 						ProvisioningStyle = Automatic;
 					};
 					E064DF041EC19D2000F5CC48 = {
@@ -422,7 +423,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = ImageFilterSampler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shoheiyokoyama.ImageFilterSampler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,7 +437,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = ImageFilterSampler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shoheiyokoyama.ImageFilterSampler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -515,6 +520,7 @@
 				E064DF1B1EC19D2000F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E064DF1C1EC19D2000F5CC48 /* Build configuration list for PBXNativeTarget "ImageFilterSamplerTests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +529,7 @@
 				E064DF1E1EC19D2000F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E064DF1F1EC19D2000F5CC48 /* Build configuration list for PBXNativeTarget "ImageFilterSamplerUITests" */ = {
 			isa = XCConfigurationList;
@@ -531,6 +538,7 @@
 				E064DF211EC19D2000F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
