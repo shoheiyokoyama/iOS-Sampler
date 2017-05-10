@@ -14,6 +14,8 @@
 		E064DFB41EC2FC7300F5CC48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E064DFB21EC2FC7300F5CC48 /* LaunchScreen.storyboard */; };
 		E064DFBF1EC2FC7300F5CC48 /* LocalPhotoViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DFBE1EC2FC7300F5CC48 /* LocalPhotoViewerTests.swift */; };
 		E064DFCA1EC2FC7300F5CC48 /* LocalPhotoViewerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DFC91EC2FC7300F5CC48 /* LocalPhotoViewerUITests.swift */; };
+		E064DFD91EC3000100F5CC48 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DFD71EC3000100F5CC48 /* ImageCollectionViewCell.swift */; };
+		E064DFDA1EC3000100F5CC48 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E064DFD81EC3000100F5CC48 /* ImageCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		E064DFC51EC2FC7300F5CC48 /* LocalPhotoViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalPhotoViewerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E064DFC91EC2FC7300F5CC48 /* LocalPhotoViewerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalPhotoViewerUITests.swift; sourceTree = "<group>"; };
 		E064DFCB1EC2FC7300F5CC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E064DFD71EC3000100F5CC48 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		E064DFD81EC3000100F5CC48 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 			children = (
 				E064DFA91EC2FC7300F5CC48 /* AppDelegate.swift */,
 				E064DFAB1EC2FC7300F5CC48 /* ViewController.swift */,
+				E064DFD71EC3000100F5CC48 /* ImageCollectionViewCell.swift */,
+				E064DFD81EC3000100F5CC48 /* ImageCollectionViewCell.xib */,
 				E064DFAD1EC2FC7300F5CC48 /* Main.storyboard */,
 				E064DFB01EC2FC7300F5CC48 /* Assets.xcassets */,
 				E064DFB21EC2FC7300F5CC48 /* LaunchScreen.storyboard */,
@@ -193,6 +199,7 @@
 				TargetAttributes = {
 					E064DFA51EC2FC7300F5CC48 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 3KU3GWQLG8;
 						ProvisioningStyle = Automatic;
 					};
 					E064DFB91EC2FC7300F5CC48 = {
@@ -234,6 +241,7 @@
 			files = (
 				E064DFB41EC2FC7300F5CC48 /* LaunchScreen.storyboard in Resources */,
 				E064DFB11EC2FC7300F5CC48 /* Assets.xcassets in Resources */,
+				E064DFDA1EC3000100F5CC48 /* ImageCollectionViewCell.xib in Resources */,
 				E064DFAF1EC2FC7300F5CC48 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -259,6 +267,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E064DFD91EC3000100F5CC48 /* ImageCollectionViewCell.swift in Sources */,
 				E064DFAC1EC2FC7300F5CC48 /* ViewController.swift in Sources */,
 				E064DFAA1EC2FC7300F5CC48 /* AppDelegate.swift in Sources */,
 			);
@@ -414,7 +423,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = LocalPhotoViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shoheiyokoyama.LocalPhotoViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -426,7 +437,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = LocalPhotoViewer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.shoheiyokoyama.LocalPhotoViewer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
