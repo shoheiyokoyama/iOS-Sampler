@@ -8,6 +8,12 @@
 
 import UIKit
 
+class Global {
+    static let shared = Global()
+    
+    
+}
+
 extension UITableView {
     func registerCell<T: UITableViewCell>(_ type: T.Type) {
         let className = String.className(type)
@@ -41,6 +47,12 @@ class ViewController: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
     
+    var isExpanded = false {
+        didSet {
+            tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: UITableViewRowAnimation.automatic)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate   = self
@@ -66,6 +78,20 @@ extension ViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+        if indexPath.section == 0 && indexPath.row == 0 {
+            isExpanded = !isExpanded
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            return isExpanded ? 80 : 40
+        }
         return 40
     }
     
