@@ -9,16 +9,16 @@
 import UIKit
 
 class CustomCollectionViewLayout: UICollectionViewLayout {
-    override func collectionViewContentSize() -> CGSize {
-        return CGSize(width: UIScreen.mainScreen().bounds.width * 2, height: UIScreen.mainScreen().bounds.height * 2)
+    override var collectionViewContentSize : CGSize {
+        return CGSize(width: UIScreen.main.bounds.width * 2, height: UIScreen.main.bounds.height * 2)
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         //
         return [UICollectionViewLayoutAttributes()]
     }
     
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return UICollectionViewLayoutAttributes()
     }
     

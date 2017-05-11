@@ -12,9 +12,9 @@ final class BlickViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let identifier = "BlickCollectionViewCell"
+    fileprivate let identifier = "BlickCollectionViewCell"
     
-    private var index = 0
+    fileprivate var index = 0
     
 
     override func viewDidLoad() {
@@ -27,25 +27,25 @@ final class BlickViewController: UIViewController {
 }
 
 private extension BlickViewController {
-    private func configureCollectionView() {
+    func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.whiteColor()
+        collectionView.backgroundColor = UIColor.white
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = .vertical
         
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 5
         collectionView.collectionViewLayout = layout
         
         
-        navigationController?.navigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
     }
     
-    private func registerCell() {
+    func registerCell() {
         let nib = UINib(nibName: identifier, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: identifier)
+        collectionView.register(nib, forCellWithReuseIdentifier: identifier)
     }
 }
 
@@ -54,20 +54,20 @@ extension BlickViewController: UICollectionViewDelegate {
 }
 
 extension BlickViewController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! BlickCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! BlickCollectionViewCell
         
         if indexPath.row >= index {
             cell.articleImage.alpha = 0
-            UIView.animateWithDuration(0.9, animations: {
+            UIView.animate(withDuration: 0.9, animations: {
                 cell.articleImage.alpha = 1
             })
             index = max(indexPath.row, index)
@@ -78,7 +78,7 @@ extension BlickViewController: UICollectionViewDataSource {
 
 extension BlickViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let margin: CGFloat = 5
         let height: CGFloat = 150
         
@@ -86,7 +86,7 @@ extension BlickViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width / rowCount - (margin * (rowCount - 1) / rowCount), height: height)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let margin: CGFloat = 5
         return UIEdgeInsets(top: 0, left: 0, bottom: margin, right: 0)
     }

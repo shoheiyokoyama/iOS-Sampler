@@ -12,7 +12,7 @@ private let reuseIdentifier = "ViewerCollectionViewCell"
 
 final class DetailCollectionViewController: UICollectionViewController {
     
-    var selectedIndexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +31,13 @@ final class DetailCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
 
-    private var flowLayout: UICollectionViewFlowLayout {
+    fileprivate var flowLayout: UICollectionViewFlowLayout {
         let margin: CGFloat = 5
         let height: CGFloat = 150
         let rowCount: CGFloat = 3
 
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = margin
         layout.minimumInteritemSpacing = margin
         layout.itemSize = CGSize(width: view.frame.width / rowCount - (margin * (rowCount - 1) / rowCount), height: height)
@@ -45,12 +45,12 @@ final class DetailCollectionViewController: UICollectionViewController {
         return layout
     }
     
-    private func registerCell() {
+    fileprivate func registerCell() {
         let nib = UINib(nibName: reuseIdentifier, bundle: nil)
-        collectionView!.registerNib(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView!.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
-    private func configureCollectionView() {
+    fileprivate func configureCollectionView() {
         collectionView?.collectionViewLayout = flowLayout
     }
 
@@ -101,17 +101,17 @@ final class DetailCollectionViewController: UICollectionViewController {
 // MARK: UICollectionViewDataSources
 
 extension DetailCollectionViewController {
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as? ViewerCollectionViewCell else { return UICollectionViewCell() }
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ViewerCollectionViewCell else { return UICollectionViewCell() }
         cell.indexLabel.text = "\(indexPath.row)"
         return cell
     }
@@ -120,10 +120,10 @@ extension DetailCollectionViewController {
 // MARK: UICollectionViewDelegate
 
 extension DetailCollectionViewController {
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
         
         selectedIndexPath = indexPath
-        self.navigationController?.popViewControllerAnimated(true)
+        self.navigationController?.popViewController(animated: true)
     }
 }

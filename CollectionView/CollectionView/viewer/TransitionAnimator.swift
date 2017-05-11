@@ -10,7 +10,7 @@ import UIKit
 
 final class TransitionAnimator: NSObject {
     let duration = 1.0
-    var operation = UINavigationControllerOperation.Push
+    var operation = UINavigationControllerOperation.push
     var goingForward = true
     
     static let sharedInstance = TransitionAnimator()
@@ -28,33 +28,33 @@ final class TransitionAnimator: NSObject {
 }
 
 extension TransitionAnimator: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let containerView = transitionContext.containerView()!
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let toViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let containerView = transitionContext.containerView
         
-        let alphaView = UIView(frame: transitionContext.finalFrameForViewController(toViewController))
+        let alphaView = UIView(frame: transitionContext.finalFrame(for: toViewController))
         containerView.addSubview(alphaView)
         
         let sourceView = toImageSource?()
         containerView.addSubview(sourceView!)
         
         if goingForward {
-            UIView.animateWithDuration(0.3,
+            UIView.animate(withDuration: 0.3,
                 animations: {
                     sourceView?.frame = self.toImageFrame!()
-                    sourceView?.transform = CGAffineTransformMakeScale(1.02, 1.02)
+                    sourceView?.transform = CGAffineTransform(scaleX: 1.02, y: 1.02)
                     alphaView.alpha = 0.9
                 }, completion: { _ in
                     
-                    UIView.animateWithDuration(0.3,
+                    UIView.animate(withDuration: 0.3,
                         animations: {
                             alphaView.alpha = 0
-                            sourceView!.transform = CGAffineTransformIdentity
+                            sourceView!.transform = CGAffineTransform.identity
                         }, completion: { _ in
                             sourceView!.alpha = 0
                             self.setImageHandler!(sourceView!)

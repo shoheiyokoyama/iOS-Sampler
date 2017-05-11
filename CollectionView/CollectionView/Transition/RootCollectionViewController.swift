@@ -12,7 +12,7 @@ private let reuseIdentifier = "ViewerCollectionViewCell"
 
 final class RootCollectionViewController: UICollectionViewController {
     
-    var selectedIndexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,31 +29,31 @@ final class RootCollectionViewController: UICollectionViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         configureCollectionView()
         collectionView?.reloadData()
     }
 
-    private var flowLayout: UICollectionViewFlowLayout {
+    fileprivate var flowLayout: UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: view.bounds.width, height: view.bounds.height)
-        layout.sectionInset = UIEdgeInsetsZero
+        layout.sectionInset = UIEdgeInsets.zero
         return layout
     }
     
-    private func registerCell() {
+    fileprivate func registerCell() {
         let nib = UINib(nibName: reuseIdentifier, bundle: nil)
-        collectionView!.registerNib(nib, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView!.register(nib, forCellWithReuseIdentifier: reuseIdentifier)
     }
     
-    private func configureCollectionView() {
+    fileprivate func configureCollectionView() {
         navigationController?.delegate = self
-        collectionView?.pagingEnabled = true
+        collectionView?.isPagingEnabled = true
         collectionView?.collectionViewLayout = flowLayout
     }
 
@@ -90,22 +90,22 @@ final class RootCollectionViewController: UICollectionViewController {
 
 extension RootCollectionViewController: UINavigationControllerDelegate {
     
-    func navigationController(navigationController: UINavigationController, animationControllerForOperation operation: UINavigationControllerOperation, fromViewController fromVC: UIViewController, toViewController toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
-        if operation == .Push && fromVC == self {
+        if operation == .push && fromVC == self {
             let animator = CollectionViewTransitionAnimator()
             animator.fromCollectionView = collectionView
             animator.goingForward = true
-            if let cell = collectionView?.cellForItemAtIndexPath(selectedIndexPath) as? ViewerCollectionViewCell {
+            if let cell = collectionView?.cellForItem(at: selectedIndexPath) as? ViewerCollectionViewCell {
                 animator.fromCell = cell
             }
             return animator
-        } else if operation == .Pop && toVC == self {
+        } else if operation == .pop && toVC == self {
             
             let animator = CollectionViewTransitionAnimator()
             
             guard let vc = fromVC as? DetailCollectionViewController,
-                cell = vc.collectionView?.cellForItemAtIndexPath(vc.selectedIndexPath) as? ViewerCollectionViewCell else {return nil}
+                let cell = vc.collectionView?.cellForItem(at: vc.selectedIndexPath as IndexPath) as? ViewerCollectionViewCell else {return nil}
             animator.fromCollectionView = vc.collectionView
             animator.fromCell = cell
             animator.goingForward = false
@@ -117,7 +117,7 @@ extension RootCollectionViewController: UINavigationControllerDelegate {
         }
     }
     
-    func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         if let vc = viewController as? DetailCollectionViewController {
             vc.collectionView?.dataSource = vc
             vc.collectionView?.delegate = vc
@@ -131,17 +131,17 @@ extension RootCollectionViewController: UINavigationControllerDelegate {
 // MARK: UICollectionViewDataSource
 
 extension RootCollectionViewController {
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as? ViewerCollectionViewCell else { return UICollectionViewCell() }
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? ViewerCollectionViewCell else { return UICollectionViewCell() }
 //        cell.articleImage.image = UIImage(named: "article_image")
         cell.indexLabel.text = "\(indexPath.row)"
         return cell
@@ -151,9 +151,9 @@ extension RootCollectionViewController {
 // MARK: UICollectionViewDelegate
 
 extension RootCollectionViewController {
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
-        guard  let vc = storyboard?.instantiateViewControllerWithIdentifier("DetailCollectionViewController") as? UICollectionViewController else { return }
+        guard  let vc = storyboard?.instantiateViewController(withIdentifier: "DetailCollectionViewController") as? UICollectionViewController else { return }
         selectedIndexPath = indexPath
         navigationController?.pushViewController(vc, animated: true)
     }

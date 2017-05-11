@@ -11,9 +11,9 @@ import UIKit
 class CustomCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     override func awakeFromNib() {
-        itemSize = CGSizeMake(UIScreen.mainScreen().bounds.width, UIScreen.mainScreen().bounds.height - 30)
+        itemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 30)
         minimumLineSpacing = 40;
-        scrollDirection = .Vertical;
+        scrollDirection = .vertical;
         
         sectionInset = UIEdgeInsetsMake(30, 0, 0, 0);
     }

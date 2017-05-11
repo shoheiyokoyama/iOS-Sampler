@@ -12,30 +12,30 @@ final class ViewerController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let identifier = "ViewerCollectionViewCell"
+    fileprivate let identifier = "ViewerCollectionViewCell"
     
     @IBOutlet weak var bottomBarView: UIView!
     @IBOutlet weak var topBarView: UIView!
     
     @IBOutlet weak var titleLabel: UILabel!
     
-    private var displayedIndex = 0
+    fileprivate var displayedIndex = 0
     
-    private var currentIndex: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+    fileprivate var currentIndex: IndexPath = IndexPath(row: 0, section: 0)
     
-    private enum State {
+    fileprivate enum State {
         case viewer, grid
     }
     
-    private var item: [Int] = [Int](count: 15, repeatedValue: 0/*　 適当　*/)
-    private var moreItem: [Int] = [Int](count: 10, repeatedValue: 0/*　 適当　*/)
+    fileprivate var item: [Int] = [Int](repeating: 0, count: 15/*　 適当　*/)
+    fileprivate var moreItem: [Int] = [Int](repeating: 0, count: 10/*　 適当　*/)
     
-    private var state: State = .viewer {
+    fileprivate var state: State = .viewer {
         didSet {
             if state == .viewer {
-                collectionView.pagingEnabled = true
+                collectionView.isPagingEnabled = true
             } else {
-                collectionView.pagingEnabled = false
+                collectionView.isPagingEnabled = false
             }
         }
     }
@@ -50,7 +50,7 @@ final class ViewerController: UIViewController {
         titleLabel.text = "タイトルタイトルタイトル"        
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -58,29 +58,29 @@ final class ViewerController: UIViewController {
 }
 
 private extension ViewerController {
-    private func configureCollectionView() {
+    func configureCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.pagingEnabled = true
+        collectionView.isPagingEnabled = true
         collectionView.setCollectionViewLayout(viewerLayout(), animated: false)
     }
     
-    private func registerCell() {
+    func registerCell() {
         let nib = UINib(nibName: identifier, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: identifier)
+        collectionView.register(nib, forCellWithReuseIdentifier: identifier)
     }
     
     // MARK: - Button Gesture -
     
-    @IBAction private func tap(sender: AnyObject) {
+    @IBAction func tap(_ sender: AnyObject) {
 //        navigationController?.pushViewController(vc!, animated: true)
         
-        let cell = collectionView.visibleCells().first!
-        currentIndex = collectionView.indexPathForCell(cell)!
+        let cell = collectionView.visibleCells.first!
+        currentIndex = collectionView.indexPath(for: cell)!
         
         displayedIndex = 0
-        topBarView.hidden = true
-        bottomBarView.hidden = true
+        topBarView.isHidden = true
+        bottomBarView.isHidden = true
         
         collectionView.performBatchUpdates({
             self.collectionView.setCollectionViewLayout(self.gridLayout(), animated: false)
@@ -94,19 +94,19 @@ private extension ViewerController {
     
     // MARK: - Layout -
     
-    private func viewerLayout() -> UICollectionViewFlowLayout {
+    func viewerLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Horizontal
+        layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: view.bounds.width, height: view.bounds.height)
-        layout.sectionInset = UIEdgeInsetsZero
+        layout.sectionInset = UIEdgeInsets.zero
         return layout
     }
     
-    private func gridLayout() -> UICollectionViewFlowLayout {
+    func gridLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 5
         layout.minimumInteritemSpacing = 5
         
@@ -125,17 +125,17 @@ private extension ViewerController {
 
 extension ViewerController {
     func toGridAnimation() {
-        let cell = collectionView.cellForItemAtIndexPath(currentIndex) as? ViewerCollectionViewCell
+        let cell = collectionView.cellForItem(at: currentIndex) as? ViewerCollectionViewCell
         
         let alphaView = UIView(frame: collectionView.frame)
-        alphaView.backgroundColor = UIColor.whiteColor()
+        alphaView.backgroundColor = UIColor.white
         collectionView.addSubview(alphaView)
         
         let imageView = UIImageView(image: UIImage(named: "article_image２"))
         imageView.frame = CGRect(x: 0, y: self.collectionView.contentOffset.y, width: self.view.frame.width, height: self.view.frame.height)
         collectionView.addSubview(imageView)
         
-        UIView.animateWithDuration(0.4,
+        UIView.animate(withDuration: 0.4,
             animations: {
                 alphaView.alpha = 0.2
                 imageView.frame = cell!.frame
@@ -147,9 +147,9 @@ extension ViewerController {
         
     }
     
-    private func toViewerAnimation(cell: ViewerCollectionViewCell) {
+    fileprivate func toViewerAnimation(_ cell: ViewerCollectionViewCell) {
         let alphaView = UIView(frame: collectionView.frame)
-        alphaView.backgroundColor = UIColor.whiteColor()
+        alphaView.backgroundColor = UIColor.white
         alphaView.alpha = 0
         collectionView.addSubview(alphaView)
         
@@ -157,7 +157,7 @@ extension ViewerController {
         imageView.frame = cell.frame
         collectionView.addSubview(imageView)
         
-        UIView.animateWithDuration(0.4,
+        UIView.animate(withDuration: 0.4,
             animations: {
                 alphaView.alpha = 1
                 imageView.frame = CGRect(x: 0, y: self.collectionView.contentOffset.y, width: self.view.frame.width, height: self.view.frame.height)
@@ -173,7 +173,7 @@ extension ViewerController {
                     self.collectionView.reloadData()
                     },completion: { _ in
                         self.state = .viewer
-                        self.collectionView.scrollToItemAtIndexPath(self.currentIndex, atScrollPosition: .None, animated: false)
+                        self.collectionView.scrollToItem(at: self.currentIndex, at: UICollectionViewScrollPosition(), animated: false)
                 })
         })
     }
@@ -196,7 +196,7 @@ extension ViewerController {
 // MARK: - UIScrollViewDelegate -
 
 extension ViewerController: UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if state != .grid { return }
         
         let offset = scrollView.contentOffset
@@ -216,15 +216,15 @@ extension ViewerController: UIScrollViewDelegate {
 // MARK: - UICollectionViewDelegate -
 
 extension ViewerController: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if state == .grid {
             
             
-            topBarView.hidden = false
-            bottomBarView.hidden = false
+            topBarView.isHidden = false
+            bottomBarView.isHidden = false
             
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as? ViewerCollectionViewCell
-            currentIndex = collectionView.indexPathForCell(cell!)!
+            let cell = collectionView.cellForItem(at: indexPath) as? ViewerCollectionViewCell
+            currentIndex = collectionView.indexPath(for: cell!)!
             toViewerAnimation(cell!)
         }
     }
@@ -233,21 +233,21 @@ extension ViewerController: UICollectionViewDelegate {
 // MARK: - UICollectionViewDataSource -
 
 extension ViewerController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return item.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! ViewerCollectionViewCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! ViewerCollectionViewCell
         cell.indexLabel.text = "\(indexPath.row)"
         
         if state == .grid && indexPath.row >= displayedIndex {
             cell.articleImage.alpha = 0
-            UIView.animateWithDuration(0.9, animations: {
+            UIView.animate(withDuration: 0.9, animations: {
                 cell.articleImage.alpha = 1
             })
             displayedIndex = max(indexPath.row, displayedIndex)

@@ -11,9 +11,9 @@ import UIKit
 class OtherCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
     override func awakeFromNib() {
-        itemSize = CGSizeMake(50, 50);
+        itemSize = CGSize(width: 50, height: 50);
         minimumLineSpacing = 40
-        scrollDirection = .Vertical;
+        scrollDirection = .vertical;
         sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
     }
 }

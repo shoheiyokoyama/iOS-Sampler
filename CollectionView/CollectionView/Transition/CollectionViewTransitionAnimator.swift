@@ -16,19 +16,20 @@ final class CollectionViewTransitionAnimator: NSObject {
 }
 
 extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitioning {
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 1
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        guard let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as? UICollectionViewController,
-            fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as? UICollectionViewController,
-            containerView = transitionContext.containerView() else { return }
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        guard let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to) as? UICollectionViewController,
+            let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? UICollectionViewController
+             else { return }
+        let containerView = transitionContext.containerView
         
         
         
-        let alphaView = UIView(frame: transitionContext.finalFrameForViewController(toVC))
-        alphaView.backgroundColor = UIColor.whiteColor()
+        let alphaView = UIView(frame: transitionContext.finalFrame(for: toVC))
+        alphaView.backgroundColor = UIColor.white
         containerView.addSubview(alphaView)
         
 //        let imageView = fromCell!.articleImage
@@ -36,7 +37,7 @@ extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitionin
         
         if goingForward {
             containerView.insertSubview(toVC.view, aboveSubview: fromVC.view)
-            let indexPath = self.fromCollectionView?.indexPathForCell(self.fromCell!)
+            let indexPath = self.fromCollectionView?.indexPath(for: self.fromCell!)
             
             toVC.collectionView?.performBatchUpdates({
 
@@ -45,11 +46,11 @@ extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitionin
                 }, completion: { _ in
                     
                     containerView.addSubview(imageView)
-                    imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+                    imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
                     
-                    let cell = toVC.collectionView?.cellForItemAtIndexPath(indexPath!)
+                    let cell = toVC.collectionView?.cellForItem(at: indexPath!)
                     
-                    UIView.animateWithDuration(1,
+                    UIView.animate(withDuration: 1,
                         animations: {
                             imageView.frame = (cell?.frame)!
                             imageView.frame.origin.y += (fromVC.navigationController?.navigationBar.frame.size.height ?? 0) + 20
@@ -67,10 +68,10 @@ extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitionin
             
         } else {
             
-            let indexPath = self.fromCollectionView?.indexPathForCell(self.fromCell!)
-            let attributes = self.fromCollectionView?.layoutAttributesForItemAtIndexPath(indexPath!)
+            let indexPath = self.fromCollectionView?.indexPath(for: self.fromCell!)
+            let attributes = self.fromCollectionView?.layoutAttributesForItem(at: indexPath!)
             
-            print(self.fromCollectionView?.convertRect((attributes?.frame)!, toView: self.fromCollectionView!.superview))
+            print(self.fromCollectionView?.convert((attributes?.frame)!, to: self.fromCollectionView!.superview))
             print(attributes?.frame)
             
             imageView.frame = (attributes?.frame)!
@@ -78,9 +79,9 @@ extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitionin
             containerView.addSubview(imageView)
             alphaView.alpha = 0
             
-            UIView.animateWithDuration(1,
+            UIView.animate(withDuration: 1,
                 animations: {
-                    imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+                    imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
 
                         imageView.frame.origin.y += (toVC.navigationController?.navigationBar.frame.size.height ?? 0)
                     alphaView.alpha = 1
@@ -99,7 +100,7 @@ extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitionin
 //                toVC.collectionView?.scrollToItemAtIndexPath(indexPath!, atScrollPosition: .None, animated: false)
                                                 
                 // nilになる
-                let cell = toVC.collectionView?.cellForItemAtIndexPath(indexPath!)
+                let cell = toVC.collectionView?.cellForItem(at: indexPath!)
                                                 
                 imageView.removeFromSuperview()
                 alphaView.removeFromSuperview()
@@ -112,13 +113,13 @@ extension CollectionViewTransitionAnimator: UIViewControllerAnimatedTransitionin
         
     }
     
-    private func gridLayout(rect: CGRect) -> UICollectionViewFlowLayout {
+    fileprivate func gridLayout(_ rect: CGRect) -> UICollectionViewFlowLayout {
         let margin: CGFloat = 5
         let height: CGFloat = 150
         let rowCount: CGFloat = 3
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = .vertical
         layout.minimumLineSpacing = margin
         layout.minimumInteritemSpacing = margin
         layout.itemSize = CGSize(width: rect.width / rowCount - (margin * (rowCount - 1) / rowCount), height: height)

@@ -18,7 +18,7 @@ class CustomController: UIViewController {
         super.viewDidLoad()
 
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
         
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -30,22 +30,22 @@ extension CustomController: UICollectionViewDelegate {
 }
 
 extension CustomController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         return cell
     }
 }
 
 extension CustomController: UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let margin: CGFloat = 5
         let height: CGFloat = 150
         
@@ -53,7 +53,7 @@ extension CustomController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: view.frame.width / rowCount - (margin * (rowCount - 1) / rowCount), height: height)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let margin: CGFloat = 5
         return UIEdgeInsets(top: 0, left: 0, bottom: margin, right: 0)
     }

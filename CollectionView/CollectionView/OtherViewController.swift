@@ -18,7 +18,7 @@ class OtherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.white
         configereCollectionViewCell()
     }
 
@@ -28,14 +28,14 @@ class OtherViewController: UIViewController {
     }
     
 
-    private func configereCollectionViewCell() {
-        collectionView.backgroundColor = UIColor.grayColor()
+    fileprivate func configereCollectionViewCell() {
+        collectionView.backgroundColor = UIColor.gray
         
         collectionView.dataSource = self
         collectionView.delegate = self
         
         let nib = UINib(nibName: cellIdentifier, bundle: nil)
-        collectionView.registerNib(nib, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
         
         let margin: CGFloat = 8
         let rowNum: CGFloat = 2
@@ -45,7 +45,7 @@ class OtherViewController: UIViewController {
         layout.itemSize = CGSize(width: rect.width / 2 - (margin * 3 / rowNum), height: rect.height / 3 - (margin * 4 / columnNum))
         layout.minimumLineSpacing = margin
         layout.minimumInteritemSpacing = margin
-        layout.scrollDirection = .Vertical
+        layout.scrollDirection = .vertical
         layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         collectionView!.collectionViewLayout = layout
     }
@@ -53,16 +53,16 @@ class OtherViewController: UIViewController {
 }
 
 extension OtherViewController: UICollectionViewDataSource {
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 6
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
         return cell
     }
 }
@@ -72,7 +72,7 @@ extension OtherViewController: UICollectionViewDelegate {
 
 extension OtherViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         
         
