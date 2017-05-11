@@ -7,6 +7,30 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class ZoomableScrollView: UIScrollView {
     
@@ -23,7 +47,7 @@ class ZoomableScrollView: UIScrollView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    class func instanciate(image: UIImage) -> ZoomableScrollView {
+    class func instanciate(_ image: UIImage) -> ZoomableScrollView {
         let scrollView = ZoomableScrollView()
         scrollView.image = image
         scrollView.delegate = scrollView
@@ -69,7 +93,7 @@ class ZoomableScrollView: UIScrollView {
 }
 
 extension ZoomableScrollView {
-    func displayImage(image: UIImage) {
+    func displayImage(_ image: UIImage) {
         if imageView != nil {
             imageView!.removeFromSuperview()
         }
@@ -80,7 +104,7 @@ extension ZoomableScrollView {
         
         // make a new UIImageView for the new image
         imageView = UIImageView(image: image)
-        imageView!.userInteractionEnabled = true
+        imageView!.isUserInteractionEnabled = true
         addSubview(imageView!)
         
         // add gesture recognizers to the image view
@@ -92,7 +116,7 @@ extension ZoomableScrollView {
         configureImageSize(image.size)
     }
     
-    func doubleTap(gesture: UITapGestureRecognizer) {
+    func doubleTap(_ gesture: UITapGestureRecognizer) {
         let newScale: CGFloat
         if zoomScale != minimumZoomScale {
             newScale = 0
@@ -100,12 +124,12 @@ extension ZoomableScrollView {
             newScale = zoomScale * 2
         }
         
-        let zoomRect = zoomRectForScale(newScale, withCenter: gesture.locationInView(gesture.view))
-        zoomToRect(zoomRect, animated: true)
+        let zoomRect = zoomRectForScale(newScale, withCenter: gesture.location(in: gesture.view))
+        zoom(to: zoomRect, animated: true)
     }
     
-    func zoomRectForScale(scale: CGFloat, withCenter: CGPoint) -> CGRect {
-        var zoomRect: CGRect = CGRectZero
+    func zoomRectForScale(_ scale: CGFloat, withCenter: CGPoint) -> CGRect {
+        var zoomRect: CGRect = CGRect.zero
         zoomRect.size.height = frame.size.height / scale
         zoomRect.size.width = frame.size.width / scale
         
@@ -114,7 +138,7 @@ extension ZoomableScrollView {
         return zoomRect
     }
     
-    func configureImageSize(size: CGSize) {
+    func configureImageSize(_ size: CGSize) {
         imageSize = size
         contentSize = size
         setMaxMinZoomScalesForCurrentBounds()
@@ -124,8 +148,8 @@ extension ZoomableScrollView {
     
     func setMaxMinZoomScalesForCurrentBounds() {
         let boundsSize: CGSize
-        if bounds.size == CGSizeZero {
-            boundsSize = CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height)
+        if bounds.size == CGSize.zero {
+            boundsSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         } else {
             boundsSize = bounds.size
         }
@@ -138,7 +162,7 @@ extension ZoomableScrollView {
         
         var minScale  = imagePortrait == phonePortrait ? xScale : min(xScale, yScale)
                 
-        let maxScale = 2 / UIScreen.mainScreen().scale
+        let maxScale = 2 / UIScreen.main.scale
         
         if minScale > maxScale {
             minScale = maxScale
@@ -150,7 +174,7 @@ extension ZoomableScrollView {
 }
 
 extension ZoomableScrollView: UIScrollViewDelegate {
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
 }

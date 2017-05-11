@@ -24,13 +24,13 @@ class PageableViewController: UIViewController {
         registerGesture()
     }
     
-    private func setup() {
+    fileprivate func setup() {
         scrollView.frame = view.frame
         scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 3
         scrollView.delegate = self
         scrollView.contentSize = CGSize(width: view.bounds.width * 3, height: view.bounds.height)
-        scrollView.pagingEnabled = true
+        scrollView.isPagingEnabled = true
         scrollView.bouncesZoom = true
         view.addSubview(scrollView)
         
@@ -50,11 +50,11 @@ class PageableViewController: UIViewController {
         scrollView.addSubview(scroll3)
     }
     
-    private func registerGesture() {
+    fileprivate func registerGesture() {
         let doubleTapGesture = UITapGestureRecognizer(target: self
             , action:#selector(ViewController.doubleTap(_:)))
         doubleTapGesture.numberOfTapsRequired = 2
-        imageView1.userInteractionEnabled = true
+        imageView1.isUserInteractionEnabled = true
         imageView1.addGestureRecognizer(doubleTapGesture)
     }
     
@@ -64,21 +64,21 @@ class PageableViewController: UIViewController {
 // MARK: - Zoom Action
 
 extension PageableViewController {
-    func doubleTap(gesture: UITapGestureRecognizer) {
+    func doubleTap(_ gesture: UITapGestureRecognizer) {
         
         if (scrollView.zoomScale == scrollView.minimumZoomScale) {
-            let zoomRect = self.zoomRectForScale(scrollView.maximumZoomScale, center: gesture.locationInView(gesture.view))
-            scrollView.zoomToRect(zoomRect, animated: true)
+            let zoomRect = self.zoomRectForScale(scrollView.maximumZoomScale, center: gesture.location(in: gesture.view))
+            scrollView.zoom(to: zoomRect, animated: true)
             
         } else if (scrollView.zoomScale <= scrollView.maximumZoomScale && scrollView.zoomScale > scrollView.minimumZoomScale) {
             scrollView.setZoomScale(1, animated: true)
         }
     }
     
-    private func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
+    fileprivate func zoomRectForScale(_ scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect()
         zoomRect.size.height = scrollView.frame.size.height / scale
-        zoomRect.size.width = scrollView.frame.size.width / scale
+        zoomRect.size.width  = scrollView.frame.size.width / scale
         
         zoomRect.origin.x = center.x - zoomRect.size.width / 2.0
         zoomRect.origin.y = center.y - zoomRect.size.height / 2.0
@@ -90,7 +90,7 @@ extension PageableViewController {
 // MARK: - UIScrollViewDelegate
 
 extension PageableViewController: UIScrollViewDelegate {
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView1
     }
 }

@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         registerGesture()
     }
     
-    private func setup() {
+    fileprivate func setup() {
         scrollView.frame = view.frame
         scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 3
@@ -34,11 +34,11 @@ class ViewController: UIViewController {
         scrollView.addSubview(imageView)
     }
     
-    private func registerGesture() {
+    fileprivate func registerGesture() {
         let doubleTapGesture = UITapGestureRecognizer(target: self
             , action:#selector(ViewController.doubleTap(_:)))
         doubleTapGesture.numberOfTapsRequired = 2
-        imageView.userInteractionEnabled = true
+        imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(doubleTapGesture)
     }
 }
@@ -46,18 +46,18 @@ class ViewController: UIViewController {
 // MARK: - Zoom Action
 
 extension ViewController {
-    func doubleTap(gesture: UITapGestureRecognizer) {
+    func doubleTap(_ gesture: UITapGestureRecognizer) {
         
         if (scrollView.zoomScale == scrollView.minimumZoomScale) {
-            let zoomRect = self.zoomRectForScale(scrollView.maximumZoomScale, center: gesture.locationInView(gesture.view))
-            scrollView.zoomToRect(zoomRect, animated: true)
+            let zoomRect = self.zoomRectForScale(scrollView.maximumZoomScale, center: gesture.location(in: gesture.view))
+            scrollView.zoom(to: zoomRect, animated: true)
             
         } else if (scrollView.zoomScale <= scrollView.maximumZoomScale && scrollView.zoomScale > scrollView.minimumZoomScale) {
             scrollView.setZoomScale(1, animated: true)
         }
     }
     
-    private func zoomRectForScale(scale: CGFloat, center: CGPoint) -> CGRect {
+    fileprivate func zoomRectForScale(_ scale: CGFloat, center: CGPoint) -> CGRect {
         var zoomRect = CGRect()
         zoomRect.size.height = scrollView.frame.size.height / scale
         zoomRect.size.width = scrollView.frame.size.width / scale
@@ -72,7 +72,7 @@ extension ViewController {
 // MARK: - UIScrollViewDelegate
 
 extension ViewController: UIScrollViewDelegate {
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }
 }
