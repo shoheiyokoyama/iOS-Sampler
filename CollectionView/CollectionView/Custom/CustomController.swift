@@ -15,6 +15,8 @@ class CustomController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var isExpanded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,26 +26,43 @@ class CustomController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         
+        
+        collectionView.collectionViewLayout = {
+           let l = UICollectionViewFlowLayout()
+            if #available(iOS 10.0, *) {
+                //この場合、func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize は呼ばれない
+                l.estimatedItemSize = UICollectionViewFlowLayoutAutomaticSize
+            } else {
+                // Fallback on earlier versions
+            }
+            return l
+        }()
+        
         let headerNib = UINib(nibName: headerIdentifier, bundle: nil)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerIdentifier)
     }
 }
 
 extension CustomController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.reloadItems(at: [IndexPath(row: 1, section: 0)])
+        isExpanded = !isExpanded
+        
+    }
 }
 
 extension CustomController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 50
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! CustomCell
+        cell.configure()
         return cell
     }
     
@@ -61,6 +80,13 @@ extension CustomController: UICollectionViewDelegateFlowLayout {
         let height: CGFloat = 150
         
         let rowCount: CGFloat = 3
+        
+        //For change Height
+//        if indexPath.row == 1 {
+//            return CGSize(width: view.frame.size.width, height: isExpanded ? 20 : 50)
+//        }
+//        return CGSize(width: view.frame.size.width, height: 50)
+//        
         return CGSize(width: view.frame.width / rowCount - (margin * (rowCount - 1) / rowCount), height: height)
     }
     

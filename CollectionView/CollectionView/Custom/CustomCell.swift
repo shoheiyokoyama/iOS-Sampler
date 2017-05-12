@@ -10,9 +10,15 @@ import UIKit
 
 class CustomCell: UICollectionViewCell {
 
+    @IBOutlet weak var viewHeight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
     }
 
+    func configure() {
+        let needsChangeHeihgt = arc4random_uniform(4) == 0
+        viewHeight.constant = needsChangeHeihgt ? 100 : 200
+    }
 }
