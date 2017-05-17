@@ -33,6 +33,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var textView2: UITextView!
     @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var textView3: UITextView!
+    
     var lastTextViewHeight:CGFloat = 0.0
     
     override func viewDidLoad() {
@@ -42,6 +45,13 @@ class ViewController: UIViewController {
         textView2.tag = 1
         
         highlightMention()
+        
+        
+        let text = "change color test"
+        let attributedString = NSMutableAttributedString(string: text)
+        let range = NSRange(0..<5)
+        attributedString.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: range)
+        textView3.attributedText = attributedString
     }
 
     func highlightMention(with symbol: String = "@") {
