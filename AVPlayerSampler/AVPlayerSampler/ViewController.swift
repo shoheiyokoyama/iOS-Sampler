@@ -20,13 +20,17 @@ class ViewController: UIViewController {
     var sampleMovieURL: URL {
         return URL(string: "https://storage.googleapis.com/instavideo/waterfall.mp4")!
     }
-
+    
+    var liveMovieURL: URL {
+        return URL(string: "https://inst12.tk/hls/test.m3u8")!
+    }
+    
     //sample video
     //http://techslides.com/sample-webm-ogg-and-mp4-video-files-for-html5
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        playerView.setVideoURL(sampleMovieURL)
+        playerView.setVideoURL(liveMovieURL)
         playerView.player?.play()
     }
     

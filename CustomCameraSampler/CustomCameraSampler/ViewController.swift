@@ -13,6 +13,7 @@ import AVFoundation
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var imageView: UIImageView!
     var captureSesssion = AVCaptureSession()
     var stillImageOutput = AVCapturePhotoOutput()
     var previewLayer: AVCaptureVideoPreviewLayer?
@@ -41,7 +42,7 @@ class ViewController: UIViewController {
         captureSesssion.startRunning() // カメラ起動
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSesssion)
-        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspect // アスペクトフィット
+        previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill // アスペクトフィット
         previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.portrait // カメラの向き
         
         cameraView.layer.addSublayer(previewLayer!)
@@ -49,8 +50,8 @@ class ViewController: UIViewController {
         // ビューのサイズの調整
         previewLayer?.position = CGPoint(x: cameraView.frame.width / 2, y: cameraView.frame.height / 2)
         previewLayer?.bounds = cameraView.frame
+        previewLayer?.bounds.size.height =  (previewLayer?.bounds.size.height ?? 0) / 2
     }
-    
     
     @IBAction func tapButton(_ sender: Any) {
         let settingsForMonitoring = AVCapturePhotoSettings()
@@ -70,6 +71,7 @@ extension ViewController: AVCapturePhotoCaptureDelegate {
             let photoData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             let image = UIImage(data: photoData!)
             print(image)
+            imageView.image = image
         }
     }
 }

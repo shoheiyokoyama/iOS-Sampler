@@ -23,7 +23,19 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZLl-4T-4zZ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4MS-fl-vSD">
+                                        <rect key="frame" x="87" y="546" width="200" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="DEz-Eu-jmO"/>
+                                            <constraint firstAttribute="width" constant="200" id="xdw-fE-6hi"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="4MS-fl-vSD" secondAttribute="bottom" constant="21" id="WuP-di-YWI"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSz-eM-awO">
                                 <rect key="frame" x="164" y="318.5" width="46" height="30"/>
@@ -38,6 +50,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="4MS-fl-vSD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="H3F-ek-Wjp"/>
                             <constraint firstItem="sSz-eM-awO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KYd-YU-wab"/>
                             <constraint firstItem="ZLl-4T-4zZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MxP-pk-RHM"/>
                             <constraint firstAttribute="bottom" secondItem="ZLl-4T-4zZ" secondAttribute="bottom" id="QtS-KX-3tZ"/>
@@ -48,6 +61,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="ZLl-4T-4zZ" id="glf-fh-LlC"/>
+                        <outlet property="imageView" destination="4MS-fl-vSD" id="Jik-O4-gfD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
