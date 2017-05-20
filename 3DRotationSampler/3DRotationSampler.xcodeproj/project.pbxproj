@@ -193,6 +193,7 @@
 				TargetAttributes = {
 					E07B2E201ED0271600009E24 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 3KU3GWQLG8;
 						ProvisioningStyle = Automatic;
 					};
 					E07B2E341ED0271600009E24 = {
@@ -414,7 +415,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = 3DRotationSampler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shoheiyokoyama.-DRotationSampler";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -426,7 +429,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3KU3GWQLG8;
 				INFOPLIST_FILE = 3DRotationSampler/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shoheiyokoyama.-DRotationSampler";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -507,6 +512,7 @@
 				E07B2E4B1ED0271600009E24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E07B2E4C1ED0271600009E24 /* Build configuration list for PBXNativeTarget "3DRotationSamplerTests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +521,7 @@
 				E07B2E4E1ED0271600009E24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E07B2E4F1ED0271600009E24 /* Build configuration list for PBXNativeTarget "3DRotationSamplerUITests" */ = {
 			isa = XCConfigurationList;
@@ -523,6 +530,7 @@
 				E07B2E511ED0271600009E24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
