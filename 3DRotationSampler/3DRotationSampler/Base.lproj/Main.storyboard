@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="_DRotationSampler" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="dk7-Px-ny6">
+                                <rect key="frame" x="35" y="487" width="304" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Hua-Co-HXb"/>
+                                    <constraint firstAttribute="width" constant="300" id="WNk-hS-cUk"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="valueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="5XJ-vn-QeC"/>
+                                </connections>
+                            </slider>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sample" translatesAutoresizingMaskIntoConstraints="NO" id="Pgy-Jf-X8f">
+                                <rect key="frame" x="67" y="213.5" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="76y-Mb-KBk"/>
+                                    <constraint firstAttribute="height" constant="240" id="aJ9-Xt-xDD"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Pgy-Jf-X8f" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2mZ-Ad-mqB"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dk7-Px-ny6" secondAttribute="bottom" constant="150" id="CfP-cE-4h8"/>
+                            <constraint firstItem="dk7-Px-ny6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iKh-PX-BrH"/>
+                            <constraint firstItem="Pgy-Jf-X8f" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="k3B-uC-gZs"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Pgy-Jf-X8f" id="0kk-So-T8z"/>
+                        <outlet property="slider" destination="dk7-Px-ny6" id="R9a-EH-0b7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Sample" width="500" height="333"/>
+    </resources>
+</document>
