@@ -21,40 +21,58 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var viewTrailing: NSLayoutConstraint!
+    @IBOutlet weak var viewLeading: NSLayoutConstraint!
     @IBOutlet weak var slider: UISlider!
+    //Autolayoutのimageview
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var contnetView: UIView!
+    
+    let codeImage: UIImageView = UIImageView(image: UIImage(named: "Sample")!)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        codeImage.frame = CGRect(x: 0, y: 0, width: 240, height: 240)
+        contnetView.addSubview(codeImage)
     }
     
     @IBAction func valueChanged(_ slider: UISlider) {
-        let degree = CGFloat(slider.value) * 180
+        let degree = CGFloat(slider.value) * 90
         let radian = degree * CGFloat.pi / 180
-        imageView.layer.transform = CATransform3DMakeRotation(radian, 0, 1, 0)
-        //setAnchorPoint(anchorPoint: CGPoint(x: 0, y: 0.5), forView: imageView)
-        setAnchorPoint(anchorPoint: CGPoint(x: 1, y: 0.5), forView: imageView)
+        codeImage.layer.transform = CATransform3DMakeRotation(radian, 0, 1, 0)
+        if slider.value > 0 {
+            codeImage.setRelativeAnchorPoint(CGPoint(x: 1, y: 0.5))
+        } else {
+            codeImage.setRelativeAnchorPoint(CGPoint(x: 0, y: 0.5))
+        }
+        
+        //content viewを動かした場合、autolayoutを設定しているとlayoutがバグる
+        let leading: CGFloat = 67
+        if slider.value < 0 {
+            viewLeading.constant = leading - CGFloat(slider.value) * leading
+        }
     }
-    
-    //http://qiita.com/usagimaru/items/b085d13ac47707ce5c69
-    func setAnchorPoint(anchorPoint: CGPoint, forView view: UIView) {
-        var newPoint = CGPoint(x: view.bounds.size.width * anchorPoint.x, y: view.bounds.size.height * anchorPoint.y)
-        var oldPoint = CGPoint(x: view.bounds.size.width * view.layer.anchorPoint.x, y: view.bounds.size.height * view.layer.anchorPoint.y)
+}
+
+//http://qiita.com/usagimaru/items/b085d13ac47707ce5c69
+extension UIView {
+    func setRelativeAnchorPoint(_ point: CGPoint) {
+        var newPoint = CGPoint(x: bounds.size.width * point.x, y: bounds.size.height * point.y)
+        var oldPoint = CGPoint(x: bounds.size.width * layer.anchorPoint.x, y: bounds.size.height * layer.anchorPoint.y)
         
+        newPoint = newPoint.applying(transform)
+        oldPoint = oldPoint.applying(transform)
         
-        newPoint = newPoint.applying(view.transform)
-        oldPoint = oldPoint.applying(view.transform)
-        
-        var position = view.layer.position
+        var position = layer.position
         position.x -= oldPoint.x
         position.x += newPoint.x
         
         position.y -= oldPoint.y
         position.y += newPoint.y
         
-        view.layer.position = position
-        view.layer.anchorPoint = anchorPoint
+        layer.position    = position
+        layer.anchorPoint = point
     }
 }
 

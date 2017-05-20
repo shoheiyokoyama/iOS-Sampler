@@ -31,25 +31,43 @@
                                     <action selector="valueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="5XJ-vn-QeC"/>
                                 </connections>
                             </slider>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sample" translatesAutoresizingMaskIntoConstraints="NO" id="Pgy-Jf-X8f">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W5q-pX-dfb">
                                 <rect key="frame" x="67" y="213.5" width="240" height="240"/>
+                                <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Sample" translatesAutoresizingMaskIntoConstraints="NO" id="Pgy-Jf-X8f">
+                                        <rect key="frame" x="0.0" y="-0.5" width="240" height="240"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="76y-Mb-KBk"/>
+                                            <constraint firstAttribute="height" constant="240" id="aJ9-Xt-xDD"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="76y-Mb-KBk"/>
-                                    <constraint firstAttribute="height" constant="240" id="aJ9-Xt-xDD"/>
+                                    <constraint firstItem="Pgy-Jf-X8f" firstAttribute="top" secondItem="W5q-pX-dfb" secondAttribute="top" id="3Pb-7c-dLk"/>
+                                    <constraint firstAttribute="height" constant="240" id="5Df-7T-1qh"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pgy-Jf-X8f" secondAttribute="trailing" id="Kmm-Z4-KEq"/>
+                                    <constraint firstAttribute="width" constant="240" id="ZTC-wN-btj"/>
+                                    <constraint firstItem="Pgy-Jf-X8f" firstAttribute="leading" secondItem="W5q-pX-dfb" secondAttribute="leading" id="gry-1k-a7F"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pgy-Jf-X8f" secondAttribute="bottom" id="yhx-kq-ZdE"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Pgy-Jf-X8f" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2mZ-Ad-mqB"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dk7-Px-ny6" secondAttribute="bottom" constant="150" id="CfP-cE-4h8"/>
+                            <constraint firstItem="W5q-pX-dfb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="67" id="Dgn-8h-ryc"/>
                             <constraint firstItem="dk7-Px-ny6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iKh-PX-BrH"/>
-                            <constraint firstItem="Pgy-Jf-X8f" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="k3B-uC-gZs"/>
+                            <constraint firstAttribute="trailing" secondItem="W5q-pX-dfb" secondAttribute="trailing" constant="68" id="sKS-es-voJ"/>
+                            <constraint firstItem="W5q-pX-dfb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zXI-jK-XoP"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contnetView" destination="W5q-pX-dfb" id="ZqN-C1-j5p"/>
                         <outlet property="imageView" destination="Pgy-Jf-X8f" id="0kk-So-T8z"/>
                         <outlet property="slider" destination="dk7-Px-ny6" id="R9a-EH-0b7"/>
+                        <outlet property="viewLeading" destination="Dgn-8h-ryc" id="VdC-hg-cAg"/>
+                        <outlet property="viewTrailing" destination="sKS-es-voJ" id="Owf-Wn-V9F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
