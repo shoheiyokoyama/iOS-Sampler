@@ -21,8 +21,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    //content viewを動かした場合、autolayoutを設定しているとlayoutがバグる
     @IBOutlet weak var viewTrailing: NSLayoutConstraint!
     @IBOutlet weak var viewLeading: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var slider: UISlider!
     //Autolayoutのimageview
     @IBOutlet weak var imageView: UIImageView!
@@ -38,20 +41,22 @@ class ViewController: UIViewController {
     }
     
     @IBAction func valueChanged(_ slider: UISlider) {
-        let degree = CGFloat(slider.value) * 90
-        let radian = degree * CGFloat.pi / 180
-        codeImage.layer.transform = CATransform3DMakeRotation(radian, 0, 1, 0)
-        if slider.value > 0 {
+        let value = CGFloat(slider.value)
+        if value > 0 {
             codeImage.setRelativeAnchorPoint(CGPoint(x: 1, y: 0.5))
         } else {
             codeImage.setRelativeAnchorPoint(CGPoint(x: 0, y: 0.5))
         }
         
-        //content viewを動かした場合、autolayoutを設定しているとlayoutがバグる
-        let leading: CGFloat = 67
-        if slider.value < 0 {
-            viewLeading.constant = leading - CGFloat(slider.value) * leading
-        }
+        var identity = CATransform3DIdentity
+        identity.m34 = -1.0 / 1000.0
+        
+        let degree = value * 90
+        let radian = degree * CGFloat.pi / 180
+        
+        let rotateTransform = CATransform3DRotate(identity, CGFloat(radian), 0, 1, 0)
+        let translateTransform = CATransform3DMakeTranslation(value, 0, 0)
+        codeImage.layer.transform = CATransform3DConcat(rotateTransform, translateTransform)
     }
 }
 
