@@ -14,14 +14,16 @@ import Photos
 //https://developer.apple.com/library/content/samplecode/UsingPhotosFramework/Introduction/Intro.html#//apple_ref/doc/uid/TP40014575-Intro-DontLinkElementID_2
 
 
+//Good article
+//http://nshipster.com/phimagemanager/
 class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     var photoAssets: [PHAsset] = []
-    var images: [UIImage] = []
+    var images: [UIImage] = [] //unused
     
-    let assetsManager = PHImageManager()
+    let assetsManager = PHImageManager.default()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,27 +33,26 @@ class ViewController: UIViewController {
         collectionView.delegate   = self
         collectionView.dataSource = self
         
-        getLoaclPhoto()
+        
+        getLoaclAsset()
+        requestAuthorization()
     }
     
-    func getLoaclPhoto() {
+    func getLoaclAsset() {
         let options = PHFetchOptions()
         options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         
-        options.fetchLimit = 20
+        //options.fetchLimit = 20
         
         let assets: PHFetchResult = PHAsset.fetchAssets(with: .image, options: options)
         
-        let size = CGSize(width: view.bounds.size.width / 3, height: view.bounds.size.height / 3)
-        
         assets.enumerateObjects({ asset, index, stop in
             self.photoAssets.append(asset as PHAsset)
-            
-            self.assetsManager.requestImage(for: asset, targetSize: size, contentMode: PHImageContentMode.aspectFill, options: nil) { image, info in
-                self.images.append(image!)
-            }
+            print("enumerateObjects: \(index) \(Thread.isMainThread)")
         })
-        
+    }
+    
+    func requestAuthorization() {
         PHPhotoLibrary.requestAuthorization { state in
             switch state {
             case .notDetermined:
@@ -61,7 +62,18 @@ class ViewController: UIViewController {
             case .denied:
                 ()
             case .authorized:
+                print("authorized") // finish enumerateObjects
                 self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func requestImage() {
+        let size = CGSize(width: view.bounds.size.width / 3, height: view.bounds.size.height / 3)
+        photoAssets.enumerated().forEach { index, asset in
+            self.assetsManager.requestImage(for: asset, targetSize: size, contentMode: PHImageContentMode.aspectFill, options: nil) { image, info in
+                print("requestImage: \(index) \(Thread.isMainThread)")
+                self.images.append(image!)
             }
         }
     }
@@ -77,7 +89,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+        return photoAssets.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -85,7 +97,13 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return .init()
         }
         
-        cell.imageView.image = images[indexPath.row]
+        let size = CGSize(width: view.bounds.size.width / 3, height: view.bounds.size.height / 3)
+        
+        assetsManager.requestImage(for: photoAssets[indexPath.row], targetSize: size, contentMode: PHImageContentMode.aspectFill, options: nil) { image, info in
+            cell.imageView.image = image
+        }
+        
+        //cell.imageView.image = images[indexPath.row]
         cell.backgroundColor = .red
         return cell
     }
