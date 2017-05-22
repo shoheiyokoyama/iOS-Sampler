@@ -14,6 +14,7 @@
 		E064DF7A1EC2F82900F5CC48 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E064DF781EC2F82900F5CC48 /* LaunchScreen.storyboard */; };
 		E064DF851EC2F82900F5CC48 /* CustomCameraSamplerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DF841EC2F82900F5CC48 /* CustomCameraSamplerTests.swift */; };
 		E064DF901EC2F82900F5CC48 /* CustomCameraSamplerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E064DF8F1EC2F82900F5CC48 /* CustomCameraSamplerUITests.swift */; };
+		E07B2EB81ED2CDE200009E24 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E07B2EB71ED2CDE200009E24 /* VideoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		E064DF8B1EC2F82900F5CC48 /* CustomCameraSamplerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomCameraSamplerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E064DF8F1EC2F82900F5CC48 /* CustomCameraSamplerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCameraSamplerUITests.swift; sourceTree = "<group>"; };
 		E064DF911EC2F82900F5CC48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E07B2EB71ED2CDE200009E24 /* VideoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				E064DF761EC2F82900F5CC48 /* Assets.xcassets */,
 				E064DF781EC2F82900F5CC48 /* LaunchScreen.storyboard */,
 				E064DF7B1EC2F82900F5CC48 /* Info.plist */,
+				E07B2EB71ED2CDE200009E24 /* VideoViewController.swift */,
 			);
 			path = CustomCameraSampler;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 			files = (
 				E064DF721EC2F82900F5CC48 /* ViewController.swift in Sources */,
 				E064DF701EC2F82900F5CC48 /* AppDelegate.swift in Sources */,
+				E07B2EB81ED2CDE200009E24 /* VideoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,6 +516,7 @@
 				E064DF961EC2F82900F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E064DF971EC2F82900F5CC48 /* Build configuration list for PBXNativeTarget "CustomCameraSamplerTests" */ = {
 			isa = XCConfigurationList;
@@ -520,6 +525,7 @@
 				E064DF991EC2F82900F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E064DF9A1EC2F82900F5CC48 /* Build configuration list for PBXNativeTarget "CustomCameraSamplerUITests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +534,7 @@
 				E064DF9C1EC2F82900F5CC48 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
