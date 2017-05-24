@@ -18,6 +18,8 @@ class PlayerView: UIView {
     var player: AVPlayer? {
         return playerLayer.player
     }
+    
+    var isEndlessPlay = false
 
     override class var layerClass: AnyClass {
         return AVPlayerLayer.self
@@ -26,11 +28,13 @@ class PlayerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+        setupNotification()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
+        setupNotification()
     }
     
     private func setup() {
@@ -55,5 +59,14 @@ class PlayerView: UIView {
         player?.pause()
         player?.currentItem?.seek(to: kCMTimeZero)
         player?.play()
+    }
+    
+    func setupNotification() {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { [weak self] notification in
+            if self?.isEndlessPlay == true {
+                self?.player?.seek(to: kCMTimeZero)
+                self?.player?.play()
+            }
+        }
     }
 }

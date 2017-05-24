@@ -30,20 +30,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        playerView.setVideoURL(liveMovieURL)
+        playerView.setVideoURL(sampleMovieURL)
         playerView.player?.play()
+        playerView.isEndlessPlay = true
     }
     
-    @IBAction func stop(_ sender: Any) {
+    @IBAction func tapPause(_ sender: Any) {
         playerView.stop()
     }
     
-    @IBAction func replay(_ sender: Any) {
-        playerView.replay()
+    @IBAction func tapPlay(_ sender: Any) {
+        playerView.start()
     }
     
-    @IBAction func play(_ sender: Any) {
-        playerView.start()
+    @IBAction func tapReplay(_ sender: Any) {
+        playerView.replay()
     }
 }
 
