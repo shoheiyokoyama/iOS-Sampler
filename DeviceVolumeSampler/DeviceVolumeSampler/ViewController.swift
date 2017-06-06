@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MediaPlayer
 
 class ViewController: UIViewController {
 
@@ -28,6 +29,10 @@ class ViewController: UIViewController {
                                  options: NSKeyValueObservingOptions.new, context: nil)
         
         progressView.progress = session.outputVolume
+        
+        //For hide device volume view
+        let v = MPVolumeView()
+        view.addSubview(v)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
