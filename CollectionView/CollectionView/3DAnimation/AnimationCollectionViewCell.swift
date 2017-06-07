@@ -11,6 +11,7 @@ import UIKit
 class AnimationCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var debugLabel: UILabel!
+    @IBOutlet weak var pictureImageview: UIImageView!
     
     override func prepareForReuse() {
         super.prepareForReuse()
