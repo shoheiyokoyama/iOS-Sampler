@@ -38,6 +38,9 @@
 		93D111EF1D1A643500B6FF23 /* CustomCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D111EE1D1A643500B6FF23 /* CustomCollectionViewFlowLayout.swift */; };
 		93D111F21D1A6D1E00B6FF23 /* CustomCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D111F01D1A6D1E00B6FF23 /* CustomCollectionReusableView.swift */; };
 		93D111F31D1A6D1E00B6FF23 /* CustomCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 93D111F11D1A6D1E00B6FF23 /* CustomCollectionReusableView.xib */; };
+		E0409DD01EE841AB00558FBD /* 3DAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0409DCF1EE841AB00558FBD /* 3DAnimationViewController.swift */; };
+		E0409DD31EE842A300558FBD /* AnimationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0409DD11EE842A300558FBD /* AnimationCollectionViewCell.swift */; };
+		E0409DD41EE842A300558FBD /* AnimationCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0409DD21EE842A300558FBD /* AnimationCollectionViewCell.xib */; };
 		E0EC40911EC45B4D007464BB /* CustomCollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC408F1EC45B4D007464BB /* CustomCollectionHeaderReusableView.swift */; };
 		E0EC40921EC45B4D007464BB /* CustomCollectionHeaderReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0EC40901EC45B4D007464BB /* CustomCollectionHeaderReusableView.xib */; };
 /* End PBXBuildFile section */
@@ -97,6 +100,9 @@
 		93D111EE1D1A643500B6FF23 /* CustomCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		93D111F01D1A6D1E00B6FF23 /* CustomCollectionReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionReusableView.swift; sourceTree = "<group>"; };
 		93D111F11D1A6D1E00B6FF23 /* CustomCollectionReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionReusableView.xib; sourceTree = "<group>"; };
+		E0409DCF1EE841AB00558FBD /* 3DAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = 3DAnimationViewController.swift; sourceTree = "<group>"; };
+		E0409DD11EE842A300558FBD /* AnimationCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationCollectionViewCell.swift; sourceTree = "<group>"; };
+		E0409DD21EE842A300558FBD /* AnimationCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimationCollectionViewCell.xib; sourceTree = "<group>"; };
 		E0EC408F1EC45B4D007464BB /* CustomCollectionHeaderReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCollectionHeaderReusableView.swift; sourceTree = "<group>"; };
 		E0EC40901EC45B4D007464BB /* CustomCollectionHeaderReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCollectionHeaderReusableView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -206,6 +212,7 @@
 		93D111B51D1A572A00B6FF23 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				E0409DCE1EE8414D00558FBD /* 3DAnimation */,
 				6D6CA7EA1D65AF65008E4948 /* Custom */,
 				6D3E16991D603401000236C4 /* Transition */,
 				9393CE0F1D46136900F582FC /* viewer */,
@@ -241,6 +248,16 @@
 				93D111D81D1A572A00B6FF23 /* Info.plist */,
 			);
 			path = CollectionViewUITests;
+			sourceTree = "<group>";
+		};
+		E0409DCE1EE8414D00558FBD /* 3DAnimation */ = {
+			isa = PBXGroup;
+			children = (
+				E0409DCF1EE841AB00558FBD /* 3DAnimationViewController.swift */,
+				E0409DD11EE842A300558FBD /* AnimationCollectionViewCell.swift */,
+				E0409DD21EE842A300558FBD /* AnimationCollectionViewCell.xib */,
+			);
+			path = 3DAnimation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,6 +379,7 @@
 				6D3E16A51D60979E000236C4 /* BlickCollectionViewCell.xib in Resources */,
 				93D111ED1D1A5B6E00B6FF23 /* CustomCollectionViewCell.xib in Resources */,
 				6D88C71D1D23B90900679822 /* OtherCollectionViewCell.xib in Resources */,
+				E0409DD41EE842A300558FBD /* AnimationCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,12 +416,14 @@
 				6D88C7141D23B7E600679822 /* OtherViewController.swift in Sources */,
 				93D111EC1D1A5B6E00B6FF23 /* CustomCollectionViewCell.swift in Sources */,
 				6D3E169F1D603C17000236C4 /* CollectionViewTransitionAnimator.swift in Sources */,
+				E0409DD01EE841AB00558FBD /* 3DAnimationViewController.swift in Sources */,
 				9393CE171D461F8F00F582FC /* BlickViewController.swift in Sources */,
 				93D111B71D1A572A00B6FF23 /* AppDelegate.swift in Sources */,
 				6D3E16A61D60979E000236C4 /* ViewerCollectionViewCell.swift in Sources */,
 				93D111F21D1A6D1E00B6FF23 /* CustomCollectionReusableView.swift in Sources */,
 				93D111EF1D1A643500B6FF23 /* CustomCollectionViewFlowLayout.swift in Sources */,
 				9393CE1F1D47642900F582FC /* TransitionAnimator.swift in Sources */,
+				E0409DD31EE842A300558FBD /* AnimationCollectionViewCell.swift in Sources */,
 				E0EC40911EC45B4D007464BB /* CustomCollectionHeaderReusableView.swift in Sources */,
 				6D6CA7E91D647382008E4948 /* CustomCollectionViewLayout.swift in Sources */,
 			);

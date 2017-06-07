@@ -1,0 +1,26 @@
+//
+//  AnimationCollectionViewCell.swift
+//  CollectionView
+//
+//  Created by 横山 祥平 on 2017/06/07.
+//  Copyright © 2017年 Shohei Yokoyama. All rights reserved.
+//
+
+import UIKit
+
+class AnimationCollectionViewCell: UICollectionViewCell {
+
+    @IBOutlet weak var debugLabel: UILabel!
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+}
