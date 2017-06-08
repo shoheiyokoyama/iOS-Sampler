@@ -10,7 +10,7 @@ import UIKit
 
 class AnimationViewController: UIViewController {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: CustomCollectionView!
     
     let cellIdentifier = "AnimationCollectionViewCell"
     
@@ -21,22 +21,52 @@ class AnimationViewController: UIViewController {
         collectionView.register(nib, forCellWithReuseIdentifier: cellIdentifier)
         
         collectionView.dataSource = self
-        collectionView.delegate   = self
+        collectionView.delegate = self
+        
+        collectionView.addObserver()
     }
 }
 
-extension AnimationViewController {
+//Gemini
+// delegate pattern
+//
+// - animation enabled
+protocol AnimationProtocol: UICollectionViewDelegate {
+    
+}
+
+extension AnimationProtocol {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let collectionview = scrollView as? UICollectionView else {
-            return
-        }
+        print("aaa")
+    }
+}
+
+class CustomCollectionView: UICollectionView {
+    
+    deinit {
+        removeObserver(self, forKeyPath: "contentOffset")
+    }
+    
+    func addObserver() {
+        addObserver(self, forKeyPath: "contentOffset", options: .new, context: nil)
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
-        let middleX = collectionview.frame.width / 2
-        collectionview.visibleCells.flatMap { $0 as? AnimationCollectionViewCell }
+        if keyPath == "contentOffset" {
+            move()
+        }
+    }
+    
+    func move() {
+        print("Custom Gesture")
+        
+        let middleX = frame.width / 2
+        visibleCells.flatMap { $0 as? AnimationCollectionViewCell }
             .forEach { cell in
-                let convertedFrame = collectionView.convert(cell.frame, to: collectionView.superview)
+                let convertedFrame = convert(cell.frame, to: superview)
                 let distance = convertedFrame.midX - middleX //右方向が+
-                let ratio = distance / collectionview.frame.width
+                let ratio = distance / frame.width
                 
                 cell.debugLabel.text = String(format: "%.2f", ratio)
                 
@@ -55,7 +85,13 @@ extension AnimationViewController {
                 let translateTransform = CATransform3DMakeTranslation(ratio, 0, 0)
                 
                 cell.layer.transform = CATransform3DConcat(rotateTransform, translateTransform)
-            }
+        }
+    }
+}
+
+extension AnimationViewController {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print("Delegate Gesture")
     }
 }
 
