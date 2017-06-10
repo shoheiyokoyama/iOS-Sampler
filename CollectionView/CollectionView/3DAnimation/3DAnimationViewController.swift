@@ -46,13 +46,13 @@ enum ShadowEffect {
 }
 
 enum Effect {
-    case `default`, custom, scale
+    case `default`, circle, scale
 }
 
 class CustomCollectionView: UICollectionView {
     
     var shadowEffetct: ShadowEffect = .none
-    var effect: Effect = .custom
+    var effect: Effect = .circle
     enum KeyPath: String {
         case contentOffset
     }
@@ -116,28 +116,29 @@ class CustomCollectionView: UICollectionView {
                     let translateTransform = CATransform3DMakeTranslation(0, 0, 0)
                     cell.layer.transform = CATransform3DConcat(rotateTransform, translateTransform)
                     cell.debugLabel.text = String(format: "%.2f", degree)
-                case .custom:
-                    
+                case .circle:
+                    //not support
                     me.isPagingEnabled = false
                     
                     if distance > 0 {
-                        cell.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+                        cell.setAnchorPoint(CGPoint(x: 0.5, y: 1))
                     } else {
-                        cell.setAnchorPoint(CGPoint(x: 0.5, y: 0.5))
+                        cell.setAnchorPoint(CGPoint(x: 0.5, y: 1))
                     }
 
-                    let scale = 1 - abs(ratio) * 0.1
                     
-                    let degree: CGFloat = ratio * 30
+                    let degree: CGFloat = ratio * 90
                     let radian = degree * CGFloat.pi / 180
-                    let rotateTransform    = CATransform3DRotate(identity, radian, 0, 1, 0)
-                    let scaleTransform = CATransform3DMakeScale(scale, scale, 0)
-                    //let translateTransform = CATransform3DMakeTranslation(0, ratio * 200, 0)
-                    cell.layer.transform = CATransform3DConcat(rotateTransform, scaleTransform)
+                    let rotateTransform    = CATransform3DRotate(identity, radian, 0, 0, 1)
+                    cell.layer.transform = rotateTransform
                     cell.debugLabel.text = String(format: "%.2f", degree)
                     
                 case .scale:
-                    
+                    // promiss
+                    // translate y
+                    // translate scale max min
+                    // rotation y
+                    //
                     me.isPagingEnabled = false
                     
                     if distance > 0 {
@@ -149,6 +150,8 @@ class CustomCollectionView: UICollectionView {
                     let scale = 1 - abs(ratio) * 0.1
                     cell.layer.transform = CATransform3DMakeScale(scale, scale, 0)
                     cell.debugLabel.text = String(format: "%.2f", scale)
+                    
+                    
                 }
                 
                 
