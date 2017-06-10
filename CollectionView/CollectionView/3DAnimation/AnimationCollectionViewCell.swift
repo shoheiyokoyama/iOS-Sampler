@@ -10,6 +10,11 @@ import UIKit
 
 class AnimationCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var shadowView: UIView! {
+        didSet {
+            shadowView.backgroundColor = UIColor.black
+        }
+    }
     @IBOutlet weak var debugLabel: UILabel!
     @IBOutlet weak var pictureImageview: UIImageView!
     

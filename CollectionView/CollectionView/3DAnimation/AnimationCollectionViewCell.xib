@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="AnimationCollectionViewCell" customModule="CollectionView" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.0" contentMode="center" id="gTV-IL-0wX" customClass="AnimationCollectionViewCell" customModule="CollectionView" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="228" height="276"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -27,21 +27,30 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1ar-sm-YsQ">
+                        <rect key="frame" x="0.0" y="0.0" width="228" height="276"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </view>
             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="W4a-Pk-WTc" secondAttribute="trailing" id="8j8-36-ngZ"/>
                 <constraint firstAttribute="bottom" secondItem="W4a-Pk-WTc" secondAttribute="bottom" id="8nU-ER-P1D"/>
+                <constraint firstAttribute="trailing" secondItem="1ar-sm-YsQ" secondAttribute="trailing" id="B8x-c1-KB9"/>
+                <constraint firstItem="1ar-sm-YsQ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="FXA-wO-rJb"/>
+                <constraint firstItem="1ar-sm-YsQ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="RC2-hR-N85"/>
                 <constraint firstItem="L02-CS-Yl4" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="aAx-ZK-pxb"/>
                 <constraint firstItem="L02-CS-Yl4" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="fNf-t1-9HV"/>
                 <constraint firstItem="W4a-Pk-WTc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="h0Z-vw-HOq"/>
                 <constraint firstItem="W4a-Pk-WTc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hLB-LT-qBK"/>
+                <constraint firstAttribute="bottom" secondItem="1ar-sm-YsQ" secondAttribute="bottom" id="snq-SV-REj"/>
             </constraints>
             <size key="customSize" width="228" height="276"/>
             <connections>
                 <outlet property="debugLabel" destination="L02-CS-Yl4" id="0Qu-Um-8ZO"/>
                 <outlet property="pictureImageview" destination="W4a-Pk-WTc" id="wpX-la-E6O"/>
+                <outlet property="shadowView" destination="1ar-sm-YsQ" id="anJ-p8-hig"/>
             </connections>
             <point key="canvasLocation" x="-107" y="142"/>
         </collectionViewCell>
